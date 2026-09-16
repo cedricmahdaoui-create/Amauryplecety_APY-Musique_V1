@@ -1425,3 +1425,78 @@ body:has(.breadcrumb) .section-head h1, body:has(.breadcrumb) h2, body:has(.brea
 .home main > section::after { background: radial-gradient(ellipse at 22% 35%, rgba(226,175,52,.58) 0%, rgba(180,126,30,.32) 42%, transparent 78%), linear-gradient(110deg, rgba(171,115,28,.28), rgba(110,83,165,.34)); }
 .home main > section::before { background: radial-gradient(ellipse at 5% 30%, rgba(223,183,72,.18), transparent 52%), radial-gradient(ellipse at 95% 80%, rgba(112,93,180,.18), transparent 55%); }
 body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 5% 25%, rgba(223,183,72,.22), transparent 52%), radial-gradient(ellipse at 95% 80%, rgba(112,93,180,.20), transparent 55%); }
+
+/* ---------- Assistant « Piston » ---------- */
+.chatbot { position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 260; }
+.chatbot-toggle {
+  display: flex; align-items: center; gap: .6rem;
+  background: linear-gradient(135deg, var(--brass-dark), var(--brass-light));
+  color: #fff; border: none; border-radius: 999px;
+  padding: .8rem 1.2rem .8rem .8rem;
+  font: inherit; font-weight: 600; font-size: .92rem;
+  box-shadow: 0 12px 28px rgba(0,0,0,.35);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.chatbot-toggle:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(0,0,0,.4); }
+.chatbot-toggle-icon {
+  display: grid; place-items: center;
+  width: 2.1rem; height: 2.1rem; border-radius: 50%;
+  background: rgba(255,255,255,.22); font-size: 1.15rem;
+}
+.chatbot-panel[hidden] { display: none; }
+.chatbot-panel {
+  position: fixed; right: 1.1rem; bottom: 5rem;
+  width: min(340px, calc(100vw - 2.2rem));
+  height: min(480px, calc(100vh - 8rem));
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 70px rgba(0,0,0,.45);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.chatbot-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .9rem 1rem;
+  background: linear-gradient(135deg, var(--brass-dark), var(--brass-light));
+  color: #fff; font-weight: 700; font-size: .95rem;
+}
+.chatbot-header .chatbot-close {
+  background: none; border: none; color: #fff; font-size: 1.4rem; line-height: 1;
+  cursor: pointer; padding: 0 .2rem;
+}
+.chatbot-messages { flex: 1; overflow-y: auto; padding: .9rem 1rem; display: flex; flex-direction: column; gap: .55rem; }
+.chatbot-msg { margin: 0; padding: .55rem .8rem; border-radius: 12px; font-size: .88rem; line-height: 1.4; max-width: 88%; }
+.chatbot-msg--bot { align-self: flex-start; background: var(--ivory-2); color: var(--text); border-bottom-left-radius: 3px; }
+.chatbot-msg--user { align-self: flex-end; background: var(--brass-dark); color: #fff; border-bottom-right-radius: 3px; }
+.chatbot-typing { opacity: .6; font-weight: 700; letter-spacing: .1em; }
+.chatbot-quick { display: flex; flex-wrap: wrap; gap: .4rem; padding: 0 1rem .6rem; }
+.chatbot-option {
+  font: inherit; font-size: .82rem; font-weight: 600;
+  background: var(--paper); color: var(--brass-dark);
+  border: 1px solid var(--brass); border-radius: 999px;
+  padding: .4rem .75rem; cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.chatbot-option:hover { background: var(--brass-dark); color: #fff; }
+.chatbot-form { display: flex; gap: .5rem; padding: .8rem; border-top: 1px solid var(--line); }
+.chatbot-form input {
+  flex: 1; min-width: 0; padding: .6rem .7rem;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--paper); color: var(--text); font: inherit; font-size: .85rem;
+}
+.chatbot-form button {
+  font: inherit; font-size: .85rem; font-weight: 700;
+  background: var(--brass-dark); color: #fff; border: none;
+  border-radius: 8px; padding: .6rem .9rem; cursor: pointer;
+}
+@media (max-width: 640px) {
+  .chatbot { right: .7rem; bottom: calc(62px + .7rem); }
+  .chatbot-panel { right: .7rem; bottom: calc(62px + 4.6rem); }
+  .chatbot-toggle-label { display: none; }
+  .chatbot-toggle { padding: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-toggle { transition: none; }
+}
