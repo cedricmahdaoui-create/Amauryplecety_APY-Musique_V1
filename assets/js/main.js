@@ -121,16 +121,3 @@
     });
   });
 })();
-
-/* Mini carrousel au survol du bouton « Trouver un instrument » */
-(function () {
-  "use strict";
-  var imgs = document.querySelectorAll('.cta-preview img');
-  if (imgs.length < 2) return;
-  var i = 0;
-  setInterval(function () {
-    imgs[i].classList.remove('is-active');
-    i = (i + 1) % imgs.length;
-    imgs[i].classList.add('is-active');
-  }, 1400);
-})();
