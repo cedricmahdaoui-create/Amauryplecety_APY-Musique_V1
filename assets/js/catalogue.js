@@ -1,13 +1,48 @@
-/* La Cave aux Instrum' — catalogue filtrable (aucune dépendance externe) */
+/* APY Musique — catalogue filtrable (aucune dépendance externe) */
 (function () {
   "use strict";
 
   var grid = document.getElementById("cat-grid");
   var countEl = document.getElementById("cat-count");
   var emptyEl = document.getElementById("cat-empty");
+  var featuredEl = document.getElementById("cat-featured");
+  var featuredGrid = document.getElementById("cat-featured-grid");
   if (!grid) return;
 
   var items = [];
+  var lightbox = null;
+  var lightboxImg = null;
+  var lightboxCounter = null;
+  var lightboxPhotos = [];
+  var lightboxPosition = 0;
+
+  function closeLightbox() {
+    if (lightbox) { lightbox.hidden = true; document.body.classList.remove("has-lightbox"); }
+  }
+  function openLightbox(it, photos, position) {
+    if (!lightbox) {
+      lightbox = document.createElement("div");
+      lightbox.className = "cat-lightbox";
+      lightbox.hidden = true;
+      lightbox.innerHTML = '<div class="cat-lightbox-backdrop"></div><div class="cat-lightbox-panel" role="dialog" aria-modal="true" aria-label="Photos de l’instrument"><button class="cat-lightbox-close" type="button" aria-label="Fermer">×</button><button class="cat-lightbox-prev" type="button" aria-label="Photo précédente">‹</button><img alt=""><button class="cat-lightbox-next" type="button" aria-label="Photo suivante">›</button><div class="cat-lightbox-counter" aria-live="polite"></div></div>';
+      document.body.appendChild(lightbox);
+      lightboxImg = lightbox.querySelector("img");
+      lightboxCounter = lightbox.querySelector(".cat-lightbox-counter");
+      lightbox.querySelector(".cat-lightbox-close").addEventListener("click", closeLightbox);
+      lightbox.querySelector(".cat-lightbox-backdrop").addEventListener("click", closeLightbox);
+      lightbox.querySelector(".cat-lightbox-prev").addEventListener("click", function () { showLightbox(-1); });
+      lightbox.querySelector(".cat-lightbox-next").addEventListener("click", function () { showLightbox(1); });
+      document.addEventListener("keydown", function (e) { if (!lightbox || lightbox.hidden) return; if (e.key === "Escape") closeLightbox(); if (e.key === "ArrowLeft") showLightbox(-1); if (e.key === "ArrowRight") showLightbox(1); });
+    }
+    lightboxPhotos = photos; lightboxPosition = position || 0; lightbox.dataset.name = it.nom; lightbox.hidden = false; document.body.classList.add("has-lightbox"); showLightbox(0);
+  }
+  function showLightbox(delta) {
+    if (!lightboxPhotos.length) return;
+    lightboxPosition = (lightboxPosition + delta + lightboxPhotos.length) % lightboxPhotos.length;
+    lightboxImg.src = lightboxPhotos[lightboxPosition];
+    lightboxImg.alt = lightbox.dataset.name + " — photo " + (lightboxPosition + 1);
+    lightboxCounter.textContent = (lightboxPosition + 1) + " / " + lightboxPhotos.length;
+  }
 
   var ETAT_LABEL = {
     "revise": "Révisé, prêt à jouer",
@@ -63,12 +98,72 @@
 
     var media = document.createElement("div");
     media.className = "cat-card-media";
-    if (it.photo) {
+    var photos = [it.photo].concat(Array.isArray(it.photos) ? it.photos : []).filter(function (src, index, all) {
+      return typeof src === "string" && src.trim() && all.indexOf(src) === index;
+    });
+    if (photos.length) {
       var img = document.createElement("img");
-      img.src = it.photo;
+      img.src = photos[0];
       img.alt = it.nom;
       img.loading = "lazy";
       media.appendChild(img);
+      if (photos.length > 1) {
+        var position = 0;
+        media.classList.add("cat-carousel");
+        media.setAttribute("role", "group");
+        media.setAttribute("aria-label", "Photos de " + it.nom);
+        var controls = document.createElement("div");
+        controls.className = "cat-carousel-controls";
+        var previous = document.createElement("button");
+        previous.type = "button";
+        previous.textContent = "‹";
+        previous.setAttribute("aria-label", "Photo précédente de " + it.nom);
+        var counter = document.createElement("span");
+        counter.setAttribute("aria-live", "polite");
+        counter.setAttribute("aria-atomic", "true");
+        var next = document.createElement("button");
+        next.type = "button";
+        next.textContent = "›";
+        next.setAttribute("aria-label", "Photo suivante de " + it.nom);
+        function show(delta) {
+          position = (position + delta + photos.length) % photos.length;
+          img.src = photos[position];
+          img.alt = it.nom + " — photo " + (position + 1) + " sur " + photos.length;
+          counter.textContent = (position + 1) + " / " + photos.length;
+          if (delta) {
+            img.classList.remove("cat-slide-next", "cat-slide-prev");
+            void img.offsetWidth;
+            img.classList.add(delta > 0 ? "cat-slide-next" : "cat-slide-prev");
+          }
+        }
+        previous.addEventListener("click", function () { show(-1); });
+        next.addEventListener("click", function () { show(1); });
+        controls.append(previous, counter, next);
+        media.appendChild(controls);
+        media.addEventListener("keydown", function (event) {
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            show(event.key === "ArrowLeft" ? -1 : 1);
+          }
+        });
+        var touchStart;
+        var hoverTimer;
+        media.addEventListener("mouseenter", function () { hoverTimer = setInterval(function () { show(1); }, 1800); });
+        media.addEventListener("mouseleave", function () { clearInterval(hoverTimer); hoverTimer = null; });
+        media.addEventListener("click", function (event) { if (event.target.closest("button")) return; openLightbox(it, photos, position); });
+        media.setAttribute("tabindex", "0");
+        media.addEventListener("touchstart", function (event) {
+          touchStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+        }, { passive: true });
+        media.addEventListener("touchend", function (event) {
+          if (!touchStart) return;
+          var dx = event.changedTouches[0].clientX - touchStart.x;
+          var dy = event.changedTouches[0].clientY - touchStart.y;
+          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) show(dx < 0 ? 1 : -1);
+          touchStart = null;
+        }, { passive: true });
+        show(0);
+      }
     } else {
       var ph = document.createElement("div");
       ph.className = "placeholder";
@@ -124,6 +219,12 @@
 
   function render() {
     var list = items.filter(matches);
+    if (featuredEl && featuredGrid) {
+      var featured = items.filter(function (it) { return it.featured && matches(it); });
+      featuredGrid.innerHTML = "";
+      featured.forEach(function (it) { featuredGrid.appendChild(card(it)); });
+      featuredEl.hidden = featured.length === 0;
+    }
     grid.innerHTML = "";
     list.forEach(function (it) { grid.appendChild(card(it)); });
 
@@ -178,6 +279,11 @@
     .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
     .then(function (data) {
       items = Array.isArray(data) ? data : (data && data.instruments) || [];
+      (Array.isArray(data.families) ? data.families : []).forEach(function (family) {
+        if (!family || typeof family.id !== 'string' || typeof family.label !== 'string') return;
+        if (!Array.from(f.famille.options).some(function (option) { return option.value === family.id; })) f.famille.add(new Option(family.label, family.id));
+      });
+      items.forEach(function (it) { if (it.famille && !Array.from(f.famille.options).some(function (option) { return option.value === it.famille; })) f.famille.add(new Option(it.famille, it.famille)); });
       readUrl();
       render();
     })
