@@ -14,7 +14,7 @@
   var articles = [];
   var news = document.createElement('section');
   news.className = 'admin-news';
-  news.innerHTML = '<h2>Gérer À la une</h2><p>Ajoutez vos nouveautés et articles. Cochez « Publier » pour les afficher, puis enregistrez les modifications.</p><button type="button" class="btn" data-news-add>Ajouter une actualité</button><div data-news-list></div><button type="button" class="btn" data-news-save>Enregistrer les modifications</button> <a href="/a-la-une.html" target="_blank">Voir À la une</a>';
+  news.innerHTML = '<h2>Gérer À la une</h2><p>Ajoutez vos nouveautés et articles. Cochez « Publier » pour les afficher, puis enregistrez les modifications.</p><button type="button" class="btn" data-news-add>Ajouter une actualité</button><div data-news-list></div><button type="button" class="btn" data-news-save>Enregistrer les modifications</button> <a href="a-la-une.html" target="_blank">Voir À la une</a>';
   listEl.before(news);
   function renderNews() {
     var list = news.querySelector('[data-news-list]');
@@ -119,7 +119,7 @@
     var photoList = document.createElement("textarea");
     photoList.dataset.k = "photos";
     photoList.rows = 3;
-    photoList.placeholder = "/assets/img/instrument-detail.jpg\n/assets/img/instrument-dos.jpg";
+    photoList.placeholder = "assets/img/instrument-detail.jpg\nassets/img/instrument-dos.jpg";
     photoLabel.appendChild(photoList);
     photoField.closest("label").after(photoLabel);
     var upload = card.querySelector("[data-upload]");
@@ -207,7 +207,7 @@
   /* ----- Chargement ----- */
   function load() {
     status("Chargement du catalogue en ligne…");
-    fetch("/assets/data/catalogue.json", { cache: "no-cache" })
+    fetch("assets/data/catalogue.json", { cache: "no-cache" })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (data) {
         var arr = Array.isArray(data) ? data : (data && data.instruments) || [];

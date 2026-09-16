@@ -18,7 +18,7 @@
         list.replaceChildren();
         var home = document.createElement('li');
         if (name) {
-          var link = document.createElement('a'); link.href = '/'; link.textContent = 'Accueil'; home.appendChild(link);
+          var link = document.createElement('a'); link.href = 'index.html'; link.textContent = 'Accueil'; home.appendChild(link);
           var current = document.createElement('li'); current.setAttribute('aria-current', 'location'); current.textContent = name;
           list.append(home, current);
         } else { home.textContent = 'Accueil'; home.setAttribute('aria-current', 'page'); list.appendChild(home); }

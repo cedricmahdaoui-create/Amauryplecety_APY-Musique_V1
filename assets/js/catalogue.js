@@ -275,7 +275,7 @@
   /* ----- Chargement des données ----- */
   countEl.textContent = "Chargement du catalogue…";
 
-  fetch("/assets/data/catalogue.json", { cache: "no-cache" })
+  fetch("assets/data/catalogue.json", { cache: "no-cache" })
     .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
     .then(function (data) {
       items = Array.isArray(data) ? data : (data && data.instruments) || [];
