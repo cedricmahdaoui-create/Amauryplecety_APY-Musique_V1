@@ -363,8 +363,17 @@ p { margin: 0 0 1rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.8rem; }
 .hero .btn--ghost { color: #f4e9d6; border-color: rgba(244,233,214,.45); }
 .hero .btn--ghost:hover { background: rgba(244,233,214,.12); color: #fff; }
-.hero-signature {
+.hero-quote {
   margin-top: 2.2rem;
+  max-width: 34ch;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+.hero-signature {
+  margin-top: .5rem;
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.05rem;
@@ -472,6 +481,11 @@ a.card .more { display: inline-block; margin-top: 1rem; font-weight: 600; color:
 .timeline strong { display: block; color: var(--ink); font-size: 1.05rem; }
 .section--walnut .timeline strong { color: #fff; }
 .timeline p { margin: .2rem 0 0; color: var(--text-soft); }
+.timeline-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--brass-dark);
+}
 .section--walnut .timeline p { color: #d3c2a4; }
 
 /* Encart "la relève" — met Amaury en avant */
@@ -1016,12 +1030,30 @@ address { font-style: normal; }
 .admin-check { flex-direction: row !important; align-items: center; gap: .5rem !important; font-weight: 400 !important; }
 .admin-check input { width: auto; }
 .admin-wide { grid-column: 1 / -1; }
-.admin-preview { margin-top: .8rem; }
-.admin-preview img {
-  max-height: 120px;
+.admin-preview { margin-top: .8rem; display: flex; flex-wrap: wrap; gap: .7rem; }
+.admin-preview-item { margin: 0; display: flex; flex-direction: column; align-items: center; gap: .25rem; }
+.admin-preview-item-media { position: relative; }
+.admin-preview-item img {
+  max-height: 100px;
+  max-width: 140px;
+  object-fit: cover;
+  display: block;
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
 }
+.admin-preview-item figcaption { font-size: .74rem; color: var(--text-soft); }
+.admin-preview-del {
+  position: absolute; top: -8px; right: -8px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--ivory);
+  color: var(--text-soft);
+  font-size: .8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.admin-preview-del:hover { border-color: var(--copper); color: var(--copper); }
 .admin-sep { border: 0; border-top: 1px solid var(--line); margin: 2.5rem 0; }
 .admin-steps { line-height: 1.7; }
 .admin-steps li { margin-bottom: .8rem; }

@@ -133,48 +133,154 @@
       else el.value = data[k] != null ? data[k] : "";
     });
 
-    var img = card.querySelector("[data-preview]");
     var wrap = card.querySelector(".admin-preview");
-    function updatePreview() {
-      var p = card.querySelector('[data-k="photo"]').value.trim();
-      if (p) { img.src = p; wrap.hidden = false; } else { wrap.hidden = true; }
+    var previewOverrides = {}; // chemin -> blob URL, pour les photos pas encore écrites sur disque
+    var MAX_EXTRA_PHOTOS = 4;
+    function deleteFileOnDisk(pathOrUri) {
+      if (!pathOrUri || pathOrUri.indexOf("data:") === 0) return;
+      var name = pathOrUri.split("/").pop();
+      fetch("/api/delete-photo?name=" + encodeURIComponent(name), { method: "POST" }).catch(function () {});
     }
-    updatePreview();
+    function removePhoto(index) {
+      var mainField = card.querySelector('[data-k="photo"]');
+      var extraLines = photoList.value.split(/\r?\n/).map(function (p) { return p.trim(); }).filter(Boolean);
+      var removed;
+      if (index === 0) {
+        removed = mainField.value.trim();
+        mainField.value = extraLines.length ? extraLines.shift() : "";
+      } else {
+        removed = extraLines.splice(index - 1, 1)[0];
+      }
+      photoList.value = extraLines.join("\n");
+      delete previewOverrides[removed];
+      deleteFileOnDisk(removed);
+      renderGallery();
+      dirty = true;
+      collect();
+    }
+    function renderGallery() {
+      var mainPath = card.querySelector('[data-k="photo"]').value.trim();
+      var extra = photoList.value.split(/\r?\n/).map(function (p) { return p.trim(); }).filter(Boolean).slice(0, MAX_EXTRA_PHOTOS);
+      wrap.innerHTML = "";
+      var all = [];
+      if (mainPath) all.push({ src: mainPath, label: "Principale" });
+      extra.forEach(function (p, i) { all.push({ src: p, label: "Photo " + (i + 2) }); });
+      if (!all.length) { wrap.hidden = true; return; }
+      wrap.hidden = false;
+      all.forEach(function (item, index) {
+        var fig = document.createElement("figure");
+        fig.className = "admin-preview-item";
+        var media = document.createElement("div");
+        media.className = "admin-preview-item-media";
+        var img = document.createElement("img");
+        img.src = previewOverrides[item.src] || item.src;
+        img.alt = "";
+        var del = document.createElement("button");
+        del.type = "button";
+        del.className = "admin-preview-del";
+        del.textContent = "✕";
+        del.setAttribute("aria-label", "Supprimer " + item.label.toLowerCase());
+        del.addEventListener("click", function () {
+          if (confirm("Supprimer cette photo ?")) removePhoto(index);
+        });
+        media.appendChild(img);
+        media.appendChild(del);
+        var cap = document.createElement("figcaption");
+        cap.textContent = item.label;
+        fig.appendChild(media);
+        fig.appendChild(cap);
+        wrap.appendChild(fig);
+      });
+    }
+    renderGallery();
+    function slugify(s) {
+      return (s || "instrument").normalize("NFD").replace(/[̀-ͯ]/g, "")
+        .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "instrument";
+    }
+
     upload.addEventListener("change", function () {
       var files = Array.prototype.slice.call(upload.files || []);
       if (!files.length) return;
-      Promise.all(files.map(function (file) {
+      var baseName = slugify(card.querySelector('[data-k="nom"]').value);
+      var startIndex = Date.now() % 100000;
+      Promise.all(files.map(function (file, i) {
         return new Promise(function (resolve, reject) {
           var reader = new FileReader();
           reader.onload = function () {
             var image = new Image();
             image.onload = function () {
+              // Redimensionne en conservant les proportions (pas de recadrage,
+              // pas de fond ajouté : la photo garde son arrière-plan d'origine).
+              var maxEdge = 1400;
+              var scale = Math.min(1, maxEdge / Math.max(image.width, image.height));
+              var width = Math.round(image.width * scale), height = Math.round(image.height * scale);
               var canvas = document.createElement("canvas");
-              canvas.width = 1200; canvas.height = 900;
+              canvas.width = width; canvas.height = height;
               var ctx = canvas.getContext("2d");
-              ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-              var scale = Math.min((canvas.width - 48) / image.width, (canvas.height - 48) / image.height);
-              var width = image.width * scale, height = image.height * scale;
-              ctx.drawImage(image, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
-              resolve(canvas.toDataURL("image/jpeg", .9));
+              // Le JPEG n'a pas de canal alpha : une zone transparente de la
+              // photo source (PNG, capture d'écran) s'exporterait en noir sans
+              // ce remplissage de secours.
+              ctx.fillStyle = "#fff";
+              ctx.fillRect(0, 0, width, height);
+              ctx.drawImage(image, 0, 0, width, height);
+              var filename = baseName + "-" + (startIndex + i) + ".jpg";
+              canvas.toBlob(function (blob) {
+                if (!blob) { reject(new Error("toBlob a échoué")); return; }
+                var blobUrl = URL.createObjectURL(blob);
+                fetch("/api/upload-photo?name=" + encodeURIComponent(filename), { method: "POST", body: blob })
+                  .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)); })
+                  .then(function () {
+                    resolve({ path: "assets/img/" + filename, blobUrl: blobUrl, saved: true });
+                  })
+                  .catch(function () {
+                    // Pas de serveur local (site ouvert en statique) : on retombe
+                    // sur le téléchargement manuel du fichier.
+                    var a = document.createElement("a");
+                    a.href = blobUrl;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    resolve({ path: "assets/img/" + filename, blobUrl: blobUrl, saved: false });
+                  });
+              }, "image/jpeg", .85);
             };
             image.onerror = reject; image.src = reader.result;
           };
           reader.onerror = reject;
           reader.readAsDataURL(file);
         });
-      })).then(function (urls) {
+      })).then(function (results) {
+        results.forEach(function (r) {
+          if (!r.saved) previewOverrides[r.path] = r.blobUrl;
+        });
+        var mainPhoto = card.querySelector('[data-k="photo"]');
+        var extra = results.slice();
+        if (!mainPhoto.value.trim() && extra.length) {
+          var first = extra.shift();
+          mainPhoto.value = first.path;
+        }
         var existing = photoList.value.split(/\r?\n/).map(function (p) { return p.trim(); }).filter(Boolean);
-        photoList.value = existing.concat(urls).join("\n");
+        photoList.value = existing.concat(extra.map(function (r) { return r.path; })).join("\n");
+        renderGallery();
         dirty = true;
         collect();
-        status(urls.length + " photo(s) ajoutée(s). Téléchargez ensuite le JSON.", "ok");
-      }).catch(function () { status("Impossible de lire une des photos sélectionnées.", "warn"); });
+        var allSaved = results.every(function (r) { return r.saved; });
+        if (allSaved) {
+          status(results.length + " photo(s) enregistrée(s) automatiquement dans assets/img/. Cliquez sur « Enregistrer sur le site » pour publier.", "ok");
+        } else {
+          status(results.length + " photo(s) téléchargée(s) (voir le dossier Téléchargements) — placez-les dans assets/img/ avant de redéployer le site. L'aperçu ci-dessus est temporaire.", "ok");
+        }
+      }).catch(function (err) { status("Impossible de traiter une des photos sélectionnées : " + (err && err.message ? err.message : err), "warn"); });
     });
 
-    card.addEventListener("input", function () { dirty = true; collect(); });
+    card.addEventListener("input", function (e) {
+      if (e.target.dataset.k === "photo" || e.target.dataset.k === "photos") renderGallery();
+      dirty = true;
+      collect();
+    });
     card.addEventListener("change", function (e) {
-      if (e.target.dataset.k === "photo") updatePreview();
+      if (e.target.dataset.k === "photo" || e.target.dataset.k === "photos") renderGallery();
       dirty = true;
       collect();
     });
