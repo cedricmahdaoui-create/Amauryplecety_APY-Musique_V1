@@ -1500,3 +1500,39 @@ body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 
 @media (prefers-reduced-motion: reduce) {
   .chatbot-toggle { transition: none; }
 }
+
+/* ---------- Saxophoniste qui marche sur les lignes de section ---------- */
+nav.breadcrumb, .site-footer { position: relative; }
+.sax-walker {
+  position: absolute;
+  left: 0;
+  width: 30px; height: 38px;
+  pointer-events: none;
+  z-index: 5;
+  animation: sax-walk 17s ease-in-out infinite;
+}
+.sax-walker--inline { bottom: -1px; }
+.sax-walker--footer { top: 4px; }
+.sax-walker-figure {
+  width: 100%; height: 100%;
+  fill: var(--brass-light);
+  color: var(--brass-light);
+  animation: sax-bob .6s ease-in-out infinite;
+}
+@keyframes sax-walk {
+  0%   { left: 0; transform: scaleX(1); }
+  48%  { left: calc(100% - 30px); transform: scaleX(1); }
+  50%  { left: calc(100% - 30px); transform: scaleX(-1); }
+  98%  { left: 0; transform: scaleX(-1); }
+  100% { left: 0; transform: scaleX(1); }
+}
+@keyframes sax-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@media (max-width: 640px) {
+  .sax-walker { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sax-walker, .sax-walker-figure { animation: none; left: 12px; }
+}
