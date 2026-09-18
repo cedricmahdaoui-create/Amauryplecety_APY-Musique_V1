@@ -23,7 +23,7 @@
     articles.forEach(function (article, index) {
       var row = document.createElement('div');
       row.className = 'admin-news-card';
-      row.innerHTML = '<label>Titre<input data-field="title" maxlength="180"></label><label>Date<input type="date" data-field="date"></label><label>Texte<textarea rows="6" data-field="text"></textarea></label><label>Photo<input type="file" accept="image/jpeg,image/png,image/webp" data-news-photo></label><img alt="Aperçu de la photo" style="max-height:180px" hidden><label><input type="checkbox" data-field="published"> Publier</label><button type="button" data-news-remove>Supprimer cette actualité</button>';
+      row.innerHTML = '<label>Titre<input data-field="title" maxlength="180"></label><label>Date<input type="date" data-field="date"></label><label>Texte<textarea rows="6" data-field="text"></textarea></label><label>Photo<input type="file" accept="image/jpeg,image/png,image/webp" data-news-photo></label><img class="admin-news-preview" alt="Aperçu de la photo" hidden><label><input type="checkbox" data-field="published"> Publier</label><button type="button" data-news-remove>Supprimer cette actualité</button>';
       var heading = document.createElement('h3'); heading.textContent = 'Actualité ' + (index + 1); row.prepend(heading);
       row.querySelectorAll('[data-field]').forEach(function (input) {
         var key = input.dataset.field;

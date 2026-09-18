@@ -1041,6 +1041,7 @@ address { font-style: normal; }
 .admin-check { flex-direction: row !important; align-items: center; gap: .5rem !important; font-weight: 400 !important; }
 .admin-check input { width: auto; }
 .admin-wide { grid-column: 1 / -1; }
+.admin-news-preview { max-height: 180px; }
 .admin-preview { margin-top: .8rem; display: flex; flex-wrap: wrap; gap: .7rem; }
 .admin-preview-item { margin: 0; display: flex; flex-direction: column; align-items: center; gap: .25rem; }
 .admin-preview-item-media { position: relative; }
