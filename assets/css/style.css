@@ -1139,11 +1139,27 @@ address { font-style: normal; }
 .home .story-portrait { aspect-ratio: 3 / 4; border-radius: 4px 4px 70px 4px; }
 .home .story-portrait img { object-position: center 9%; }
 .home .spotlight { box-shadow: none; border-radius: 3px; }
-.home .service { overflow: hidden; padding: 0 2rem 2rem; border-radius: 8px; color: var(--text); }
+.home .service { position: relative; overflow: hidden; padding: 0 2rem 2rem; border-radius: 8px; color: var(--text); }
 .home .service h3 { color: var(--ink); font-size: 1.8rem; }
 .home .service-photo { width: calc(100% + 4rem); max-width: none; margin: 0 -2rem 1.7rem; height: 230px; object-fit: cover; }
 .home .service-photo--instrument { object-fit: cover; padding: 0; }
 .home .service-tag { padding: 0; background: none; letter-spacing: .1em; }
+.service-bubble {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  z-index: 2;
+  max-width: 62%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: .86rem;
+  line-height: 1.35;
+  padding: .55rem .85rem;
+  border-radius: 14px 14px 14px 3px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.3);
+}
 .home .check-list { font-size: .95rem; }
 .home .service .btn { background: var(--brass-dark); color: white; }
 .home .service .btn:hover { background: var(--copper); }
