@@ -2,6 +2,35 @@
 [build]
   publish = "."
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Code serveur et fichiers de configuration : jamais servis au public (404 forcé).
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/node_modules/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "https://lacaveauxinstrum.fr/*"
   to = "https://www.lacaveauxinstrum.fr/:splat"
@@ -21,9 +50,29 @@
     Cross-Origin-Resource-Policy = "same-origin"
 
 [[headers]]
-  for = "/assets/*"
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
 
 # L'éditeur hors ligne /admin/ fonctionne sous la CSP stricte.
 # Decap CMS (/admin/cms.html) nécessite une CSP élargie — décommenter si utilisé :

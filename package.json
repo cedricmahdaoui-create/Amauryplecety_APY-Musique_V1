@@ -1,0 +1,10 @@
+{
+  "name": "apy-musique",
+  "private": true,
+  "type": "module",
+  "description": "Site APY Musique : site statique + fonctions Netlify pour l'administration du catalogue.",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.0",
+    "piexifjs": "^1.0.6"
+  }
+}

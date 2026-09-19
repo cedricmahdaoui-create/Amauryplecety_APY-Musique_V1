@@ -1569,3 +1569,14 @@ body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 
 @media (prefers-reduced-motion: reduce) {
   .chatbot-toggle { transition: none; }
 }
+
+/* ---------- Administration : connexion et historique ---------- */
+.admin-login { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 1rem; background: rgba(10,7,4,.92); }
+.admin-login-box { width: min(100%, 26rem); display: grid; gap: 1rem; padding: 2rem; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.admin-login-box h2 { margin: 0; }
+.admin-login-box label { display: grid; gap: .4rem; font-weight: 600; }
+.admin-login-box input { padding: .7rem .8rem; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--ivory); color: var(--text); font: inherit; }
+.admin-login-msg { margin: 0; color: var(--text-soft); }
+.admin-login-back { justify-self: center; font-size: .9rem; }
+.admin-history { display: grid; gap: .7rem; padding-top: .8rem; max-width: 34rem; }
+.admin-history select { padding: .6rem .7rem; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--ivory); color: var(--text); font: inherit; }
