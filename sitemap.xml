@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/</loc>
+    <loc>https://apy-musique.netlify.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/catalogue.html</loc>
+    <loc>https://apy-musique.netlify.app/catalogue.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/amaury-plecety.html</loc>
+    <loc>https://apy-musique.netlify.app/amaury-plecety.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/reparations.html</loc>
+    <loc>https://apy-musique.netlify.app/reparations.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/reparation-instruments-vent-eure.html</loc>
+    <loc>https://apy-musique.netlify.app/reparation-instruments-vent-eure.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/achat-vente-instruments-normandie.html</loc>
+    <loc>https://apy-musique.netlify.app/achat-vente-instruments-normandie.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/instruments-a-vent.html</loc>
+    <loc>https://apy-musique.netlify.app/instruments-a-vent.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/instruments-a-cordes.html</loc>
+    <loc>https://apy-musique.netlify.app/instruments-a-cordes.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/mentions-legales.html</loc>
+    <loc>https://apy-musique.netlify.app/mentions-legales.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/politique-confidentialite.html</loc>
+    <loc>https://apy-musique.netlify.app/politique-confidentialite.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://cedricmahdaoui-create.github.io/plan-du-site.html</loc>
+    <loc>https://apy-musique.netlify.app/plan-du-site.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
