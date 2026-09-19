@@ -1,0 +1,28 @@
+# Systèmes
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+*.swp
+*~
+.vscode/
+.idea/
+
+# Node (si outillage ajouté plus tard)
+node_modules/
+
+# Secrets de l'agent de prospection locale
+agent-sites-desuets/.env
+
+# Fichiers générés par les serveurs d'aperçu
+*.log
+
+# Exports/imports de référence (zips volumineux, pas du code source)
+/github-export-v2/
+/lovable-import/
+/site-export-*/
+/site-export-*.zip
+
+# Local Netlify folder
+.netlify

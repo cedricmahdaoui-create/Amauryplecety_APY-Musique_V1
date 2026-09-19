@@ -16,8 +16,9 @@ export default async (req) => {
       "Content-Type": "image/jpeg",
       "Cache-Control": "public, max-age=31536000, immutable",
       "Netlify-CDN-Cache-Control": "public, max-age=31536000, durable",
-      "Cross-Origin-Resource-Policy": "same-origin",
       ...safeHeaders,
+      // Politique adaptée à une image affichée seule (même approche que GitHub pour les fichiers bruts).
+      "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
     },
   });
 };

@@ -94,30 +94,6 @@ html { scroll-behavior: smooth; }
 }
 
 /* Pages internes : même direction artistique que l'accueil. */
-body:has(.breadcrumb) {
-  color-scheme: dark;
-  --ivory: #1a120c;
-  --ivory-2: #121217;
-  --paper: #18181d;
-  --ink: #f5f1e9;
-  --text: #d7d3cd;
-  --text-soft: #b7b2aa;
-  --line: #3d2f1f;
-  --brass: #dfb748;
-  --brass-light: #e6c979;
-  --brass-dark: #dfb748;
-  --verdigris: #7c9c8b;
-  background: #1a120c;
-}
-body:has(.breadcrumb) .site-header { background: #140d08; border-bottom-color: #332619; }
-body:has(.breadcrumb) .brand, body:has(.breadcrumb) .brand:hover { color: #f8f5ed; }
-body:has(.breadcrumb) .brand small { color: #bcb5a8; }
-body:has(.breadcrumb) .main-nav a { color: #dedbd4; }
-body:has(.breadcrumb) .main-nav a:hover, body:has(.breadcrumb) .main-nav a[aria-current="page"] { background: #201d18; color: #dfb748; }
-body:has(.breadcrumb) .main-nav .btn { color: #16120a; }
-body:has(.breadcrumb) .section { position: relative; isolation: isolate; background: #1a120c; border-color: #332619; color: var(--text); }
-body:has(.breadcrumb) .section::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at 5% 25%, rgba(181,137,48,.12), transparent 52%), radial-gradient(ellipse at 95% 80%, rgba(104,101,146,.11), transparent 55%); }
-body:has(.breadcrumb) .section-head h1, body:has(.breadcrumb) h2, body:has(.breadcrumb) h3 { color: #f5f1e9; }
 body:has(.breadcrumb) .breadcrumb { background: #0d0d11; border-bottom-color: #332619; color: #b7b2aa; }
 body:has(.breadcrumb) .site-footer { background: #140d08; border-top-color: #332619; color: #b7b2aa; }
 body:has(.breadcrumb) .cta-band, body:has(.breadcrumb) .catalogue-filters, body:has(.breadcrumb) .cat-card { background: rgba(24,24,29,.78); border-color: #3d2f1f; box-shadow: 0 16px 50px rgba(0,0,0,.22); }
@@ -346,11 +322,10 @@ p { margin: 0 0 1rem; }
 .hero {
   position: relative;
   color: #f4e9d6;
-  /* Illustration décorative générée : elle ne représente pas l'atelier réel. */
   background:
     linear-gradient(90deg, rgba(28,18,13,.87) 0%, rgba(28,18,13,.70) 48%, rgba(28,18,13,.28) 100%),
     linear-gradient(180deg, rgba(28,18,13,.15), rgba(28,18,13,.58)),
-    #241812 url("../img/hero-atelier-artisanal.jpg") right center / cover no-repeat;
+    #241812;
   overflow: hidden;
 }
 .hero::after {
@@ -450,7 +425,6 @@ a.card:hover {
   box-shadow: var(--shadow-md);
   border-color: var(--brass);
 }
-a.card .more { display: inline-block; margin-top: 1rem; font-weight: 600; color: var(--brass-dark); }
 
 /* ---------- Notre histoire ---------- */
 .story {
@@ -610,11 +584,6 @@ a.card .more { display: inline-block; margin-top: 1rem; font-weight: 600; color:
 .review-summary small { display: block; margin-top: 1rem; color: var(--text-soft); font-size: .78rem; }
 .testimonials .quote { display: none; }
 .testimonials .review-summary { grid-column: 1 / -1; }
-.social-links { display: flex; flex-wrap: wrap; gap: .65rem; }
-.social-link { display: inline-flex; align-items: center; gap: .55rem; padding: .65rem .85rem; border-radius: 999px; background: #1877f2; color: #fff; font-weight: 700; text-decoration: none; }
-.social-link:hover { background: #0f5fc7; color: #fff; text-decoration: none; }
-.social-link--maps { background: var(--walnut-700); }
-.social-link--maps:hover { background: var(--walnut-900); }
 
 /* Galerie sans wrapper .frame (pages secondaires) */
 .gallery figure > img,
@@ -774,28 +743,6 @@ address { font-style: normal; }
 .hours li[data-closed] span:last-child { color: var(--text-soft); font-weight: 400; }
 
 /* ---------- Formulaire ---------- */
-.form-field { margin-bottom: 1.2rem; }
-.form-field label { display: block; font-weight: 600; margin-bottom: .35rem; color: var(--ink); }
-.form-field input,
-.form-field textarea {
-  width: 100%;
-  padding: .78rem .95rem;
-  font: inherit;
-  color: var(--text);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-}
-.form-field input:focus,
-.form-field textarea:focus {
-  border-color: var(--brass);
-  outline: 3px solid color-mix(in srgb, var(--brass) 35%, transparent);
-  outline-offset: 1px;
-}
-.form-field textarea { min-height: 150px; resize: vertical; }
-.checkbox-field label { font-weight: 400; display: flex; gap: .6rem; align-items: flex-start; }
-.checkbox-field input { width: auto; margin-top: .35rem; flex: none; }
-.form-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-note { font-size: .88rem; color: var(--text-soft); }
 
 /* ---------- Fil d'Ariane ---------- */
@@ -1067,9 +1014,7 @@ address { font-style: normal; }
 }
 .admin-preview-del:hover { border-color: var(--copper); color: var(--copper); }
 .admin-sep { border: 0; border-top: 1px solid var(--line); margin: 2.5rem 0; }
-.admin-steps { line-height: 1.7; }
-.admin-steps li { margin-bottom: .8rem; }
-.admin-steps code, .admin-json code, .prose code, .admin-steps li code {
+.admin-json code, .prose code {
   background: var(--ivory-2);
   padding: .1em .4em;
   border-radius: 4px;
@@ -1093,7 +1038,6 @@ address { font-style: normal; }
 /* ---------- Utilitaires ---------- */
 .prose { max-width: 70ch; }
 .prose h2 { margin-top: 2rem; }
-.text-center { text-align: center; }
 .mt-1 { margin-top: 1rem; }
 .mt-2 { margin-top: 2rem; }
 .lead { font-size: 1.16rem; color: var(--text-soft); }
@@ -1133,10 +1077,6 @@ address { font-style: normal; }
   --ink: #2b2016; --text: #3a2e22; --text-soft: #6c5c49;
   --line: #e0d2b8; --brass: #b07a35; --brass-light: #cd9a5b; --brass-dark: #8a5c25;
   background: var(--ivory);
-}
-.home .hero {
-  background-image: linear-gradient(90deg, rgba(28,18,13,.88), rgba(28,18,13,.64) 45%, rgba(28,18,13,.08)), url('../img/hero-atelier-artisanal.jpg');
-  background-position: center;
 }
 .home .hero::after { display: none; }
 .home .hero .container { max-width: var(--container); padding-block: clamp(2.8rem, 7vw, 6rem); }
@@ -1193,7 +1133,6 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
   .home .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 }
 @media (max-width: 640px) {
-  .home .hero { background-image: linear-gradient(90deg, rgba(28,18,13,.84), rgba(28,18,13,.48)), url('../img/hero-atelier-artisanal.jpg'); background-position: 60% center; }
   .home .hero h1 { max-width: 15ch; }
   .home .hero-actions { gap: .6rem; margin-top: 1.25rem; }
   .home .hero-actions .btn { padding: .75rem 1rem; font-size: .9rem; }
@@ -1394,10 +1333,6 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
   transition: opacity .5s ease;
 }
 .home .hero::after { display: block; }
-@media (hover: hover) {
-  .home main > section:hover::after { opacity: 1; }
-}
-.home main > section:focus-within::after { opacity: 1; }
 
 /* Survol des sections : halo marqué, sans dépendre des calques du fond. */
 .home main > section::after { display: block; }
@@ -1411,7 +1346,6 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
   .home main > section:hover {
     box-shadow: inset 0 0 0 1px rgba(223,183,72,.35), inset 0 0 110px rgba(205,151,40,.12);
   }
-  .home main > section:hover::after { opacity: 1; }
 }
 
 /* Dégradé commun à toutes les sections de l'accueil. */
@@ -1580,3 +1514,6 @@ body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 
 .admin-login-back { justify-self: center; font-size: .9rem; }
 .admin-history { display: grid; gap: .7rem; padding-top: .8rem; max-width: 34rem; }
 .admin-history select { padding: .6rem .7rem; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--ivory); color: var(--text); font: inherit; }
+
+/* <picture> (variantes WebP) : aucune boîte propre, la mise en page reste celle de l'<img>. */
+picture { display: contents; }

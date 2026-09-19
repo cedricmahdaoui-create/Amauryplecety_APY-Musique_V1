@@ -4,9 +4,16 @@ import { getStore } from "@netlify/blobs";
 export const dataStore = () => getStore({ name: "apy-data", consistency: "strong" });
 export const mediaStore = () => getStore({ name: "apy-media", consistency: "strong" });
 
+// En-têtes de sécurité des réponses de l'API (les règles _headers ne s'appliquent
+// qu'aux fichiers statiques) : rien de ce que renvoie une fonction n'est une page.
 const SAFE_HEADERS = {
   "X-Content-Type-Options": "nosniff",
   "Referrer-Policy": "no-referrer",
+  "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none'",
+  "X-Frame-Options": "DENY",
+  "Permissions-Policy": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "Cross-Origin-Resource-Policy": "same-origin",
 };
 
 export function json(body, status = 200, extra = {}) {
