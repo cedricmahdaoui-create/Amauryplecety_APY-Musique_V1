@@ -1,8 +1,7 @@
-# La Cave aux Instrum'
+# APY Musique
 User-agent: *
 Allow: /
 Disallow: /merci.html
 Disallow: /404.html
-Disallow: /admin/
 
 Sitemap: https://apy-musique.netlify.app/sitemap.xml
