@@ -16,6 +16,14 @@
   var lightboxPhotos = [];
   var lightboxPosition = 0;
 
+  // Photos du catalogue d origine : version WebP quand elle existe, sinon le JPEG.
+  function setPhoto(img, src) {
+    var m = /^(assets\/img\/[A-Za-z0-9._-]+)\.jpe?g$/i.exec(src);
+    if (!m) { img.src = src; return; }
+    img.onerror = function () { img.onerror = null; img.src = src; };
+    img.src = m[1] + ".webp";
+  }
+
   function closeLightbox() {
     if (lightbox) { lightbox.hidden = true; document.body.classList.remove("has-lightbox"); }
   }
@@ -39,7 +47,7 @@
   function showLightbox(delta) {
     if (!lightboxPhotos.length) return;
     lightboxPosition = (lightboxPosition + delta + lightboxPhotos.length) % lightboxPhotos.length;
-    lightboxImg.src = lightboxPhotos[lightboxPosition];
+    setPhoto(lightboxImg, lightboxPhotos[lightboxPosition]);
     lightboxImg.alt = lightbox.dataset.name + " — photo " + (lightboxPosition + 1);
     lightboxCounter.textContent = (lightboxPosition + 1) + " / " + lightboxPhotos.length;
   }
@@ -103,7 +111,7 @@
     });
     if (photos.length) {
       var img = document.createElement("img");
-      img.src = photos[0];
+      setPhoto(img, photos[0]);
       img.alt = it.nom;
       img.loading = "lazy";
       media.appendChild(img);
@@ -127,7 +135,7 @@
         next.setAttribute("aria-label", "Photo suivante de " + it.nom);
         function show(delta) {
           position = (position + delta + photos.length) % photos.length;
-          img.src = photos[position];
+          setPhoto(img, photos[position]);
           img.alt = it.nom + " — photo " + (position + 1) + " sur " + photos.length;
           counter.textContent = (position + 1) + " / " + photos.length;
           if (delta) {
