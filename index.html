@@ -181,7 +181,12 @@
 
       <div class="services">
         <article class="service">
-          <picture><source type="image/webp" srcset="assets/img/service-photo-instrument.webp"><img class="service-photo service-photo--instrument" src="assets/img/service-photo-instrument.jpg" alt="Cliente découvrant un mur d'instruments : guitares, violon, cuivres et saxophone" width="1600" height="1067" loading="lazy"></picture>
+          <div class="service-slides" tabindex="0" role="group" aria-label="Photos de l’atelier : passez la souris sur la carte ou touchez pour les faire défiler">
+            <picture><source type="image/webp" srcset="assets/img/atelier-contrebasses-cuivres.webp"><img class="service-photo" src="assets/img/atelier-contrebasses-cuivres.jpg" alt="Contrebasses et pavillons de cuivres rangés sur des rayonnages dans la réserve de l’atelier" width="1000" height="750"></picture>
+            <picture><source type="image/webp" srcset="assets/img/atelier-etuis-stock.webp"><img class="service-photo" src="assets/img/atelier-etuis-stock.jpg" alt="Réserve de l’atelier : étuis d’instruments empilés, trompette et violoncelle" width="1000" height="750" loading="lazy"></picture>
+            <picture><source type="image/webp" srcset="assets/img/atelier-rayonnage-cuivres.webp"><img class="service-photo" src="assets/img/atelier-rayonnage-cuivres.jpg" alt="Étagères de l’atelier chargées de cuivres, de saxophones anciens et d’étuis" width="1000" height="1333" loading="lazy"></picture>
+            <span class="story-slides-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
           <span class="service-bubble">Celui-ci a une histoire à raconter…</span>
           <span class="service-tag">Achat &amp; vente</span>
           <h3>Trouver un instrument</h3>
@@ -429,6 +434,7 @@
 </nav>
 
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/photo-slides.js" defer></script>
 <script src="assets/js/contact-dialog.js" defer></script>
 <script src="assets/js/chatbot.js" defer></script>
 </body>

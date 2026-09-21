@@ -443,6 +443,16 @@ a.card:hover {
   aspect-ratio: 3 / 2;
 }
 .story-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.story-slides { position: relative; aspect-ratio: 4 / 5; cursor: pointer; }
+.story-slides picture, .service-slides picture { display: block; position: absolute; inset: 0; opacity: 0; transition: opacity .7s ease; }
+.story-slides picture.is-active, .service-slides picture.is-active { opacity: 1; }
+.story-slides:focus-visible, .service-slides:focus-visible { outline: 3px solid #d9b454; outline-offset: 3px; }
+.story-slides-dots { position: absolute; left: 0; right: 0; bottom: .8rem; display: flex; justify-content: center; gap: .4rem; }
+.story-slides-dots i { width: .5rem; height: .5rem; border-radius: 50%; background: rgba(255,255,255,.45); transition: background .3s, transform .3s; }
+.story-slides-dots i.is-active { background: #fff; transform: scale(1.25); }
+.home .service-slides { position: relative; width: calc(100% + 4rem); margin: 0 -2rem 1.7rem; height: 230px; overflow: hidden; cursor: pointer; }
+.home .service-slides .service-photo { margin: 0; width: 100%; height: 100%; }
+@media (prefers-reduced-motion: reduce) { .story-slides picture, .service-slides picture { transition: none; } }
 
 .timeline { list-style: none; margin: 1.5rem 0 0; padding: 0; }
 .timeline li {
