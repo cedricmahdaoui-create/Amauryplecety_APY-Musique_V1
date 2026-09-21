@@ -1517,3 +1517,4 @@ body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 
 
 /* <picture> (variantes WebP) : aucune boîte propre, la mise en page reste celle de l'<img>. */
 picture { display: contents; }
+picture > source { display: none; }
