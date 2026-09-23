@@ -2,7 +2,7 @@ const PHOTO_PATH = /^(?:assets\/img\/[A-Za-z0-9._-]{1,120}\.(?:jpe?g|png|webp)|m
 const SLUG = /^[a-z0-9][a-z0-9-]{0,59}$/;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
-const LIMITS = { instruments: 300, families: 60, articles: 100, photos: 12 };
+const LIMITS = { instruments: 300, families: 60, articles: 4, photos: 12, realisations: 10 };
 
 export function isPhotoPath(value) {
   return typeof value === "string" && PHOTO_PATH.test(value);
@@ -16,7 +16,8 @@ export function mediaNames(catalogue) {
     add(it.photo);
     for (const p of it.photos || []) add(p);
   }
-  for (const a of (catalogue && catalogue.articles) || []) add(a.photo);
+  for (const a of (catalogue && catalogue.articles) || []) { add(a.photo); for (const p of a.photos || []) add(p); }
+  for (const r of (catalogue && catalogue.realisations) || []) { add(r.avant); add(r.apres); }
   return [...names];
 }
 
@@ -82,24 +83,49 @@ export function cleanCatalogue(input) {
 
   const articles = [];
   if (input.articles != null) {
-    if (!Array.isArray(input.articles) || input.articles.length > LIMITS.articles) {
+    if (!Array.isArray(input.articles)) {
       errors.push("Liste d'actualités non valide.");
+    } else if (input.articles.length > LIMITS.articles) {
+      errors.push(`${LIMITS.articles} actualités maximum.`);
     } else {
       input.articles.forEach((a, i) => {
         const raw = a && typeof a === "object" ? a : {};
         const date = typeof raw.date === "string" && DATE.test(raw.date) ? raw.date : "";
         if (!date) errors.push(`Actualité ${i + 1} : date non valide.`);
+        const extraPhotos = Array.isArray(raw.photos) ? raw.photos : [];
+        if (extraPhotos.length > LIMITS.photos) errors.push(`Actualité ${i + 1} : ${LIMITS.photos} photos supplémentaires maximum.`);
         articles.push({
           title: text(raw.title, 180, `Actualité ${i + 1} — titre`),
           text: text(raw.text, 10000, `Actualité ${i + 1} — texte`),
           date,
           published: raw.published === true,
           photo: photo(raw.photo, `Actualité ${i + 1} — photo`),
+          photos: extraPhotos.slice(0, LIMITS.photos).map((p, k) => photo(p, `Actualité ${i + 1} — photo ${k + 2}`)).filter(Boolean),
+        });
+      });
+    }
+  }
+
+  const realisations = [];
+  if (input.realisations != null) {
+    if (!Array.isArray(input.realisations)) {
+      errors.push("Liste « passés entre nos mains » non valide.");
+    } else if (input.realisations.length > LIMITS.realisations) {
+      errors.push(`${LIMITS.realisations} exemples « passés entre nos mains » maximum.`);
+    } else {
+      input.realisations.forEach((r, i) => {
+        const raw = r && typeof r === "object" ? r : {};
+        realisations.push({
+          id: typeof raw.id === "string" && /^[a-z0-9-]{1,40}$/.test(raw.id) ? raw.id : `r${Date.now().toString(36)}${i}`,
+          titre: text(raw.titre, 80, `Réalisation ${i + 1} — titre`),
+          avant: photo(raw.avant, `Réalisation ${i + 1} — photo avant`),
+          apres: photo(raw.apres, `Réalisation ${i + 1} — photo après`),
+          texte: text(raw.texte, 240, `Réalisation ${i + 1} — texte`),
         });
       });
     }
   }
 
   if (errors.length) return { ok: false, error: errors.slice(0, 5).join(" ") };
-  return { ok: true, value: { instruments, families, articles } };
+  return { ok: true, value: { instruments, families, articles, realisations } };
 }

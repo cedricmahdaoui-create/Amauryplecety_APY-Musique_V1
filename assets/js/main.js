@@ -12,7 +12,7 @@
         document.documentElement.style.setProperty('--navigation-height', (header.getBoundingClientRect().height + breadcrumb.getBoundingClientRect().height) + 'px');
       }
       function updateBreadcrumb() {
-        var names = { histoire: 'Notre histoire', services: 'Nos services', 'a-la-une': 'À la une', galerie: 'Galerie', avis: 'Avis', contact: 'Contact' };
+        var names = { histoire: 'Notre histoire', services: 'Nos services', 'a-la-une': 'À la une', avis: 'Avis', contact: 'Contact' };
         var name = names[location.hash.slice(1)];
         var list = breadcrumb.querySelector('ol');
         list.replaceChildren();

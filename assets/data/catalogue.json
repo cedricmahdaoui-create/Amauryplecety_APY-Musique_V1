@@ -54,58 +54,6 @@
       "photo": "assets/img/restauration-04.jpg",
       "photos": [],
       "desc": "Verni, révisé et réglé pour un démarrage serein. Housse fournie."
-    },
-    {
-      "nom": "Trompette Sib professionnelle",
-      "famille": "vent",
-      "sousfamille": "Trompette",
-      "etat": "revise",
-      "prix": 850,
-      "dispo": false,
-      "featured": false,
-      "annee": "",
-      "photo": "",
-      "photos": [],
-      "desc": "Pistons rodés, coulisses révisées. En préparation — nous consulter pour la date de disponibilité."
-    },
-    {
-      "nom": "Violon 4/4 d'étude, monté et réglé",
-      "famille": "cordes",
-      "sousfamille": "Violon",
-      "etat": "revise",
-      "prix": 480,
-      "dispo": true,
-      "featured": false,
-      "annee": "",
-      "photo": "",
-      "photos": [],
-      "desc": "Chevalet ajusté, cordes neuves, archet et étui inclus. Autres tailles (1/2, 3/4) sur demande."
-    },
-    {
-      "nom": "Violoncelle 4/4 d'occasion",
-      "famille": "cordes",
-      "sousfamille": "Violoncelle",
-      "etat": "revise",
-      "prix": 1600,
-      "dispo": true,
-      "featured": false,
-      "annee": "",
-      "photo": "",
-      "photos": [],
-      "desc": "Réglage complet en lien avec un luthier partenaire. Housse rembourrée fournie."
-    },
-    {
-      "nom": "Jeu de tampons pour saxophone alto",
-      "famille": "accessoire",
-      "sousfamille": "Pièce détachée",
-      "etat": "piece",
-      "prix": 0,
-      "dispo": true,
-      "featured": false,
-      "annee": "",
-      "photo": "",
-      "photos": [],
-      "desc": "Tampons cuir, feutres et résonateurs. Pose possible à l'atelier — prix selon modèle."
     }
   ],
   "families": [
@@ -132,11 +80,38 @@
   ],
   "articles": [
     {
-      "title": "",
-      "text": "",
-      "date": "2026-09-11",
-      "published": false,
-      "photo": ""
+      "title": "L'expo du weekend",
+      "text": "L'expo à '...........' à été riche en '......'.\nPlusieurs commandes de pièces et instruments.\nEt un agenda de réparations prévues qui se remplie a vue d'oeil. \n",
+      "date": "2026-09-23",
+      "published": true,
+      "photo": "assets/img/actualite-33271.jpg",
+      "photos": [
+        "assets/img/actualite-33404.jpg"
+      ]
+    },
+    {
+      "title": "Test d'actu",
+      "text": "Ceci est un test.",
+      "date": "2026-09-23",
+      "published": true,
+      "photo": "assets/img/actualite-88065.jpg",
+      "photos": []
+    }
+  ],
+  "realisations": [
+    {
+      "id": "",
+      "titre": "Saxo restauré",
+      "avant": "assets/img/realisation-avant-89669.jpg",
+      "apres": "assets/img/realisation-apres-98097.jpg",
+      "texte": "Texte example de ce qui a été fait"
+    },
+    {
+      "id": "",
+      "titre": "Trompette",
+      "avant": "assets/img/realisation-avant-79090.jpg",
+      "apres": "assets/img/realisation-apres-93894.jpg",
+      "texte": "trompette restaurée"
     }
   ]
 }

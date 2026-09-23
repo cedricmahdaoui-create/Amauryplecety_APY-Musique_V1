@@ -130,41 +130,175 @@
 
   var items = [];
   var articles = [];
+  var MAX_ARTICLES = 4;
   var news = document.createElement('section');
   news.className = 'admin-news';
-  news.innerHTML = '<h2>Gérer À la une</h2><p>Ajoutez vos nouveautés et articles. Cochez « Publier » pour les afficher, puis enregistrez les modifications.</p><button type="button" class="btn" data-news-add>Ajouter une actualité</button><div data-news-list></div><button type="button" class="btn" data-news-save>Enregistrer les modifications</button> <a href="a-la-une.html" target="_blank">Voir À la une</a>';
+  news.innerHTML = '<h2>Gérer À la une</h2><p>Ajoutez vos nouveautés et articles — 4 au maximum. Cochez « Publier » pour les afficher, puis enregistrez les modifications.</p><button type="button" class="btn" data-news-add>Ajouter une actualité</button><p data-news-limit hidden>Maximum de 4 actualités atteint — supprimez-en une pour en ajouter une nouvelle.</p><div data-news-list></div><button type="button" class="btn" data-news-save>Enregistrer les modifications</button> <a href="index.html#a-la-une" target="_blank">Voir À la une</a>';
   listEl.before(news);
   function renderNews() {
+    var addBtn = news.querySelector('[data-news-add]');
+    var limitNote = news.querySelector('[data-news-limit]');
+    addBtn.disabled = articles.length >= MAX_ARTICLES;
+    limitNote.hidden = articles.length < MAX_ARTICLES;
     var list = news.querySelector('[data-news-list]');
     list.replaceChildren();
     if (!articles.length) { var empty = document.createElement('p'); empty.className = 'admin-news-empty'; empty.textContent = 'Aucune actualité. Cliquez sur Ajouter une actualité pour commencer.'; list.appendChild(empty); }
     articles.forEach(function (article, index) {
       var row = document.createElement('div');
       row.className = 'admin-news-card';
-      row.innerHTML = '<label>Titre<input data-field="title" maxlength="180"></label><label>Date<input type="date" data-field="date"></label><label>Texte<textarea rows="6" data-field="text"></textarea></label><label>Photo<input type="file" accept="image/jpeg,image/png,image/webp" data-news-photo></label><img class="admin-news-preview" alt="Aperçu de la photo" hidden><label><input type="checkbox" data-field="published"> Publier</label><button type="button" data-news-remove>Supprimer cette actualité</button>';
+      row.innerHTML = '<label>Titre<input data-field="title" maxlength="180"></label><label>Date<input type="date" data-field="date"></label><label>Texte<textarea rows="6" data-field="text"></textarea></label><div class="admin-preview" data-news-gallery hidden></div><label>Photos — plusieurs possibles<input type="file" accept="image/jpeg,image/png,image/webp" multiple data-news-photo></label><label><input type="checkbox" data-field="published"> Publier</label><button type="button" data-news-remove>Supprimer cette actualité</button>';
       var heading = document.createElement('h3'); heading.textContent = 'Actualité ' + (index + 1); row.prepend(heading);
       row.querySelectorAll('[data-field]').forEach(function (input) {
         var key = input.dataset.field;
         if (key === 'published') input.checked = article[key] === true; else input.value = article[key] || '';
         input.addEventListener('input', function () { article[key] = key === 'published' ? input.checked : input.value; dirty = true; refreshMeta(); });
       });
-      var preview = row.querySelector('img');
-      if (article.photo) { preview.src = article.photo; preview.hidden = false; }
+
+      if (!Array.isArray(article.photos)) article.photos = [];
+      if (!article._previewOverrides) article._previewOverrides = {};
+      var wrap = row.querySelector('[data-news-gallery]');
+      function deleteFileOnDisk(pathOrUri) {
+        if (!pathOrUri || pathOrUri.indexOf('data:') === 0) return;
+        var name = pathOrUri.split('/').pop();
+        api('/api/delete-photo?name=' + encodeURIComponent(name), { method: 'POST' }).catch(function () {});
+      }
+      function renderGallery() {
+        var all = [];
+        if (article.photo) all.push({ src: article.photo, label: 'Principale' });
+        article.photos.forEach(function (p, i) { all.push({ src: p, label: 'Photo ' + (i + 2) }); });
+        wrap.innerHTML = '';
+        if (!all.length) { wrap.hidden = true; return; }
+        wrap.hidden = false;
+        all.forEach(function (item, idx) {
+          var fig = document.createElement('figure');
+          fig.className = 'admin-preview-item';
+          var media = document.createElement('div');
+          media.className = 'admin-preview-item-media';
+          var img = document.createElement('img');
+          img.src = article._previewOverrides[item.src] || item.src;
+          img.alt = '';
+          var del = document.createElement('button');
+          del.type = 'button';
+          del.className = 'admin-preview-del';
+          del.textContent = '✕';
+          del.setAttribute('aria-label', 'Supprimer ' + item.label.toLowerCase());
+          del.addEventListener('click', function () {
+            if (!confirm('Supprimer cette photo ?')) return;
+            var removed;
+            if (idx === 0 && article.photo) { removed = article.photo; article.photo = article.photos.length ? article.photos.shift() : ''; }
+            else { removed = article.photos.splice(article.photo ? idx - 1 : idx, 1)[0]; }
+            delete article._previewOverrides[removed];
+            deleteFileOnDisk(removed);
+            renderGallery(); dirty = true; refreshMeta();
+          });
+          media.appendChild(img);
+          media.appendChild(del);
+          var cap = document.createElement('figcaption');
+          cap.textContent = item.label;
+          fig.appendChild(media);
+          fig.appendChild(cap);
+          wrap.appendChild(fig);
+        });
+      }
+      renderGallery();
       row.querySelector('[data-news-photo]').addEventListener('change', function (event) {
-        var file = event.target.files[0]; if (!file) return;
-        processImage(file, 'actualite', 0).then(function (res) {
-          article.photo = res.path;
-          preview.src = res.saved ? res.path : res.blobUrl;
-          preview.hidden = false; dirty = true; refreshMeta();
-          status(res.saved ? 'Photo enregistrée. Cliquez sur « Enregistrer sur le site » pour publier.' : 'Photo téléchargée dans votre dossier Téléchargements : placez-la dans assets/img/ avant de publier.', 'ok');
-        }).catch(function (err) { status('Impossible de traiter cette photo : ' + (err && err.message ? err.message : err), 'warn'); });
+        var files = Array.prototype.slice.call(event.target.files || []);
+        if (!files.length) return;
+        Promise.all(files.map(function (file, i) { return processImage(file, 'actualite', i); })).then(function (results) {
+          results.forEach(function (r) { if (!r.saved) article._previewOverrides[r.path] = r.blobUrl; });
+          var extra = results.slice();
+          if (!article.photo && extra.length) article.photo = extra.shift().path;
+          article.photos = article.photos.concat(extra.map(function (r) { return r.path; }));
+          renderGallery(); dirty = true; refreshMeta();
+          var allSaved = results.every(function (r) { return r.saved; });
+          status(allSaved ? results.length + ' photo(s) ajoutée(s), redimensionnée(s) et protégée(s) par un filigrane. Cliquez sur « Enregistrer sur le site » pour publier.' : results.length + ' photo(s) téléchargée(s) (voir le dossier Téléchargements) — placez-les dans assets/img/ avant de redéployer le site.', 'ok');
+        }).catch(function (err) { status('Impossible de traiter une des photos sélectionnées : ' + (err && err.message ? err.message : err), 'warn'); });
       });
       row.querySelector('[data-news-remove]').addEventListener('click', function () { if (!confirm('Supprimer cette actualité ?')) return; articles.splice(index, 1); dirty = true; renderNews(); refreshMeta(); });
       list.appendChild(row);
     });
   }
-  news.querySelector('[data-news-add]').addEventListener('click', function () { articles.push({ title: '', text: '', date: new Date().toISOString().slice(0, 10), published: false, photo: '' }); dirty = true; renderNews(); refreshMeta(); });
+  news.querySelector('[data-news-add]').addEventListener('click', function () { if (articles.length >= MAX_ARTICLES) return; articles.push({ title: '', text: '', date: new Date().toISOString().slice(0, 10), published: false, photo: '' }); dirty = true; renderNews(); refreshMeta(); });
   news.querySelector('[data-news-save]').addEventListener('click', function () { document.getElementById('a-save').click(); statusEl.scrollIntoView({ block: 'center' }); });
+
+  /* ----- « Passés entre nos mains » : exemples avant / après ----- */
+  var realisations = [];
+  var MAX_REALISATIONS = 10;
+  var realis = document.createElement('section');
+  realis.className = 'admin-news';
+  realis.innerHTML = '<h2>Gérer « Passés entre nos mains »</h2><p>Une photo avant, une photo après, un petit texte : ajoutez vos exemples de réparation ou de restauration — 10 au maximum. Ils s’affichent sur la page Réparations, dans « Quelques exemples : avant / après ».</p><button type="button" class="btn" data-realis-add>Ajouter un exemple</button><p data-realis-limit hidden>Maximum de 10 exemples atteint — supprimez-en un pour en ajouter un nouveau.</p><div data-realis-list></div><button type="button" class="btn" data-realis-save>Enregistrer les modifications</button> <a href="reparations.html#galerie" target="_blank">Voir les exemples</a>';
+  news.after(realis);
+  function renderRealisations() {
+    var addBtn = realis.querySelector('[data-realis-add]');
+    var limitNote = realis.querySelector('[data-realis-limit]');
+    addBtn.disabled = realisations.length >= MAX_REALISATIONS;
+    limitNote.hidden = realisations.length < MAX_REALISATIONS;
+    var list = realis.querySelector('[data-realis-list]');
+    list.replaceChildren();
+    if (!realisations.length) { var empty = document.createElement('p'); empty.className = 'admin-news-empty'; empty.textContent = 'Aucun exemple. Cliquez sur Ajouter un exemple pour commencer.'; list.appendChild(empty); }
+    realisations.forEach(function (r, index) {
+      var row = document.createElement('div');
+      row.className = 'admin-news-card';
+      row.innerHTML = '<label class="admin-wide">Titre<input data-field="titre" maxlength="80" placeholder="Ex. : Saxophone alto Selmer restauré"></label>' +
+        '<div class="admin-realisation-photos">' +
+        '<div><label>Photo avant<input type="file" accept="image/jpeg,image/png,image/webp" data-realis-photo="avant"></label>' +
+        '<div class="admin-preview-item-media"><img class="admin-news-preview" data-preview="avant" alt="Aperçu avant" hidden>' +
+        '<button type="button" class="admin-preview-del" data-preview-del="avant" hidden aria-label="Supprimer la photo avant">✕</button></div></div>' +
+        '<div><label>Photo après<input type="file" accept="image/jpeg,image/png,image/webp" data-realis-photo="apres"></label>' +
+        '<div class="admin-preview-item-media"><img class="admin-news-preview" data-preview="apres" alt="Aperçu après" hidden>' +
+        '<button type="button" class="admin-preview-del" data-preview-del="apres" hidden aria-label="Supprimer la photo après">✕</button></div></div>' +
+        '</div>' +
+        '<label>Texte affiché sous les deux photos<textarea rows="3" maxlength="240" data-field="texte"></textarea></label>' +
+        '<button type="button" data-realis-remove>Supprimer cet exemple</button>';
+      var heading = document.createElement('h3'); heading.textContent = 'Exemple ' + (index + 1); row.prepend(heading);
+      row.querySelector('[data-field="titre"]').value = r.titre || '';
+      row.querySelector('[data-field="titre"]').addEventListener('input', function (e) { r.titre = e.target.value; dirty = true; refreshMeta(); });
+      row.querySelector('[data-field="texte"]').value = r.texte || '';
+      row.querySelector('[data-field="texte"]').addEventListener('input', function (e) { r.texte = e.target.value; dirty = true; refreshMeta(); });
+      if (!r._previewOverrides) r._previewOverrides = {};
+      function deleteRealisPhoto(pathOrUri) {
+        if (!pathOrUri || pathOrUri.indexOf('data:') === 0) return;
+        var name = pathOrUri.split('/').pop();
+        api('/api/delete-photo?name=' + encodeURIComponent(name), { method: 'POST' }).catch(function () {});
+      }
+      ['avant', 'apres'].forEach(function (side) {
+        var preview = row.querySelector('[data-preview="' + side + '"]');
+        var delBtn = row.querySelector('[data-preview-del="' + side + '"]');
+        function refreshSide() {
+          if (r[side]) { preview.src = r._previewOverrides[r[side]] || r[side]; preview.hidden = false; delBtn.hidden = false; }
+          else { preview.hidden = true; delBtn.hidden = true; }
+        }
+        refreshSide();
+        row.querySelector('[data-realis-photo="' + side + '"]').addEventListener('change', function (event) {
+          var file = event.target.files[0]; if (!file) return;
+          var previous = r[side];
+          processImage(file, 'realisation-' + side, side === 'apres' ? 1 : 0).then(function (res) {
+            if (previous && previous !== res.path) { delete r._previewOverrides[previous]; deleteRealisPhoto(previous); }
+            r[side] = res.path;
+            if (!res.saved) r._previewOverrides[res.path] = res.blobUrl;
+            refreshSide(); dirty = true; refreshMeta();
+            status(res.saved ? 'Photo enregistrée, redimensionnée et protégée par un filigrane. Cliquez sur « Enregistrer sur le site » pour publier.' : 'Photo téléchargée dans votre dossier Téléchargements : placez-la dans assets/img/ avant de publier.', 'ok');
+          }).catch(function (err) { status('Impossible de traiter cette photo : ' + (err && err.message ? err.message : err), 'warn'); });
+        });
+        delBtn.addEventListener('click', function () {
+          if (!confirm('Supprimer la photo « ' + (side === 'avant' ? 'avant' : 'après') + ' » de cet exemple ?')) return;
+          delete r._previewOverrides[r[side]];
+          deleteRealisPhoto(r[side]);
+          r[side] = '';
+          refreshSide(); dirty = true; refreshMeta();
+        });
+      });
+      row.querySelector('[data-realis-remove]').addEventListener('click', function () {
+        if (!confirm('Supprimer cet exemple ?')) return;
+        deleteRealisPhoto(r.avant);
+        deleteRealisPhoto(r.apres);
+        realisations.splice(index, 1); dirty = true; renderRealisations(); refreshMeta();
+      });
+      list.appendChild(row);
+    });
+  }
+  realis.querySelector('[data-realis-add]').addEventListener('click', function () { if (realisations.length >= MAX_REALISATIONS) return; realisations.push({ id: '', titre: '', avant: '', apres: '', texte: '' }); dirty = true; renderRealisations(); refreshMeta(); });
+  realis.querySelector('[data-realis-save]').addEventListener('click', function () { document.getElementById('a-save').click(); statusEl.scrollIntoView({ block: 'center' }); });
   var families = [];
   var defaults = Array.from(tpl.content.querySelector('[data-k="famille"]').options).map(function (o) { return { id: o.value, label: o.textContent }; });
   families = defaults.slice();
@@ -222,9 +356,23 @@
     refreshMeta();
   }
 
+  // Retire les champs internes (aperçus de photos pas encore enregistrées)
+  // avant d'envoyer ou d'exporter le catalogue : ils ne doivent jamais être écrits sur le site.
+  function publicList(list) {
+    return list.map(function (item) {
+      var copy = {};
+      Object.keys(item).forEach(function (k) { if (k !== '_previewOverrides') copy[k] = item[k]; });
+      return copy;
+    });
+  }
+
+  function payload() {
+    return { instruments: items, families: families, articles: publicList(articles), realisations: publicList(realisations) };
+  }
+
   function refreshMeta() {
     countEl.textContent = items.length + (items.length > 1 ? " instruments" : " instrument");
-    jsonEl.textContent = JSON.stringify({ instruments: items, families: families, articles: articles }, null, 2);
+    jsonEl.textContent = JSON.stringify(payload(), null, 2);
   }
 
   /* ----- Construction d'une carte ----- */
@@ -396,6 +544,8 @@
     var arr = Array.isArray(data) ? data : (data && data.instruments) || [];
     articles = Array.isArray(data.articles) ? data.articles : [];
     renderNews();
+    realisations = Array.isArray(data.realisations) ? data.realisations : [];
+    renderRealisations();
     families = defaults.map(function (f) { return { id: f.id, label: f.label }; });
     (Array.isArray(data.families) ? data.families : []).forEach(function (f) { if (f && typeof f.id === 'string' && typeof f.label === 'string' && !families.some(function (known) { return known.id === f.id; })) families.push(f); });
     arr.forEach(function (it) { if (it.famille && !families.some(function (f) { return f.id === it.famille; })) families.push({ id: it.famille, label: it.famille }); });
@@ -467,7 +617,7 @@
   document.getElementById("a-save").addEventListener("click", function () {
     collect();
     status("Enregistrement en cours…");
-    api("/api/catalogue", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ instruments: items, families: families, articles: articles }) })
+    api("/api/catalogue", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload()) })
       .then(function (r) { return r.ok ? r.json() : apiError(r); })
       .then(function (res) {
         dirty = false;
@@ -480,7 +630,7 @@
   var downloadBtn = document.getElementById("a-download");
   if (downloadBtn) downloadBtn.addEventListener("click", function () {
     collect();
-    var blob = new Blob([JSON.stringify({ instruments: items, families: families, articles: articles }, null, 2) + "\n"], { type: "application/json" });
+    var blob = new Blob([JSON.stringify(payload(), null, 2) + "\n"], { type: "application/json" });
     var url = URL.createObjectURL(blob);
     var a = document.createElement("a");
     a.href = url;
@@ -495,7 +645,7 @@
   var copyBtn = document.getElementById("a-copy");
   if (copyBtn) copyBtn.addEventListener("click", function () {
     collect();
-    var txt = JSON.stringify({ instruments: items, families: families, articles: articles }, null, 2) + "\n";
+    var txt = JSON.stringify(payload(), null, 2) + "\n";
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(txt).then(
         function () { status("Contenu copié dans le presse‑papiers.", "ok"); },
