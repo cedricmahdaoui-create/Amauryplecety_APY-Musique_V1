@@ -5,6 +5,7 @@
   "description": "Site APY Musique : site statique + fonctions Netlify pour l'administration du catalogue.",
   "dependencies": {
     "@netlify/blobs": "^11.1.0",
+    "nodemailer": "^6.9.0",
     "piexifjs": "^1.0.6"
   }
 }

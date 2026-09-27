@@ -1,30 +1,37 @@
+/* Formulaire « Écrire à l'atelier » (accueil uniquement) : envoi direct par e-mail. */
 (function () {
   'use strict';
-  var dialog = document.createElement('dialog');
-  dialog.className = 'contact-dialog';
-  dialog.setAttribute('aria-labelledby', 'contact-dialog-title');
-  dialog.innerHTML = `<button type="button" class="contact-close" aria-label="Fermer">×</button>
-    <h2 id="contact-dialog-title">Écrire à l’atelier</h2>
-    <form>
-      <label>Votre nom<input name="nom" autocomplete="name" required maxlength="120"></label>
-      <label>Votre adresse e-mail<input name="email" type="email" autocomplete="email" required></label>
-      <label>Objet<select name="objet"><option>Achat d’un instrument</option><option>Réparation</option><option>Estimation</option><option>Autre demande</option></select></label>
-      <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
-      <p class="form-note">Le bouton ci-dessous ouvre votre messagerie avec le message préparé. Vous pourrez alors l’envoyer à l’atelier.</p>
-      <button class="btn" type="submit">Préparer mon e-mail</button>
-    </form>`;
-  document.body.appendChild(dialog);
-  dialog.querySelector('.contact-close').addEventListener('click', function () { dialog.close(); });
-  dialog.addEventListener('click', function (event) { if (event.target === dialog) { var r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
-  document.querySelectorAll('a.btn').forEach(function (link) {
-    if (!/^écrire à l['’]atelier$/i.test(link.textContent.trim())) return;
-    link.setAttribute('aria-haspopup', 'dialog');
-    link.addEventListener('click', function (event) { event.preventDefault(); dialog.showModal(); });
-  });
-  dialog.querySelector('form').addEventListener('submit', function (event) {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  var note = form.querySelector('[data-contact-note]');
+  var submitBtn = form.querySelector('button[type="submit"]');
+  var defaultNote = note.textContent;
+  var defaultClass = note.className;
+
+  form.addEventListener('submit', function (event) {
     event.preventDefault();
-    var data = new FormData(event.currentTarget);
-    var body = data.get('message') + '\n\n' + data.get('nom') + '\n' + data.get('email');
-    location.href = 'mailto:amaury.plecety@laposte.net?subject=' + encodeURIComponent(data.get('objet')) + '&body=' + encodeURIComponent(body);
+    var data = new FormData(form);
+    submitBtn.disabled = true;
+    note.textContent = 'Envoi en cours…'; note.className = defaultClass;
+    fetch('api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nom: data.get('nom'), email: data.get('email'), objet: data.get('objet'),
+        message: data.get('message'), site: data.get('site')
+      })
+    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, body: b }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.body && res.body.error ? res.body.error : 'Envoi impossible.');
+        note.textContent = 'Message envoyé — l’atelier vous répond sous 1 à 2 jours.';
+        note.className = defaultClass + ' form-note--ok';
+        form.reset();
+        Array.prototype.slice.call(form.elements).forEach(function (el) { el.disabled = true; });
+      })
+      .catch(function (err) {
+        note.textContent = err.message + ' Vous pouvez aussi appeler, écrire par WhatsApp ou par e-mail (ci-dessous).';
+        note.className = defaultClass + ' form-note--warn';
+        submitBtn.disabled = false;
+      });
   });
 })();
