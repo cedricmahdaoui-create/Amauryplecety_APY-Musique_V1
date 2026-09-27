@@ -1,0 +1,287 @@
+{
+  "project": {
+    "name": "APY Musique",
+    "domain": "lacaveauxinstrum.fr",
+    "subdomain": "apy-musique.netlify.app",
+    "description": "Site statique + admin en ligne avec Netlify Functions & Blobs"
+  },
+  "platform": {
+    "provider": "Netlify",
+    "region": "Global (CDN)",
+    "sla": "99.99%",
+    "region_primary": "US",
+    "backup_regions": ["EU", "APAC"]
+  },
+  "services": {
+    "static_hosting": {
+      "type": "Netlify Edge (CDN)",
+      "files_served": [
+        "index.html",
+        "catalogue.html",
+        "admin/index.html",
+        "/assets/**"
+      ],
+      "cache_rules": {
+        "fonts": "max-age=31536000, immutable",
+        "images": "max-age=604800",
+        "css_js_data": "max-age=0, must-revalidate",
+        "html": "no-cache"
+      }
+    },
+    "serverless": {
+      "type": "Netlify Functions (Node.js 18+)",
+      "runtime": "esbuild",
+      "directory": "netlify/functions",
+      "timeout": "26 seconds",
+      "memory": "1024 MB",
+      "cold_start": "~100ms",
+      "endpoints": {
+        "auth": {
+          "path": "/api/auth-check",
+          "method": "POST",
+          "handler": "auth.mjs",
+          "requires_password": true
+        },
+        "catalogue": {
+          "path": "/api/catalogue",
+          "method": ["GET", "POST", "PUT"],
+          "handler": "catalogue.mjs",
+          "requires_password": true
+        },
+        "photo": {
+          "path": "/api/photo",
+          "method": ["POST"],
+          "handler": "photo.mjs",
+          "requires_password": true,
+          "max_size_mb": 10
+        },
+        "media": {
+          "path": "/api/media",
+          "method": ["GET", "POST", "DELETE"],
+          "handler": "media.mjs",
+          "requires_password": true
+        },
+        "history": {
+          "path": "/api/history",
+          "method": "GET",
+          "handler": "history.mjs",
+          "requires_password": true
+        }
+      }
+    },
+    "storage": {
+      "type": "Netlify Blobs",
+      "consistency": "strong",
+      "buckets": {
+        "apy-data": {
+          "purpose": "Catalogue JSON + sessions admin",
+          "size_gb": 0.5,
+          "replication": "Global"
+        },
+        "apy-media": {
+          "purpose": "Images (originals + thumbnails) + documents",
+          "size_gb": 2.0,
+          "replication": "Global"
+        }
+      },
+      "backup": "Automatic by Netlify"
+    }
+  },
+  "security": {
+    "authentication": {
+      "method": "Bearer Token (ADMIN_PASSWORD)",
+      "hashing": "SHA-256",
+      "timing_safe": true,
+      "rate_limiting": {
+        "max_attempts": 8,
+        "window_minutes": 15,
+        "action": "429 Too Many Requests"
+      }
+    },
+    "headers": {
+      "hsts": {
+        "max_age_seconds": 63072000,
+        "includeSubDomains": true,
+        "preload": true
+      },
+      "csp": "default-src 'self'; base-uri 'self'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests",
+      "x_frame_options": "DENY",
+      "x_content_type_options": "nosniff",
+      "referrer_policy": "strict-origin-when-cross-origin",
+      "permissions_policy": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()",
+      "cross_origin_opener_policy": "same-origin",
+      "cross_origin_resource_policy": "same-origin"
+    },
+    "redirects": [
+      {
+        "from": "/netlify/*",
+        "to": "/404.html",
+        "status": 404,
+        "purpose": "Hide server files"
+      },
+      {
+        "from": "/package.json",
+        "to": "/404.html",
+        "status": 404,
+        "purpose": "Hide dependencies"
+      },
+      {
+        "from": "/node_modules/*",
+        "to": "/404.html",
+        "status": 404,
+        "purpose": "Hide libraries"
+      },
+      {
+        "from": "https://lacaveauxinstrum.fr/*",
+        "to": "https://www.lacaveauxinstrum.fr/:splat",
+        "status": 301,
+        "purpose": "Force www subdomain"
+      }
+    ],
+    "tls": {
+      "protocol": "TLS 1.2+",
+      "certificate": "Netlify (Let's Encrypt)",
+      "auto_renewal": true
+    }
+  },
+  "performance": {
+    "cdn": {
+      "enabled": true,
+      "edge_locations": 200,
+      "avg_latency_ms": 25
+    },
+    "compression": {
+      "enabled": true,
+      "formats": ["gzip", "brotli"]
+    },
+    "caching": {
+      "strategy": "Aggressive for immutable, revalidate for mutable",
+      "cache_hit_ratio_target": "95%"
+    },
+    "optimization_opportunities": [
+      "WebP/AVIF image formats",
+      "SRI (Subresource Integrity) for external resources",
+      "Preload critical fonts",
+      "DNS prefetch to API"
+    ]
+  },
+  "monitoring": {
+    "available_in_netlify": {
+      "build_logs": true,
+      "function_logs": true,
+      "error_tracking": false,
+      "performance_metrics": false,
+      "uptime_monitoring": false
+    },
+    "recommended_integrations": [
+      {
+        "name": "Sentry",
+        "purpose": "Error tracking & alerting",
+        "cost_monthly": 29,
+        "events_included": 5000
+      },
+      {
+        "name": "Datadog",
+        "purpose": "Logs + Metrics + APM",
+        "cost_monthly": 32,
+        "features": "Log aggregation, dashboards"
+      },
+      {
+        "name": "Uptimerobot",
+        "purpose": "Uptime monitoring",
+        "cost_monthly": 0,
+        "features": "Free tier: 50 monitors"
+      },
+      {
+        "name": "Loggly",
+        "purpose": "Centralized logging",
+        "cost_monthly": 0,
+        "features": "Free tier: 200 MB/day"
+      }
+    ]
+  },
+  "deployment": {
+    "method": "Git push (GitHub)",
+    "build_command": "npm run build",
+    "build_time_seconds": 15,
+    "deployment_type": "Atomic (zero-downtime)",
+    "preview_deploys": true,
+    "rollback": {
+      "available": true,
+      "time_seconds": 5
+    },
+    "environment_variables": {
+      "ADMIN_PASSWORD": {
+        "secret": true,
+        "required": true,
+        "description": "Admin authentication key"
+      }
+    }
+  },
+  "costs": {
+    "monthly_estimate_usd": {
+      "netlify_site": 0,
+      "netlify_functions": "0-25",
+      "netlify_blobs": "0-30",
+      "cdn": 0,
+      "builds": 0,
+      "monitoring_sentry": 0,
+      "total": "0-100"
+    },
+    "cost_breakdown": {
+      "site_plan": "Free ($0)",
+      "functions": "125k invocations/month free (~3k/month used = free)",
+      "blobs": "5GB free (~2.5GB used = free)",
+      "builds": "300/month free (~15/month used = free)",
+      "bandwidth": "Unlimited"
+    },
+    "optimization_potential": "Add caching rules to reduce function invocations to 0-5/month"
+  },
+  "compliance": {
+    "gdpr": {
+      "https_enforced": true,
+      "data_location": "Global (US primary)",
+      "dpa_signed": false,
+      "user_rights": "Need implementation (export, delete)"
+    },
+    "wcag": {
+      "accessibility_audit": "Not included in infrastructure",
+      "note": "HTML/CSS level, outside scope"
+    },
+    "pci_dss": "Not applicable (no payment processing)"
+  },
+  "disaster_recovery": {
+    "rto_minutes": 5,
+    "rpo_hours": 0,
+    "backup_strategy": "Netlify automatic",
+    "manual_backup": "Not configured",
+    "restore_procedure": "Rollback deployment or restore from GitHub"
+  },
+  "scaling": {
+    "auto_scaling": {
+      "enabled": true,
+      "type": "Automatic (Netlify managed)",
+      "limits": {
+        "concurrent_functions": "1000+",
+        "storage_max_gb": "Unlimited",
+        "bandwidth_max": "Unlimited"
+      }
+    },
+    "expected_capacity": {
+      "users_per_minute": 10000,
+      "concurrent_sessions": 100,
+      "storage_growth_yearly_gb": 5
+    }
+  },
+  "deprecations": {
+    "removed_services": [
+      {
+        "name": "chatbot.js",
+        "removed_date": "2026-09-27",
+        "reason": "Replaced with client-side only implementation"
+      }
+    ]
+  },
+  "generated_at": "2026-09-27T00:00:00Z",
+  "version": "1.0"
+}

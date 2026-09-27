@@ -245,7 +245,7 @@ p { margin: 0 0 1rem; }
   text-decoration: none;
 }
 .brand:hover { color: var(--ink); }
-.brand svg { width: 42px; height: 42px; flex: none; }
+.brand svg, .brand img { width: 42px; height: 42px; flex: none; }
 .brand span small {
   display: block;
   font-family: var(--font);
@@ -846,7 +846,7 @@ address { font-style: normal; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
 .site-footer li { margin-bottom: .45rem; }
 .footer-brand { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; }
-.footer-brand svg { width: 36px; height: 36px; }
+.footer-brand svg, .footer-brand img { width: 36px; height: 36px; }
 .footer-brand strong { color: #fff; font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; }
 .footer-legal {
   margin-top: 2.5rem;
@@ -907,29 +907,97 @@ address { font-style: normal; }
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
 
-/* ---------- « À la une » : mise en page journal ---------- */
+/* ---------- « À la une » : tribune journalistique ---------- */
 .news-feed {
+  border-top: 3px solid var(--brass-dark);
+  padding-top: clamp(1.5rem, 3vw, 2rem);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: clamp(2rem, 4vw, 3.5rem) clamp(1.75rem, 4vw, 3rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(2.25rem, 5vw, 3.5rem);
   align-items: start;
 }
+a.news-article {
+  position: relative;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+.news-article:nth-child(n+3) { padding-top: clamp(2rem, 4vw, 3rem); }
+/* Filet horizontal pleine largeur entre la 1re et la 2e rangée. */
+.news-feed .news-article:nth-child(3)::after { content: ""; position: absolute; top: 0; left: 0; width: calc(200% + clamp(2.25rem, 5vw, 3.5rem)); height: 1px; background: var(--line); }
+/* Filet vertical façon colonnes de journal, colonne de droite. */
+.news-feed .news-article:nth-child(2n)::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: calc(-1 * clamp(1.125rem, 2.5vw, 1.75rem));
+  width: 1px;
+  background: var(--line);
+}
+.news-article:hover .news-article-title { color: var(--brass-dark); }
+.news-article-kicker {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .5em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variant: small-caps;
+  letter-spacing: .02em;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--brass-dark);
+}
+.news-article-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 1.4em;
+  height: 1px;
+  background: currentColor;
+  opacity: .55;
+  transform: translateY(-.35em);
+}
 .news-article-head { margin-bottom: 1rem; }
-.news-article-date { display: block; color: var(--text-soft); font-size: .85rem; margin-bottom: .35rem; }
-.news-article-title { font-size: clamp(1.3rem, 2.4vw, 1.7rem); line-height: 1.2; margin: 0; }
+.news-article-date {
+  display: block;
+  margin-top: .3rem;
+  color: var(--text-soft);
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.news-article-title {
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  line-height: 1.2;
+  margin: .3rem 0 0;
+  transition: color .15s ease;
+}
 .news-article-media {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: var(--radius);
+  border-radius: 2px;
   box-shadow: var(--shadow-md);
   background: var(--ivory-2);
-  margin-bottom: 1.1rem;
+  margin: 1.2rem 0;
 }
 .news-article-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.news-article-body { font-size: .98rem; color: var(--text); }
-.news-article-body p { white-space: pre-wrap; margin: 0 0 1.1em; }
-.news-article-body p:last-child { margin-bottom: 0; }
+.news-article-body { font-size: .98rem; line-height: 1.6; color: var(--text); }
+.news-article-body p { white-space: pre-wrap; margin: 0; }
+.news-article-more { display: block; margin-top: .5rem; color: var(--brass-dark); font-weight: 600; font-size: .9rem; }
+@media (max-width: 720px) {
+  .news-feed { grid-template-columns: minmax(0, 1fr); }
+  .news-feed .news-article::before { display: none; }
+  .news-article:nth-child(n+2) { border-top: 1px solid var(--line); padding-top: clamp(2rem, 4vw, 3rem); }
+  .news-feed .news-article:nth-child(3)::after { display: none; }
+}
+
+/* ---------- Page d'un article isolé ---------- */
+.article-full { max-width: 42rem; margin-inline: auto; }
+.article-full .news-article-media { aspect-ratio: 16 / 9; margin: 1.5rem 0; }
+.article-full .news-article-body p { white-space: pre-wrap; margin: 0 0 1.1em; }
+.article-gallery { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.5rem 0; }
+.article-gallery img { width: 140px; height: 105px; object-fit: cover; border-radius: 4px; cursor: pointer; }
 .cat-card {
   display: flex;
   flex-direction: column;
@@ -1337,6 +1405,9 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
   background: #dfb748; border-color: #dfb748; color: #17130a;
 }
 .home .btn:hover, .home .service .btn:hover, .home .cta-band .btn:hover { background: #efca65; border-color: #efca65; color: #17130a; }
+/* Bouton « Voir le catalogue » (carte Trouver un instrument) : fond blanc, cadre orange. */
+.home .service .btn[href="catalogue.html"], .home .service .btn[href="reparations.html"], .home .hero .btn[href="catalogue.html"] { background: #fff; border: 2px solid #ee7d1a; color: #17130a; }
+.home .service .btn[href="catalogue.html"]:hover, .home .service .btn[href="reparations.html"]:hover, .home .hero .btn[href="catalogue.html"]:hover { background: #fff3e6; border-color: #d96a0a; color: #17130a; }
 .home .btn--ghost { background: rgba(255,255,255,.025); color: #ead39c; border-color: #655638; }
 .home .btn--ghost:hover { background: #252119; color: #fff1ca; }
 .home a:not(.btn):hover { color: #f5d98a; }
@@ -1607,3 +1678,17 @@ body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 
 /* <picture> (variantes WebP) : aucune boîte propre, la mise en page reste celle de l'<img>. */
 picture { display: contents; }
 picture > source { display: none; }
+
+/* TEST — photo du saxophone démonté en fond de la section d'accueil (retirer ce bloc pour revenir en arrière). */
+.home main > section.hero {
+  background-color: #140d08;
+  background-image: linear-gradient(90deg, #140d08 0%, #140d08 58%, rgba(20,13,8,.5) 72%, rgba(20,13,8,.1) 92%), url("../img/hero-saxophone-demonte.jpg");
+  background-repeat: no-repeat;
+  background-position: 0 0, right center;
+  background-size: 100% 100%, auto 100%;
+}
+.home .hero picture { display: none; }
+.footer-credit { display: inline-flex; align-items: center; gap: .45rem; }
+.footer-credit img { display: block; width: 22px; height: auto; }
+.footer-heart { color: #e0245e; }
+.footer-credit img { position: relative; top: -3px; }

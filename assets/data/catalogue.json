@@ -1,6 +1,19 @@
 {
   "instruments": [
     {
+      "nom": "Saxophone alto Selmer Série III",
+      "famille": "vent",
+      "sousfamille": "Saxophone alto",
+      "etat": "revise",
+      "prix": 2600,
+      "dispo": true,
+      "featured": false,
+      "annee": "2005",
+      "photo": "assets/img/catalogue-selmer-serie-iii.jpg",
+      "photos": [],
+      "desc": "Verni intégral, mécanique révisée, très bon état général. Idéal conservatoire et pratique avancée."
+    },
+    {
       "nom": "Saxophone alto Selmer Mark VI",
       "famille": "vent",
       "sousfamille": "Saxophone alto",
@@ -15,19 +28,6 @@
         "assets/img/saxophone-alto-selmer-mark-vi-55908.jpg"
       ],
       "desc": "Révision complète, jeu de tampons neuf, clés argentées d'origine. Instrument professionnel, son centré et rond."
-    },
-    {
-      "nom": "Saxophone alto Selmer Série III",
-      "famille": "vent",
-      "sousfamille": "Saxophone alto",
-      "etat": "revise",
-      "prix": 2600,
-      "dispo": true,
-      "featured": false,
-      "annee": "2005",
-      "photo": "assets/img/catalogue-selmer-serie-iii.jpg",
-      "photos": [],
-      "desc": "Verni intégral, mécanique révisée, très bon état général. Idéal conservatoire et pratique avancée."
     },
     {
       "nom": "Saxophone alto King Zephyr",
@@ -95,6 +95,14 @@
       "date": "2026-09-23",
       "published": true,
       "photo": "assets/img/actualite-88065.jpg",
+      "photos": []
+    },
+    {
+      "title": "Mark VI de Cloclo",
+      "text": "Une rareté, commande spéciale pour les musiciens de Claude François. Laque bleue d'origine et clés additionnelles.",
+      "date": "2026-09-26",
+      "published": true,
+      "photo": "assets/img/actualite-65157.jpg",
       "photos": []
     }
   ],

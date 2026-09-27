@@ -55,6 +55,7 @@
   var ETAT_LABEL = {
     "revise": "Révisé, prêt à jouer",
     "a-restaurer": "À restaurer",
+    "invendu": "Invendu",
     "piece": "Pièce détachée"
   };
   var FAMILLE_LABEL = {
