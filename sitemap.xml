@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://apy-musique.netlify.app/</loc>
+    <loc>https://apymusique.fr/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/catalogue.html</loc>
+    <loc>https://apymusique.fr/catalogue.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/amaury-plecety.html</loc>
+    <loc>https://apymusique.fr/amaury-plecety.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/reparations.html</loc>
+    <loc>https://apymusique.fr/reparations.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/reparation-instruments-vent-eure.html</loc>
+    <loc>https://apymusique.fr/reparation-instruments-vent-eure.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/achat-vente-instruments-normandie.html</loc>
+    <loc>https://apymusique.fr/achat-vente-instruments-normandie.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/instruments-a-vent.html</loc>
+    <loc>https://apymusique.fr/instruments-a-vent.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/instruments-a-cordes.html</loc>
+    <loc>https://apymusique.fr/instruments-a-cordes.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/mentions-legales.html</loc>
+    <loc>https://apymusique.fr/mentions-legales.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/politique-confidentialite.html</loc>
+    <loc>https://apymusique.fr/politique-confidentialite.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://apy-musique.netlify.app/plan-du-site.html</loc>
+    <loc>https://apymusique.fr/plan-du-site.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
