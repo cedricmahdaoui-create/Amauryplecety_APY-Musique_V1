@@ -5,4 +5,4 @@ Disallow: /merci.html
 Disallow: /404.html
 Disallow: /admin/
 
-Sitemap: https://apy-musique.netlify.app/sitemap.xml
+Sitemap: https://apymusique.fr/sitemap.xml
