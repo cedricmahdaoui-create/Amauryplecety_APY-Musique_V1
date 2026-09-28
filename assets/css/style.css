@@ -1693,15 +1693,6 @@ body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 
 picture { display: contents; }
 picture > source { display: none; }
 
-/* TEST — photo du saxophone démonté en fond de la section d'accueil (retirer ce bloc pour revenir en arrière). */
-.home main > section.hero {
-  background-color: #140d08;
-  background-image: linear-gradient(90deg, #140d08 0%, #140d08 58%, rgba(20,13,8,.5) 72%, rgba(20,13,8,.1) 92%), url("../img/hero-saxophone-demonte.jpg");
-  background-repeat: no-repeat;
-  background-position: 0 0, right center;
-  background-size: 100% 100%, auto 100%;
-}
-.home .hero picture { display: none; }
 .footer-credit { display: inline-flex; align-items: center; gap: .45rem; }
 .footer-credit img { display: block; width: 22px; height: auto; }
 .footer-heart { color: #e0245e; }
