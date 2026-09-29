@@ -1040,36 +1040,29 @@ a.news-article {
 .cat-card-price { font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); font-weight: 600; }
 .cat-card-foot .btn { padding: .55rem 1rem; font-size: .88rem; }
 
-/* ---------- Barre d'actions mobile ---------- */
-.mobile-bar { display: none; }
+/* ---------- Bouton flottant WhatsApp ---------- */
+.wa-float {
+  position: fixed;
+  right: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  text-decoration: none;
+  transition: transform .15s ease;
+}
+.wa-float svg { width: 30px; height: 30px; }
+.wa-float:hover, .wa-float:focus-visible { transform: scale(1.07); }
 @media (max-width: 640px) {
-  .mobile-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    z-index: 200;
-    background: color-mix(in srgb, var(--walnut-900) 94%, transparent);
-    backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(205,154,91,.3);
-  }
-  .mobile-bar a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .15rem;
-    padding: .55rem .4rem calc(.55rem + env(safe-area-inset-bottom, 0px));
-    color: #f0e6d3;
-    text-decoration: none;
-    font-size: .74rem;
-    font-weight: 600;
-  }
-  .mobile-bar a + a { border-left: 1px solid rgba(205,154,91,.22); }
-  .mobile-bar a:active { background: rgba(205,154,91,.16); }
-  .mobile-bar svg { width: 22px; height: 22px; }
-  .mobile-bar .mb-wa { color: #cdeccf; }
-  body { padding-bottom: 62px; }
-  .site-footer { margin-bottom: 0; }
+  .wa-float { right: .85rem; bottom: calc(.85rem + env(safe-area-inset-bottom, 0px)); width: 52px; height: 52px; }
+  .wa-float svg { width: 27px; height: 27px; }
 }
 
 /* ---------- Espace d'administration (/admin/) ---------- */
@@ -1290,11 +1283,6 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
   .home .hero-actions { gap: .6rem; margin-top: 1.25rem; }
   .home .hero-actions .btn { padding: .75rem 1rem; font-size: .9rem; }
   .home .hero p { font-size: 1rem; }
-  .mobile-bar { background: #241812; grid-template-columns: 1.15fr 1fr 1fr; padding-bottom: env(safe-area-inset-bottom, 0px); }
-  .mobile-bar a { flex-direction: row; justify-content: center; gap: .4rem; padding: .65rem .3rem; min-height: 48px; }
-  .mobile-bar a:first-child { background: #8a5c25; color: #fff; }
-  .mobile-bar svg { width: 18px; height: 18px; }
-  body { padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* Hero inspiré du site Lovable : saxophone sur fond noir. */
@@ -1417,8 +1405,6 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
 .home .site-footer { background: #120b07; color: #b7b2aa; border-top: 1px solid #2e2214; }
 .home .site-footer h2 { color: #dfb748; }
 .home .footer-legal { color: #aaa49b; }
-.home .mobile-bar { background: #09090c; }
-.home .mobile-bar a:first-child { background: #dfb748; color: #17130a; }
 
 /* Photos de chaque instrument : navigation manuelle et tactile. */
 .cat-carousel { position: relative; touch-action: pan-y; }
@@ -1707,7 +1693,6 @@ picture > source { display: none; }
   background-position: 0 0, right center;
   background-size: 100% 100%, auto 100%;
 }
-.home .hero picture { display: none; }
 
 .footer-credit { display: inline-flex; align-items: center; gap: .45rem; }
 .footer-credit img { display: block; width: 22px; height: auto; }

@@ -32,6 +32,33 @@ export const safeHeaders = SAFE_HEADERS;
 
 const sha = (value) => createHash("sha256").update(value).digest();
 
+const ALLOWED_ORIGINS = ["https://apymusique.fr", "https://www.apymusique.fr", "https://apy-musique.netlify.app"];
+const MIN_FORM_MS = 2500; // en dessous, quasi certainement un robot (rempli+envoyé trop vite).
+
+/**
+ * Contrôles anti-spam communs à tous les formulaires publics (contact, éditeur…) :
+ * origine de la requête, délai de remplissage minimum, nombre de liens dans le message.
+ * Renvoie true si la requête est suspecte (à rejeter silencieusement, comme le honeypot).
+ */
+export function looksLikeSpam(req, body) {
+  const origin = req.headers.get("origin");
+  const referer = req.headers.get("referer") || "";
+  if (origin) {
+    if (!ALLOWED_ORIGINS.includes(origin)) return true;
+  } else if (!ALLOWED_ORIGINS.some((o) => referer.startsWith(o))) {
+    return true;
+  }
+
+  const elapsed = Number(body && body.elapsed);
+  if (!Number.isFinite(elapsed) || elapsed < MIN_FORM_MS) return true;
+
+  const message = typeof (body && body.message) === "string" ? body.message : "";
+  const linkCount = (message.match(/https?:\/\//gi) || []).length;
+  if (linkCount >= 2) return true;
+
+  return false;
+}
+
 const MAX_FAILURES = 8;
 const WINDOW_MS = 15 * 60 * 1000;
 

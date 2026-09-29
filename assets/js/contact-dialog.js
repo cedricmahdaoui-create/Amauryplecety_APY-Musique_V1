@@ -7,6 +7,7 @@
   var submitBtn = form.querySelector('button[type="submit"]');
   var defaultNote = note.textContent;
   var defaultClass = note.className;
+  var loadedAt = Date.now(); // anti-spam : un envoi trop rapide après l'affichage du formulaire est suspect.
 
   form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -18,7 +19,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         nom: data.get('nom'), email: data.get('email'), objet: data.get('objet'),
-        message: data.get('message'), site: data.get('site')
+        message: data.get('message'), site: data.get('site'), elapsed: Date.now() - loadedAt
       })
     }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, body: b }; }); })
       .then(function (res) {

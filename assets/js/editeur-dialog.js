@@ -14,6 +14,7 @@
   var defaultNote = note.textContent;
   var defaultClass = note.className;
   var openers = document.querySelectorAll("[data-editeur-objet]");
+  var openedAt = 0; // anti-spam : mesuré depuis l'ouverture de la fenêtre, pas le chargement de la page.
 
   function reset() {
     form.reset();
@@ -32,6 +33,7 @@
       objetInput.value = objet;
       if (typeof dialog.showModal === "function") dialog.showModal();
       else dialog.setAttribute("open", "");
+      openedAt = Date.now();
       var firstField = form.querySelector('input[name="nom"]');
       if (firstField) firstField.focus();
     });
@@ -53,7 +55,7 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         nom: data.get("nom"), email: data.get("email"), objet: data.get("objet"),
-        message: data.get("message"), site: data.get("site")
+        message: data.get("message"), site: data.get("site"), elapsed: Date.now() - openedAt
       })
     }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, body: b }; }); })
       .then(function (res) {

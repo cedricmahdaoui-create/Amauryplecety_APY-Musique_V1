@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { createHash } from "node:crypto";
-import { dataStore, json } from "../lib/common.mjs";
+import { dataStore, json, looksLikeSpam } from "../lib/common.mjs";
 
 const MAX_MSG_PER_WINDOW = 5;
 const WINDOW_MS = 60 * 60 * 1000; // 1 heure
@@ -22,8 +22,9 @@ export default async (req, context) => {
   let body;
   try { body = await req.json(); } catch (e) { return json({ error: "Requête invalide." }, 400); }
 
-  // Piège à robots : un champ caché que seul un script remplit.
+  // Pièges à robots : champ caché rempli, origine suspecte, envoi trop rapide, liens en nombre.
   if (clean(body.site, 200)) return json({ ok: true });
+  if (looksLikeSpam(req, body)) return json({ ok: true });
 
   const nom = clean(body.nom, 120);
   const email = clean(body.email, 200);
