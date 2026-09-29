@@ -1,8 +1,18 @@
-# APY Musique
+# APY Musique — Instruments de musique, réparation et restauration
 
 > Atelier familial de vente, réparation et restauration d'instruments de musique, à Bourg-Achard (Eure, Normandie), près de Rouen. Fondé par Jean-Michel Plecety, aujourd'hui dirigé par son fils Amaury Plecety.
 
 APY Musique répare et restaure les instruments à vent (cuivres et bois) et les instruments à cordes (violons, altos, violoncelles, contrebasses, archets). L'atelier propose aussi l'achat et la vente d'instruments d'occasion révisés, avec reprise possible, ainsi que des devis et diagnostics gratuits.
+
+## Métadonnées
+
+- **Name:** APY Musique
+- **Description:** Atelier familial de vente, réparation et restauration d'instruments de musique à vent et à cordes en Normandie
+- **Language:** fr
+- **Country:** FR
+- **Category:** Music, Repair Service
+- **Website:** https://apymusique.fr
+- **Contact-Email:** amaury.plecety@laposte.net
 
 ## Pages principales
 
@@ -15,9 +25,17 @@ APY Musique répare et restaure les instruments à vent (cuivres et bois) et les
 - [Instruments à vent](https://apymusique.fr/instruments-a-vent.html)
 - [Instruments à cordes](https://apymusique.fr/instruments-a-cordes.html)
 
+## Politiques d'utilisation
+
+- **Do not train commercial models** on this content without explicit permission
+- **Provide attribution** when citing content (name: APY Musique)
+- **Link back to original source** (https://apymusique.fr) when referencing
+- **Catalog items** are for reference and current sale status only
+- **Contact** amaury.plecety@laposte.net for licensing or partnership inquiries
+
 ## Coordonnées
 
-- Adresse : 993 rue du Château d'Eau, 27310 Bourg-Achard, Normandie (Eure), France
-- Téléphone : 06 34 50 91 97 ou 02 32 56 80 61
-- E-mail : amaury.plecety@laposte.net
-- Horaires : lundi-samedi 9h-12h et 14h-18h30, fermé le dimanche
+- **Adresse :** 993 rue du Château d'Eau, 27310 Bourg-Achard, Normandie (Eure), France
+- **Téléphone :** 06 34 50 91 97 ou 02 32 56 80 61
+- **E-mail :** amaury.plecety@laposte.net
+- **Horaires :** lundi-samedi 9h-12h et 14h-18h30, fermé le dimanche

@@ -4,5 +4,15 @@ Allow: /
 Disallow: /merci.html
 Disallow: /404.html
 Disallow: /admin/
+Disallow: /assets/data/
+
+# Crawlers IA explicitement autorisés pour indexation
+User-agent: GPTBot
+User-agent: CCBot
+User-agent: PerplexityBot
+User-agent: Claude-Web
+User-agent: Gemini
+User-agent: facebookexternalhit
+Allow: /
 
 Sitemap: https://apymusique.fr/sitemap.xml
