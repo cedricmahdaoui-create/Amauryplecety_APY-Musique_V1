@@ -1,0 +1,71 @@
+/* Fenêtre « Écrire à l'éditeur du site » : ouverte depuis le crédit SpectrumIA du
+   pied de page (toutes les pages) et depuis le lien « droit au retrait d'information »
+   de la politique de confidentialité. L'objet est imposé par le lien cliqué et n'est
+   pas modifiable par le visiteur. */
+(function () {
+  "use strict";
+  var dialog = document.getElementById("editeur-dialog");
+  if (!dialog) return;
+  var form = document.getElementById("editeur-form");
+  var objetDisplay = dialog.querySelector("[data-objet-display]");
+  var objetInput = dialog.querySelector("[data-objet-input]");
+  var note = form.querySelector("[data-editeur-note]");
+  var submitBtn = form.querySelector('button[type="submit"]');
+  var defaultNote = note.textContent;
+  var defaultClass = note.className;
+  var openers = document.querySelectorAll("[data-editeur-objet]");
+
+  function reset() {
+    form.reset();
+    Array.prototype.slice.call(form.elements).forEach(function (el) { el.disabled = false; });
+    note.textContent = defaultNote;
+    note.className = defaultClass;
+    submitBtn.disabled = false;
+  }
+
+  Array.prototype.forEach.call(openers, function (opener) {
+    opener.addEventListener("click", function (event) {
+      event.preventDefault();
+      reset();
+      var objet = opener.getAttribute("data-editeur-objet");
+      objetDisplay.textContent = objet;
+      objetInput.value = objet;
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+      var firstField = form.querySelector('input[name="nom"]');
+      if (firstField) firstField.focus();
+    });
+  });
+
+  dialog.addEventListener("click", function (event) {
+    if (event.target === dialog) dialog.close();
+  });
+  var closeBtn = dialog.querySelector(".editeur-dialog-close");
+  if (closeBtn) closeBtn.addEventListener("click", function () { dialog.close(); });
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var data = new FormData(form);
+    submitBtn.disabled = true;
+    note.textContent = "Envoi en cours…"; note.className = defaultClass;
+    fetch("api/contact-editeur", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nom: data.get("nom"), email: data.get("email"), objet: data.get("objet"),
+        message: data.get("message"), site: data.get("site")
+      })
+    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, body: b }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.body && res.body.error ? res.body.error : "Envoi impossible.");
+        note.textContent = "Message envoyé.";
+        note.className = defaultClass + " form-note--ok";
+        Array.prototype.slice.call(form.elements).forEach(function (el) { el.disabled = true; });
+      })
+      .catch(function (err) {
+        note.textContent = err.message;
+        note.className = defaultClass + " form-note--warn";
+        submitBtn.disabled = false;
+      });
+  });
+})();

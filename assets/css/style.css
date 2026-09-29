@@ -823,6 +823,7 @@ address { font-style: normal; }
 .home > .breadcrumb ol { padding-block: .45rem; }
 .home > .breadcrumb::before, .home > .breadcrumb::after { content: none; }
 .home main > section[id] { scroll-margin-top: var(--navigation-height, 135px); }
+.home #contact-form { scroll-margin-top: var(--navigation-height, 135px); }
 
 /* ---------- Pied de page ---------- */
 .site-footer {
@@ -1555,13 +1556,18 @@ body:has(.breadcrumb) .section-head h1, body:has(.breadcrumb) h2, body:has(.brea
 
 .featured-page .catalogue-filters, .featured-page #cat-grid, .featured-page .catalogue-count { display: none; }
 .featured-page #cat-featured { margin-top: 0; }
-.contact-dialog { width: min(560px, calc(100% - 32px)); max-height: 90vh; overflow: auto; padding: 2rem; border: 1px solid #685737; border-radius: 20px; background: #121217; color: #f5f1e9; color-scheme: dark; }
-.contact-dialog::backdrop { background: #000b; backdrop-filter: blur(8px); }
-.contact-dialog h2 { color: #f5f1e9; padding-right: 2rem; }
-.contact-dialog form, .contact-dialog label { display: grid; gap: .5rem; }
-.contact-dialog form { gap: 1rem; }
-.contact-dialog input, .contact-dialog select, .contact-dialog textarea { width: 100%; padding: .7rem; background: #1a120c; color: #f5f1e9; border: 1px solid #685737; border-radius: 8px; font: inherit; }
-.contact-close { position: absolute; top: .6rem; right: .8rem; padding: .3rem .7rem; border: 0; background: transparent; color: #e6c979; font-size: 1.8rem; cursor: pointer; }
+.editeur-dialog { width: min(560px, calc(100% - 32px)); max-height: 90vh; overflow: auto; padding: 2rem; border: 1px solid #685737; border-radius: 20px; background: #121217; color: #f5f1e9; color-scheme: dark; }
+.editeur-dialog::backdrop { background: #000b; backdrop-filter: blur(8px); }
+.editeur-dialog h2 { color: #f5f1e9; padding-right: 2rem; margin-top: 0; }
+.editeur-dialog form, .editeur-dialog label { display: grid; gap: .5rem; }
+.editeur-dialog form { gap: 1rem; }
+.editeur-dialog input, .editeur-dialog textarea { width: 100%; padding: .7rem; background: #1a120c; color: #f5f1e9; border: 1px solid #685737; border-radius: 8px; font: inherit; }
+.editeur-dialog input:focus, .editeur-dialog textarea:focus { border-color: var(--brass); outline: 3px solid color-mix(in srgb, var(--brass) 35%, transparent); }
+.editeur-dialog button[type="submit"] { justify-self: start; }
+.editeur-dialog button[disabled] { opacity: .6; cursor: not-allowed; }
+.editeur-dialog-close { position: absolute; top: .6rem; right: .8rem; padding: .3rem .7rem; border: 0; background: transparent; color: #e6c979; font-size: 1.8rem; line-height: 1; cursor: pointer; }
+.footer-credit-link { display: inline-flex; align-items: center; gap: .45rem; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: .15em; cursor: pointer; }
+.link-btn { padding: 0; border: 0; background: none; font: inherit; color: var(--brass); text-decoration: underline; text-underline-offset: .15em; cursor: pointer; }
 .contact-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-note--ok { color: #7bc47f; }
 .form-note--warn { color: #e0a15c; }
@@ -1692,6 +1698,16 @@ body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 
 /* <picture> (variantes WebP) : aucune boîte propre, la mise en page reste celle de l'<img>. */
 picture { display: contents; }
 picture > source { display: none; }
+
+/* Fond du hero d'accueil : photo du saxophone démonté (pièces détachées) sur établi en bois. */
+.home main > section.hero {
+  background-color: #140d08;
+  background-image: linear-gradient(90deg, #140d08 0%, #140d08 58%, rgba(20,13,8,.5) 72%, rgba(20,13,8,.1) 92%), url("../img/hero-saxophone-eclate.jpg");
+  background-repeat: no-repeat;
+  background-position: 0 0, right center;
+  background-size: 100% 100%, auto 100%;
+}
+.home .hero picture { display: none; }
 
 .footer-credit { display: inline-flex; align-items: center; gap: .45rem; }
 .footer-credit img { display: block; width: 22px; height: auto; }

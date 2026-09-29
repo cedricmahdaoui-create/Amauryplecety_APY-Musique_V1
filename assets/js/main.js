@@ -2,6 +2,20 @@
 (function () {
   "use strict";
 
+  /* Correctif d'ancrage : si la page s'ouvre avec un lien du type #contact-form,
+     le contenu chargé dynamiquement plus bas (actualités, carrousels) peut décaler
+     la page APRÈS que le navigateur a fait son positionnement initial. On refait
+     le scroll une fois que tout est chargé, pour atterrir au bon endroit à coup sûr. */
+  function fixHashScroll() {
+    if (!location.hash) return;
+    var target = document.getElementById(location.hash.slice(1));
+    if (target) target.scrollIntoView({ block: "start" });
+  }
+  window.addEventListener("load", function () {
+    fixHashScroll();
+    setTimeout(fixHashScroll, 400);
+  });
+
   /* Fil d’Ariane unique, attaché au header de l’accueil. */
   if (document.body.classList.contains('home')) {
     var header = document.querySelector('.site-header');
@@ -12,7 +26,7 @@
         document.documentElement.style.setProperty('--navigation-height', (header.getBoundingClientRect().height + breadcrumb.getBoundingClientRect().height) + 'px');
       }
       function updateBreadcrumb() {
-        var names = { histoire: 'Notre histoire', services: 'Nos services', 'a-la-une': 'À la une', avis: 'Avis', contact: 'Contact' };
+        var names = { histoire: 'Notre histoire', services: 'Nos services', 'a-la-une': 'À la une', avis: 'Avis', contact: 'Contact', 'contact-form': 'Contact' };
         var name = names[location.hash.slice(1)];
         var list = breadcrumb.querySelector('ol');
         list.replaceChildren();

@@ -26,3 +26,6 @@ agent-sites-desuets/.env
 
 # Local Netlify folder
 .netlify
+
+# Artefact généré par `netlify dev` (bundling des fonctions)
+deno.lock
