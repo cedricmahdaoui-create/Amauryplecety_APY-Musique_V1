@@ -12,7 +12,7 @@ APY Musique répare et restaure les instruments à vent (cuivres et bois) et les
 - **Country:** FR
 - **Category:** Music, Repair Service
 - **Website:** https://apymusique.fr
-- **Contact-Email:** amaury.plecety@laposte.net
+- **Contact:** via the contact form at https://apymusique.fr/#contact-form
 
 ## Pages principales
 
@@ -31,11 +31,10 @@ APY Musique répare et restaure les instruments à vent (cuivres et bois) et les
 - **Provide attribution** when citing content (name: APY Musique)
 - **Link back to original source** (https://apymusique.fr) when referencing
 - **Catalog items** are for reference and current sale status only
-- **Contact** amaury.plecety@laposte.net for licensing or partnership inquiries
+- **Contact** via the contact form at https://apymusique.fr/#contact-form for licensing or partnership inquiries
 
 ## Coordonnées
 
 - **Adresse :** 993 rue du Château d'Eau, 27310 Bourg-Achard, Normandie (Eure), France
 - **Téléphone :** 06 34 50 91 97 ou 02 32 56 80 61
-- **E-mail :** amaury.plecety@laposte.net
 - **Horaires :** lundi-samedi 9h-12h et 14h-18h30, fermé le dimanche

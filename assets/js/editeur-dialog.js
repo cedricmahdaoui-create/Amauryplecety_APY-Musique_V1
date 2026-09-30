@@ -1,7 +1,8 @@
 /* Fenêtre « Écrire à l'éditeur du site » : ouverte depuis le crédit SpectrumIA du
    pied de page (toutes les pages) et depuis le lien « droit au retrait d'information »
    de la politique de confidentialité. L'objet est imposé par le lien cliqué et n'est
-   pas modifiable par le visiteur. */
+   pas modifiable par le visiteur. Le message peut être pré-rempli (ex. depuis le
+   crédit SpectrumIA) mais reste librement modifiable par le visiteur. */
 (function () {
   "use strict";
   var dialog = document.getElementById("editeur-dialog");
@@ -31,6 +32,9 @@
       var objet = opener.getAttribute("data-editeur-objet");
       objetDisplay.textContent = objet;
       objetInput.value = objet;
+      var messageField = form.querySelector('textarea[name="message"]');
+      var prefill = opener.getAttribute("data-editeur-message");
+      if (messageField && prefill) messageField.value = prefill;
       if (typeof dialog.showModal === "function") dialog.showModal();
       else dialog.setAttribute("open", "");
       openedAt = Date.now();

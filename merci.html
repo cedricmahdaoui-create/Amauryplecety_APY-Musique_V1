@@ -54,7 +54,7 @@
   <div class="container">
     <div class="footer-legal">
       <span>&copy; <span data-year>2026</span> APY Musique — Plecety · SIRET 841 052 764 00013</span>
-      <span class="footer-credit">Fait avec <span class="footer-heart">❤︎</span> par <button type="button" class="footer-credit-link" data-editeur-objet="Contacter l’éditeur du site">SpectrumIA <img src="assets/img/logo-spectrumia.svg" alt="" width="22" height="19"></button></span>
+      <span class="footer-credit">Fait avec <span class="footer-heart">❤︎</span> par <button type="button" class="footer-credit-link" data-editeur-objet="Contacter l’éditeur du site" data-editeur-message="Je souhaite faire un site web, auditer mon site, l’améliorer ou le refondre — ou j’ai une automatisation à mettre en place dans mon entreprise. Pourrions-nous échanger sur mon projet ?&#10;&#10;Mes coordonnées : ">SpectrumIA <img src="assets/img/logo-spectrumia.svg" alt="" width="22" height="19"></button></span>
       <span>
         <a href="mentions-legales.html">Mentions légales</a> ·
         <a href="politique-confidentialite.html">Confidentialité</a>
@@ -71,6 +71,20 @@
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/contact-dialog.js" defer></script>
 <script src="assets/js/editeur-dialog.js" defer></script>
+<dialog id="contact-dialog" class="editeur-dialog">
+  <form id="contact-form">
+    <button type="button" class="editeur-dialog-close" aria-label="Fermer">×</button>
+    <h2>Écrire à l'atelier</h2>
+    <p>Pour une demande d'achat, de réparation ou d'estimation : votre message est envoyé directement à l'atelier.</p>
+    <label>Votre nom<input name="nom" autocomplete="name" required maxlength="120"></label>
+    <label>Votre adresse e-mail<input name="email" type="email" autocomplete="email" required></label>
+    <label>Objet<select name="objet"><option>Achat d’un instrument</option><option>Réparation</option><option>Estimation</option><option>Autre demande</option></select></label>
+    <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
+    <label class="contact-hp" aria-hidden="true" tabindex="-1">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
+    <p class="form-note" data-contact-note>Amaury vous répond sous 1 à 2 jours.</p>
+    <button class="btn" type="submit">Envoyer mon message</button>
+  </form>
+</dialog>
 <dialog id="editeur-dialog" class="editeur-dialog">
   <form id="editeur-form">
     <button type="button" class="editeur-dialog-close" aria-label="Fermer">×</button>

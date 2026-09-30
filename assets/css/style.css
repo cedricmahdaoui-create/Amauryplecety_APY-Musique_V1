@@ -823,7 +823,6 @@ address { font-style: normal; }
 .home > .breadcrumb ol { padding-block: .45rem; }
 .home > .breadcrumb::before, .home > .breadcrumb::after { content: none; }
 .home main > section[id] { scroll-margin-top: var(--navigation-height, 135px); }
-.home #contact-form { scroll-margin-top: var(--navigation-height, 135px); }
 
 /* ---------- Pied de page ---------- */
 .site-footer {
@@ -1023,7 +1022,7 @@ a.news-article {
   background: rgba(36,24,18,.82);
   color: #f4e9d6;
 }
-.cat-badge--ok { background: #2f6d43; color: #fff; }
+.cat-badge--ok { background: var(--brass-dark); color: #fff; }
 .cat-card-body { display: flex; flex-direction: column; gap: .5rem; padding: 1.2rem; flex: 1; }
 .cat-card-body h3 { margin: 0; font-size: 1.12rem; }
 .cat-card-meta { margin: 0; font-size: .85rem; color: var(--brass-dark); font-weight: 600; }

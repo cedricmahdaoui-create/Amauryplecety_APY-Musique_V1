@@ -53,6 +53,7 @@
   }
 
   var ETAT_LABEL = {
+    "disponible": "Disponible",
     "revise": "Révisé, prêt à jouer",
     "a-restaurer": "À restaurer",
     "vendu": "Vendu",
@@ -182,7 +183,7 @@
     }
     var badge = document.createElement("span");
     badge.className = "cat-badge" + (it.dispo ? " cat-badge--ok" : "");
-    badge.textContent = it.dispo ? "Disponibilité à confirmer" : "Indisponible / sur demande";
+    badge.textContent = it.dispo ? "Disponible" : "Indisponible / sur demande";
     media.appendChild(badge);
     el.appendChild(media);
 

@@ -1,13 +1,68 @@
-/* Formulaire « Écrire à l'atelier » (accueil uniquement) : envoi direct par e-mail. */
+/* Formulaire « Écrire à l'atelier » : fenêtre popup, présente sur toutes les pages.
+   S'ouvre depuis n'importe quel lien/bouton de contact du site, sans changer de page.
+   Le message peut être pré-rempli selon le contexte du lien cliqué (voir CTX_MESSAGES),
+   mais reste toujours librement modifiable par le visiteur. */
 (function () {
   'use strict';
+  var dialog = document.getElementById('contact-dialog');
   var form = document.getElementById('contact-form');
-  if (!form) return;
+  if (!dialog || !form) return;
   var note = form.querySelector('[data-contact-note]');
   var submitBtn = form.querySelector('button[type="submit"]');
+  var messageField = form.querySelector('[name="message"]');
   var defaultNote = note.textContent;
   var defaultClass = note.className;
-  var loadedAt = Date.now(); // anti-spam : un envoi trop rapide après l'affichage du formulaire est suspect.
+  var openedAt = 0; // anti-spam : mesuré depuis l'ouverture de la fenêtre, pas le chargement de la page.
+
+  var CTX_MESSAGES = {
+    recherche: "Je vous contacte car je recherche un instrument précis : ",
+    "instrument-vent": "Je recherche un instrument à vent précis : ",
+    "devis-reparation": "Je souhaite un devis pour la réparation de : ",
+    reparation: "Je vous contacte pour une réparation : ",
+    "expertise-cordes": "Je souhaite une expertise pour mon instrument à cordes : ",
+    estimation: "Je souhaite faire estimer mon instrument : ",
+    rdv: "Je souhaite prendre rendez-vous à l'atelier. ",
+    amaury: "Je vous contacte suite à la présentation d'Amaury sur le site. "
+  };
+
+  function reset() {
+    form.reset();
+    Array.prototype.slice.call(form.elements).forEach(function (el) { el.disabled = false; });
+    note.textContent = defaultNote;
+    note.className = defaultClass;
+    submitBtn.disabled = false;
+  }
+
+  function openDialog(ctx) {
+    reset();
+    if (ctx && CTX_MESSAGES[ctx]) messageField.value = CTX_MESSAGES[ctx];
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
+    openedAt = Date.now();
+    var firstField = form.querySelector('input[name="nom"]');
+    if (firstField) firstField.focus();
+  }
+
+  /* Déclencheurs : tout lien historique vers #contact-form (menu, CTA, pages secondaires…)
+     et tout bouton marqué .js-contact-open. Le contexte (?ctx=…) est lu depuis le lien lui-même. */
+  var triggers = document.querySelectorAll('a[href*="#contact-form"], .js-contact-open');
+  Array.prototype.forEach.call(triggers, function (trigger) {
+    trigger.addEventListener('click', function (event) {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      var ctx = null;
+      if (trigger.href) {
+        try { ctx = new URL(trigger.href, location.href).searchParams.get('ctx'); } catch (e) {}
+      }
+      openDialog(ctx);
+    });
+  });
+
+  dialog.addEventListener('click', function (event) {
+    if (event.target === dialog) dialog.close();
+  });
+  var closeBtn = dialog.querySelector('.editeur-dialog-close');
+  if (closeBtn) closeBtn.addEventListener('click', function () { dialog.close(); });
 
   form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -19,20 +74,24 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         nom: data.get('nom'), email: data.get('email'), objet: data.get('objet'),
-        message: data.get('message'), site: data.get('site'), elapsed: Date.now() - loadedAt
+        message: data.get('message'), site: data.get('site'), elapsed: Date.now() - openedAt
       })
     }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, body: b }; }); })
       .then(function (res) {
         if (!res.ok) throw new Error(res.body && res.body.error ? res.body.error : 'Envoi impossible.');
         note.textContent = 'Message envoyé — l’atelier vous répond sous 1 à 2 jours.';
         note.className = defaultClass + ' form-note--ok';
-        form.reset();
         Array.prototype.slice.call(form.elements).forEach(function (el) { el.disabled = true; });
       })
       .catch(function (err) {
-        note.textContent = err.message + ' Vous pouvez aussi appeler, écrire par WhatsApp ou par e-mail (ci-dessous).';
+        note.textContent = err.message + ' Vous pouvez aussi appeler ou écrire par WhatsApp.';
         note.className = defaultClass + ' form-note--warn';
         submitBtn.disabled = false;
       });
   });
+
+  // Accès direct par URL (ex. lien partagé index.html?ctx=…#contact-form) : ouvre aussi la fenêtre.
+  if (location.hash === '#contact-form') {
+    openDialog(new URLSearchParams(location.search).get('ctx'));
+  }
 })();
