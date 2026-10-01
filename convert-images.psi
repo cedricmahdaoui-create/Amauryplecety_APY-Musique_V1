@@ -1,0 +1,50 @@
+# Script de conversion images en WebP
+$imgDir = "C:\Users\cedri\Documents\Developpement IA\Claude\Mon premier site Claude\assets\img"
+
+# Formats à convertir
+$formats = @("*.jpg", "*.jpeg", "*.png")
+
+Write-Host "🔄 Conversion WebP en cours..."
+$converted = 0
+$failed = 0
+
+foreach ($pattern in $formats) {
+    Get-ChildItem $imgDir -Filter $pattern -File | ForEach-Object {
+        $input = $_.FullName
+        $output = [System.IO.Path]::Combine($_.DirectoryName, $_.BaseName + ".webp")
+        
+        # Éviter re-convertir les .webp existants
+        if ($input -eq $output) { return }
+        
+        try {
+            Write-Host "  📦 $($_.Name) → $($_.BaseName).webp" -NoNewline
+            
+            # Conversion quality 85 = bon compromis taille/qualité
+            & convert $input -quality 85 $output
+            
+            $inputSize = (Get-Item $input).Length / 1KB
+            $outputSize = (Get-Item $output).Length / 1KB
+            $reduction = [math]::Round((1 - $outputSize/$inputSize) * 100, 0)
+            
+            Write-Host " ✅ (-$reduction%)"
+            $converted++
+        }
+        catch {
+            Write-Host " ❌ Erreur"
+            $failed++
+        }
+    }
+}
+
+Write-Host "`n📊 Résultats :"
+Write-Host "  ✅ Convertis : $converted"
+Write-Host "  ❌ Échoués : $failed"
+
+# Résumé tailles
+$totalJpg = (Get-ChildItem $imgDir -Filter "*.jpg" -File | Measure-Object -Property Length -Sum).Sum / 1MB
+$totalWebp = (Get-ChildItem $imgDir -Filter "*.webp" -File | Measure-Object -Property Length -Sum).Sum / 1MB
+
+Write-Host "`n💾 Tailles :"
+Write-Host "  JPG : $([math]::Round($totalJpg, 1)) MB"
+Write-Host "  WebP : $([math]::Round($totalWebp, 1)) MB"
+Write-Host "  Économie : $([math]::Round($totalJpg - $totalWebp, 1)) MB"

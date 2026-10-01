@@ -16,6 +16,19 @@
     setTimeout(fixHashScroll, 400);
   });
 
+  /* Le bouton WhatsApp flottant « sonne » quand on survole le lien Contact du menu. */
+  (function () {
+    var contactLink = document.querySelector('#main-nav a.btn');
+    var waFloat = document.querySelector('.wa-float');
+    if (!contactLink || !waFloat) return;
+    function ring() { waFloat.classList.add('wa-float--ringing'); }
+    function stop() { waFloat.classList.remove('wa-float--ringing'); }
+    contactLink.addEventListener('mouseenter', ring);
+    contactLink.addEventListener('mouseleave', stop);
+    contactLink.addEventListener('focus', ring);
+    contactLink.addEventListener('blur', stop);
+  })();
+
   /* Fil d’Ariane unique, attaché au header de l’accueil. */
   if (document.body.classList.contains('home')) {
     var header = document.querySelector('.site-header');
@@ -25,9 +38,9 @@
         document.documentElement.style.setProperty('--header-height', header.getBoundingClientRect().height + 'px');
         document.documentElement.style.setProperty('--navigation-height', (header.getBoundingClientRect().height + breadcrumb.getBoundingClientRect().height) + 'px');
       }
-      function updateBreadcrumb() {
-        var names = { histoire: 'Notre histoire', services: 'Nos services', 'a-la-une': 'À la une', avis: 'Avis', contact: 'Contact', 'contact-form': 'Contact' };
-        var name = names[location.hash.slice(1)];
+      var CRUMB_NAMES = { histoire: 'Notre histoire', services: 'Nos services', 'a-la-une': 'À la une', avis: 'Avis', contact: 'Contact', 'contact-form': 'Contact' };
+      function updateBreadcrumb(hashOverride) {
+        var name = CRUMB_NAMES[(hashOverride || location.hash).slice(1)];
         var list = breadcrumb.querySelector('ol');
         list.replaceChildren();
         var home = document.createElement('li');
@@ -38,9 +51,31 @@
         } else { home.textContent = 'Accueil'; home.setAttribute('aria-current', 'page'); list.appendChild(home); }
         measureHeader();
       }
-      window.addEventListener('hashchange', updateBreadcrumb);
+      window.addEventListener('hashchange', function () { updateBreadcrumb(); });
       new ResizeObserver(measureHeader).observe(header);
       updateBreadcrumb();
+
+      /* Aperçu au survol : le fil d'Ariane prévisualise la section survolée, puis revient
+         à la section réelle quand la souris s'en va — à la fois depuis le menu et
+         directement sur les sections de la page principale. */
+      function wireHoverPreview(el, hash) {
+        el.addEventListener('mouseenter', function () { updateBreadcrumb(hash); });
+        el.addEventListener('focus', function () { updateBreadcrumb(hash); });
+        el.addEventListener('mouseleave', function () { updateBreadcrumb(); });
+        el.addEventListener('blur', function () { updateBreadcrumb(); });
+      }
+      var navLinks = document.querySelectorAll('#main-nav a[href*="#"]');
+      navLinks.forEach(function (link) {
+        var hash = '#' + link.getAttribute('href').split('#')[1];
+        if (!CRUMB_NAMES[hash.slice(1)]) return;
+        wireHoverPreview(link, hash);
+      });
+      var pageSections = document.querySelectorAll('main section[id]');
+      pageSections.forEach(function (section) {
+        var hash = '#' + section.id;
+        if (!CRUMB_NAMES[section.id]) return;
+        wireHoverPreview(section, hash);
+      });
     }
   }
   /* ----- Menu mobile ----- */

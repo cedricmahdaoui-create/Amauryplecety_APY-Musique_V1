@@ -32,17 +32,15 @@
 <main id="contenu">
   <section class="section">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Catalogue</span>
-        <h1>Gérer les instruments à vendre</h1>
-        <p class="lead">Ajoutez, modifiez, réordonnez ou retirez les instruments. Rien n'est publié tant que vous n'avez pas cliqué sur « Enregistrer sur le site » (en bas de page).</p>
-      </div>
-
       <div class="admin-toolbar">
         <button type="button" class="btn" id="a-add">+ Ajouter un instrument</button>
         <button type="button" class="btn btn--ghost" id="a-reload">Recharger depuis le site</button>
         <span class="admin-count" id="a-count"></span>
       </div>
+
+      <label class="admin-search">Rechercher un instrument
+        <input type="search" id="a-search" placeholder="Nom, marque, famille…" autocomplete="off">
+      </label>
 
       <p class="admin-status" id="a-status" role="status"></p>
 

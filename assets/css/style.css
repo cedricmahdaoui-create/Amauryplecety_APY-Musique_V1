@@ -288,6 +288,37 @@ p { margin: 0 0 1rem; }
 .main-nav a[aria-current="page"] { color: var(--brass-dark); background: var(--ivory-2); }
 .main-nav .btn { color: #fff; }
 
+/* Sous-menu « Nos services » : Catalogue / Réparations. */
+.has-submenu { position: relative; }
+.has-submenu > a::after { content: "▾"; margin-left: .4em; font-size: .7em; opacity: .7; }
+.main-nav .submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 190px;
+  list-style: none;
+  margin: 0;
+  padding: .4rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  display: none;
+  flex-direction: column;
+  gap: .1rem;
+  z-index: 50;
+}
+.has-submenu:hover .submenu,
+.has-submenu:focus-within .submenu { display: flex; }
+.submenu a { color: var(--walnut-700); white-space: nowrap; }
+
+/* Niveau 2 : Réparations > Cuivres / Bois — bascule à droite du premier menu. */
+.submenu .has-submenu > .submenu {
+  top: -.4rem;
+  left: 100%;
+  margin-left: .35rem;
+}
+
 /* ---------- Boutons ---------- */
 .btn {
   display: inline-flex;
@@ -374,6 +405,7 @@ p { margin: 0 0 1rem; }
 /* ---------- Sections ---------- */
 .section { padding-block: clamp(3.25rem, 7vw, 5.5rem); padding-top: clamp(1.5rem, 3vw, 2.5rem); }
 main > section[id] { scroll-margin-top: 88px; }
+.card[id] { scroll-margin-top: 88px; }
 .section--alt {
   background: var(--ivory-2);
   border-block: 1px solid var(--line);
@@ -740,6 +772,8 @@ a.card:hover {
 .info-item h3 { font-size: 1.05rem; margin-bottom: .2rem; }
 .info-item p { margin: 0; color: var(--text-soft); }
 .info-item a { font-weight: 600; }
+.info-facebook { display: inline-flex; align-items: center; gap: .4rem; }
+.info-facebook svg { width: 18px; height: 18px; flex-shrink: 0; }
 address { font-style: normal; }
 
 .contact-split {
@@ -835,6 +869,27 @@ address { font-style: normal; }
 .site-footer a:hover { color: #fff; text-decoration: underline; }
 .footer-grid { display: grid; gap: 2rem; grid-template-columns: 1.5fr 1fr 1fr; }
 @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-centered { text-align: center; }
+.footer-centered .footer-brand { justify-content: center; margin-bottom: 1.4rem; }
+.footer-about-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 1.4rem;
+}
+.footer-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem 1.8rem;
+  margin: 0 0 2.2rem;
+  padding: 0;
+  list-style: none;
+}
+.footer-links-row a { font-weight: 600; font-size: .95rem; text-decoration: underline; text-underline-offset: .2em; }
+.footer-links-row span { color: #9c8a6d; }
+.footer-centered .footer-legal { justify-content: center; margin-top: 1.6rem; padding-top: 1.4rem; }
 .site-footer h2 {
   font-size: .78rem;
   letter-spacing: .14em;
@@ -1059,6 +1114,23 @@ a.news-article {
 }
 .wa-float svg { width: 30px; height: 30px; }
 .wa-float:hover, .wa-float:focus-visible { transform: scale(1.07); }
+
+/* « Sonnerie » du bouton WhatsApp au survol du lien Contact du menu. */
+@keyframes wa-pulse-ring {
+  0% { box-shadow: 0 6px 18px rgba(0,0,0,.35), 0 0 0 0 rgba(37,211,102,.6); }
+  100% { box-shadow: 0 6px 18px rgba(0,0,0,.35), 0 0 0 24px rgba(37,211,102,0); }
+}
+@keyframes wa-shake {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  15% { transform: rotate(-14deg) scale(1.08); }
+  30% { transform: rotate(12deg) scale(1.08); }
+  45% { transform: rotate(-10deg) scale(1.05); }
+  60% { transform: rotate(8deg) scale(1.05); }
+  80% { transform: rotate(-3deg) scale(1.02); }
+}
+.wa-float--ringing {
+  animation: wa-pulse-ring 1s ease-out infinite, wa-shake .9s ease-in-out infinite;
+}
 @media (max-width: 640px) {
   .wa-float { right: .85rem; bottom: calc(.85rem + env(safe-area-inset-bottom, 0px)); width: 52px; height: 52px; }
   .wa-float svg { width: 27px; height: 27px; }
@@ -1073,6 +1145,13 @@ a.news-article {
   margin-bottom: 1rem;
 }
 .admin-count { color: var(--text-soft); font-size: .9rem; }
+.admin-search { display: grid; gap: .35rem; max-width: 360px; margin-bottom: 1.2rem; font-weight: 600; font-size: .9rem; color: var(--ink); }
+.admin-search input {
+  padding: .65rem .8rem; font: inherit; color: var(--text); background: var(--ivory);
+  border: 1px solid var(--line); border-radius: var(--radius-sm); width: 100%;
+}
+.admin-search input:focus { border-color: var(--brass); outline: 3px solid color-mix(in srgb, var(--brass) 35%, transparent); }
+.admin-item[hidden] { display: none; }
 .admin-status { min-height: 1.4em; margin: 0 0 1rem; font-size: .92rem; color: var(--text-soft); }
 .admin-status--ok { color: var(--success, #2f7d4f); }
 .admin-status--warn { color: var(--copper); }
@@ -1213,6 +1292,16 @@ a.news-article {
   .main-nav ul { flex-direction: column; align-items: stretch; gap: .1rem; }
   .main-nav a { padding: .8rem .6rem; }
   .main-nav .btn { justify-content: center; margin-top: .6rem; }
+  /* Le survol n'existe pas au doigt : le sous-menu reste ouvert en permanence sur mobile. */
+  .main-nav .submenu {
+    position: static;
+    display: flex;
+    box-shadow: none;
+    border: none;
+    background: none;
+    padding: 0 0 0 1rem;
+    margin: .1rem 0 0;
+  }
 }
 
 /* Accueil : ivoire, laiton et photographies d'atelier. */
@@ -1233,6 +1322,7 @@ a.news-article {
 .home .section-head { margin-bottom: 2.8rem; }
 .home h2 { text-wrap: balance; margin-bottom: .7em; }
 .home .story { align-items: start; }
+.home .story > div:first-child { position: sticky; top: calc(var(--navigation-height, 135px) + 1.5rem); }
 .home .story-portrait { aspect-ratio: 3 / 4; border-radius: 4px 4px 70px 4px; }
 .home .story-portrait img { object-position: center 9%; }
 .home .spotlight { box-shadow: none; border-radius: 3px; }
@@ -1276,6 +1366,7 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
 @media (max-width: 860px) {
   .home .story-portrait { aspect-ratio: 3 / 4; border-radius: 4px 4px 40px 4px; }
   .home .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .home .story > div:first-child { position: static; }
 }
 @media (max-width: 640px) {
   .home .hero h1 { max-width: 15ch; }
@@ -1684,13 +1775,24 @@ body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 
 picture { display: contents; }
 picture > source { display: none; }
 
-/* Fond du hero d'accueil : photo du saxophone démonté (pièces détachées) sur établi en bois. */
+/* Fond du hero d'accueil : photo du saxophone démonté (pièces détachées) sur établi en bois.
+   Le fondu avec le fond de la section est directement intégré à l'image (voir génération de
+   assets/img/hero-saxophone-eclate.jpg) pour une jonction parfaite à toutes les largeurs d'écran. */
 .home main > section.hero {
   background-color: #140d08;
-  background-image: linear-gradient(90deg, #140d08 0%, #140d08 58%, rgba(20,13,8,.5) 72%, rgba(20,13,8,.1) 92%), url("../img/hero-saxophone-eclate.jpg");
+  background-image: url("../img/hero-saxophone-eclate.jpg");
   background-repeat: no-repeat;
-  background-position: 0 0, right center;
-  background-size: 100% 100%, auto 100%;
+  background-position: right center;
+  background-size: auto 100%;
+}
+@media (max-width: 760px) {
+  /* Sur mobile, la photo couvre toute la largeur : fondu vertical en haut plutôt qu'horizontal
+     (image sans marge cuite, plus adaptée à ce cadrage). */
+  .home main > section.hero {
+    background-image: linear-gradient(180deg, #140d08 0%, rgba(20,13,8,.5) 16%, rgba(20,13,8,0) 32%), url("../img/hero-saxophone-eclate-mobile.jpg");
+    background-position: 0 0, center top;
+    background-size: 100% 100%, cover;
+  }
 }
 
 .footer-credit { display: inline-flex; align-items: center; gap: .45rem; }

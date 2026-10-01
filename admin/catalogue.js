@@ -9,6 +9,29 @@
   var countEl = document.getElementById("a-count");
   var statusEl = document.getElementById("a-status");
   var jsonEl = document.getElementById("a-json");
+  var searchEl = document.getElementById("a-search");
+
+  /* ----- Recherche : filtre visuellement les cartes, ne retire rien du DOM
+     (l'enregistrement lit toutes les cartes présentes, filtrées ou non). */
+  function applySearch() {
+    if (!searchEl) return;
+    var q = searchEl.value.trim().toLowerCase();
+    var cards = listEl.querySelectorAll(".admin-item");
+    var shown = 0;
+    cards.forEach(function (card) {
+      var nom = (card.querySelector('[data-k="nom"]') || {}).value || "";
+      var sousfamille = (card.querySelector('[data-k="sousfamille"]') || {}).value || "";
+      var match = !q || (nom + " " + sousfamille).toLowerCase().indexOf(q) !== -1;
+      card.hidden = !match;
+      if (match) shown++;
+    });
+    if (countEl) {
+      countEl.textContent = q
+        ? shown + " résultat(s) sur " + cards.length
+        : cards.length + (cards.length > 1 ? " instruments" : " instrument");
+    }
+  }
+  if (searchEl) searchEl.addEventListener("input", applySearch);
 
   /* ----- Accès : mot de passe demandé seulement sur le site en ligne ----- */
   var PW_KEY = "apy-admin-pw";
@@ -134,7 +157,7 @@
   var news = document.createElement('section');
   news.className = 'admin-news';
   news.innerHTML = '<h2>Gérer À la une</h2><p>Ajoutez vos nouveautés et articles — 4 au maximum. Cochez « Publier » pour les afficher, puis enregistrez les modifications.</p><button type="button" class="btn" data-news-add>Ajouter une actualité</button><p data-news-limit hidden>Maximum de 4 actualités atteint — supprimez-en une pour en ajouter une nouvelle.</p><div data-news-list></div><button type="button" class="btn" data-news-save>Enregistrer les modifications</button> <a href="index.html#a-la-une" target="_blank">Voir À la une</a>';
-  listEl.before(news);
+  listEl.after(news);
   function renderNews() {
     var addBtn = news.querySelector('[data-news-add]');
     var limitNote = news.querySelector('[data-news-limit]');
@@ -310,7 +333,7 @@
   var familyForm = document.createElement('form');
   familyForm.className = 'admin-family-form';
   familyForm.innerHTML = '<h2>Familles d’instruments</h2><label for="a-family-name">Nouvelle famille</label><input id="a-family-name" required maxlength="80" placeholder="Ex. : Claviers"><button class="btn" type="submit">Ajouter la famille</button><p>Après ajout, choisissez la famille sur vos instruments puis cliquez sur « Enregistrer sur le site ».</p><p id="a-families-list"></p>';
-  listEl.before(familyForm);
+  news.after(familyForm);
   function familySummary() { familyForm.querySelector('#a-families-list').textContent = families.map(function (f) { return f.label; }).join(' · '); }
   familyForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -528,6 +551,7 @@
     listEl.innerHTML = "";
     list.forEach(function (d) { listEl.appendChild(buildCard(d)); });
     collect();
+    applySearch();
   }
 
   /* ----- Chargement ----- */

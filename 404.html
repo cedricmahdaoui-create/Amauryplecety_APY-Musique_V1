@@ -26,12 +26,22 @@
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
     <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
       <ul>
-        <li><a href="catalogue.html">Catalogue</a></li>
-
+        <li><a href="index.html">Accueil</a></li>
         <li><a href="index.html#histoire">Notre histoire</a></li>
-        <li><a href="index.html#services">Nos services</a></li>
+        <li class="has-submenu">
+          <a href="index.html#services">Nos services</a>
+          <ul class="submenu">
+            <li><a href="catalogue.html">Catalogue</a></li>
+            <li class="has-submenu">
+              <a href="reparations.html">Réparations</a>
+              <ul class="submenu">
+                <li><a href="reparations.html#cuivres">Cuivres</a></li>
+                <li><a href="reparations.html#bois">Bois</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="index.html#a-la-une">À la une</a></li>
-        <li><a href="reparations.html">Réparations</a></li>
         <li><a class="btn" href="index.html#contact-form">Contact</a></li>
       </ul>
     </nav>
@@ -58,11 +68,22 @@
 </main>
 
 <footer class="site-footer">
-  <div class="container">
+  <div class="container footer-centered">
+    <a class="footer-brand" href="index.html">
+      <img src="assets/img/logo-apy.png" alt="" width="36" height="36">
+      <strong>APY Musique</strong>
+    </a>
+    <h2 class="footer-about-title">À propos d’APY Musique</h2>
+    <nav class="footer-links-row" aria-label="Liens du pied de page">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <span aria-hidden="true">–</span>
+      <a href="politique-confidentialite.html">Confidentialité</a>
+      <span aria-hidden="true">–</span>
+      <a href="plan-du-site.html">Plan du site</a>
+    </nav>
     <div class="footer-legal">
       <span>&copy; <span data-year>2026</span> APY Musique — Plecety · SIRET 841 052 764 00013</span>
-      <span class="footer-credit">Fait avec <span class="footer-heart">❤︎</span> par <button type="button" class="footer-credit-link" data-editeur-objet="Contacter l’éditeur du site" data-editeur-message="Je souhaite faire un site web, auditer mon site, l’améliorer ou le refondre — ou j’ai une automatisation à mettre en place dans mon entreprise. Pourrions-nous échanger sur mon projet ?&#10;&#10;Mes coordonnées : ">SpectrumIA <img src="assets/img/logo-spectrumia.svg" alt="" width="22" height="19"></button></span>
-      <span><a href="mentions-legales.html">Mentions légales</a> · <a href="politique-confidentialite.html">Confidentialité</a></span>
+      <span class="footer-credit">Fait avec <span class="footer-heart">❤︎</span> par <button type="button" class="footer-credit-link" data-editeur-objet="Contacter l’éditeur du site" data-editeur-message="Je souhaite faire un site web, auditer mon site, l’améliorer ou le refondre — ou j’ai une automatisation à mettre en place dans mon entreprise. Pourrions-nous échanger sur mon projet ?&#10;&#10;Mes coordonnées : ">SpectrumIA <img src="assets/img/logo-spectrumia.svg" alt="" width="22" height="19"></button></span>
     </div>
   </div>
 </footer>
