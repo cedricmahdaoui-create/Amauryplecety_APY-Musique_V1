@@ -120,7 +120,7 @@
           </ul>
         </li>
         <li><a href="index.html#a-la-une">À la une</a></li>
-        <li><a class="btn" href="index.html#contact-form">Contact</a></li>
+        <li><a class="btn" href="#contact">Contact</a></li>
       </ul>
     </nav>
   </div>
@@ -331,6 +331,18 @@
           </ul>
           <p class="form-note mt-1">Horaires issus de la fiche Google de l’atelier, relevés le 8 septembre 2026.</p>
 
+          <h3 class="mt-3">Écrire à l’atelier</h3>
+          <p>Pour une demande d’achat, de réparation ou d’estimation : votre message est envoyé directement à l’atelier.</p>
+          <form id="contact-form">
+            <label>Votre nom<input name="nom" autocomplete="name" required maxlength="120"></label>
+            <label>Votre adresse e-mail<input name="email" type="email" autocomplete="email" required></label>
+            <label>Objet<select name="objet"><option>Achat d’un instrument</option><option>Réparation</option><option>Estimation</option><option>Autre demande</option></select></label>
+            <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
+            <label class="contact-hp" aria-hidden="true" tabindex="-1">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
+            <p class="form-note" data-contact-note>Amaury vous répond sous 1 à 2 jours.</p>
+            <button class="btn" type="submit">Envoyer mon message</button>
+          </form>
+
           <a class="contact-map mt-2"
              href="https://www.google.com/maps/place/Plecety+Jean+Michel/@49.3620309,0.8053628,17z/data=!3m1!4b1!4m6!3m5!1s0x47e1020b393b9471:0xf1030e30f7e30935!8m2!3d49.3620309!4d0.8053628!16s%2Fg%2F1tg4kp44"
              target="_blank" rel="noopener noreferrer"
@@ -364,12 +376,8 @@
           </p>
         </div>
 
-        <div>
-          <h3>Écrire à l'atelier</h3>
-          <p>Pour une demande d'achat, de réparation ou d'estimation : votre message est envoyé directement à l'atelier.</p>
-          <button type="button" class="btn js-contact-open">Ouvrir le formulaire</button>
-        </div>
       </div>
+
     </div>
   </section>
 
@@ -414,22 +422,7 @@
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/photo-slides.js" defer></script>
 <script src="assets/js/news.js" defer></script>
-<script src="assets/js/contact-dialog.js" defer></script>
 <script src="assets/js/editeur-dialog.js" defer></script>
-<dialog id="contact-dialog" class="editeur-dialog">
-  <form id="contact-form">
-    <button type="button" class="editeur-dialog-close" aria-label="Fermer">×</button>
-    <h2>Écrire à l'atelier</h2>
-    <p>Pour une demande d'achat, de réparation ou d'estimation : votre message est envoyé directement à l'atelier.</p>
-    <label>Votre nom<input name="nom" autocomplete="name" required maxlength="120"></label>
-    <label>Votre adresse e-mail<input name="email" type="email" autocomplete="email" required></label>
-    <label>Objet<select name="objet"><option>Achat d’un instrument</option><option>Réparation</option><option>Estimation</option><option>Autre demande</option></select></label>
-    <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
-    <label class="contact-hp" aria-hidden="true" tabindex="-1">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
-    <p class="form-note" data-contact-note>Amaury vous répond sous 1 à 2 jours.</p>
-    <button class="btn" type="submit">Envoyer mon message</button>
-  </form>
-</dialog>
 <dialog id="editeur-dialog" class="editeur-dialog">
   <form id="editeur-form">
     <button type="button" class="editeur-dialog-close" aria-label="Fermer">×</button>

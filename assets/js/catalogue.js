@@ -190,18 +190,21 @@
     var body = document.createElement("div");
     body.className = "cat-card-body";
 
-    var h = document.createElement("h3");
-    h.textContent = it.nom;
-    body.appendChild(h);
-
-    var meta = document.createElement("p");
-    meta.className = "cat-card-meta";
     var bits = [];
     if (it.sousfamille) bits.push(it.sousfamille);
     if (ETAT_LABEL[it.etat]) bits.push(ETAT_LABEL[it.etat]);
     if (it.annee) bits.push(it.annee);
-    meta.textContent = bits.join(" · ");
-    body.appendChild(meta);
+    if (bits.length) {
+      var meta = document.createElement("p");
+      meta.className = "cat-card-meta";
+      meta.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 19a3 3 0 1 1-2-2.83V4.3a1 1 0 0 1 .78-.97l9-2A1 1 0 0 1 18 2.3V15a3 3 0 1 1-2-2.83V6.1l-7 1.56Z"/></svg>';
+      meta.appendChild(document.createTextNode(bits.join(" · ")));
+      body.appendChild(meta);
+    }
+
+    var h = document.createElement("h3");
+    h.textContent = it.nom;
+    body.appendChild(h);
 
     if (it.desc) {
       var d = document.createElement("p");
