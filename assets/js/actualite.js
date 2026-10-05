@@ -25,7 +25,7 @@
   var i = parseInt(params.get('i'), 10);
   if (!Number.isInteger(i) || i < 0) { notFound(); return; }
 
-  fetch('api/catalogue').then(function (r) { if (!r.ok) throw new Error(); return r; }).catch(function () { return fetch('assets/data/catalogue.json', { cache: 'no-cache' }); }).then(function (r) { if (!r.ok) throw new Error(); return r.json(); }).then(function (data) {
+  fetch('assets/data/catalogue.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(); return r; }).then(function (r) { return r.json(); }).then(function (data) {
     var articles = (data.articles || []).filter(function (a) { return a.published === true; });
     var a = articles[i];
     if (!a) { notFound(); return; }

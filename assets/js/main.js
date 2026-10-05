@@ -170,3 +170,31 @@
     });
   });
 })();
+
+/* Pré-sélectionne "Réparation" quand on accède au formulaire via #contact-form */
+(function () {
+  var contactForm = document.getElementById('contact-form');
+  if (!contactForm) return;
+  var selectObjet = contactForm.querySelector('select[name="objet"]');
+  if (!selectObjet) return;
+
+  function preSelectRepair() {
+    for (var i = 0; i < selectObjet.options.length; i++) {
+      if (selectObjet.options[i].textContent.trim() === 'Réparation') {
+        selectObjet.value = selectObjet.options[i].value;
+        return;
+      }
+    }
+  }
+
+  /* Si la page s'ouvre avec #contact-form, pré-sélectionne après le chargement */
+  if (location.hash === '#contact-form') {
+    setTimeout(preSelectRepair, 100);
+  }
+
+  /* Sinon, écoute les clics sur les liens vers #contact-form */
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href="#contact-form"]');
+    if (link) setTimeout(preSelectRepair, 100);
+  });
+})();
