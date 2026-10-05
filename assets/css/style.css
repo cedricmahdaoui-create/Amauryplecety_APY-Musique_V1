@@ -936,7 +936,7 @@ address { font-style: normal; }
 }
 .contact-map .map-cta svg { width: 16px; height: 16px; }
 .contact-map:hover .map-cta { background: #241812; color: #fff; }
-.contact-form-card { border: 1px solid rgba(220, 198, 150, 0.3); border-radius: 12px; padding: 1.5rem; background: rgba(255, 255, 255, 0.03); margin-bottom: 1rem; }
+.contact-form-card { margin-bottom: 1rem; }
 .contact-form-card h3 { margin-top: 0; margin-bottom: 0.5rem; }
 .contact-map--small { aspect-ratio: 16 / 9; max-width: 400px; margin: 0 auto; }
 .map-actions { display: flex; }
