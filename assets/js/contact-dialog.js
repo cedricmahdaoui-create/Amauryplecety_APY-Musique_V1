@@ -25,6 +25,19 @@
     amaury: "Je vous contacte suite à la présentation d'Amaury sur le site. "
   };
 
+  var CTX_OBJET = {
+    recherche: "Achat d'un instrument",
+    "instrument-vent": "Achat d'un instrument",
+    "devis-reparation": "Réparation",
+    reparation: "Réparation",
+    "expertise-cordes": "Estimation",
+    estimation: "Estimation",
+    rdv: "Autre demande",
+    amaury: "Achat d'un instrument"
+  };
+
+  var selectObjet = form.querySelector('select[name="objet"]');
+
   function reset() {
     form.reset();
     Array.prototype.slice.call(form.elements).forEach(function (el) { el.disabled = false; });
@@ -36,6 +49,14 @@
   function openDialog(ctx) {
     reset();
     if (ctx && CTX_MESSAGES[ctx]) messageField.value = CTX_MESSAGES[ctx];
+    if (ctx && CTX_OBJET[ctx] && selectObjet) {
+      for (var i = 0; i < selectObjet.options.length; i++) {
+        if (selectObjet.options[i].textContent === CTX_OBJET[ctx]) {
+          selectObjet.value = selectObjet.options[i].value;
+          break;
+        }
+      }
+    }
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else dialog.setAttribute('open', '');
     openedAt = Date.now();
