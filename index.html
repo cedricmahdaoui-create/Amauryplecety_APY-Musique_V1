@@ -330,8 +330,22 @@
             <li data-closed><span>Dimanche</span><span>Fermé</span></li>
           </ul>
           <p class="form-note mt-1">Horaires issus de la fiche Google de l’atelier, relevés le 8 septembre 2026.</p>
+        </div>
 
-          <a class="contact-map mt-2"
+        <div>
+          <h3>Écrire à l’atelier</h3>
+          <p>Pour une demande d’achat, de réparation ou d’estimation : votre message est envoyé directement à l’atelier.</p>
+          <form id="contact-form">
+            <label>Votre nom<input name="nom" autocomplete="name" required maxlength="120"></label>
+            <label>Votre adresse e-mail<input name="email" type="email" autocomplete="email" required></label>
+            <label>Objet<select name="objet"><option>Achat d’un instrument</option><option>Réparation</option><option>Estimation</option><option>Autre demande</option></select></label>
+            <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
+            <label class="contact-hp" aria-hidden="true" tabindex="-1">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
+            <p class="form-note" data-contact-note>Amaury vous répond sous 1 à 2 jours.</p>
+            <button class="btn" type="submit">Envoyer mon message</button>
+          </form>
+
+          <a class="contact-map mt-3"
              href="https://www.google.com/maps/place/Plecety+Jean+Michel/@49.3620309,0.8053628,17z/data=!3m1!4b1!4m6!3m5!1s0x47e1020b393b9471:0xf1030e30f7e30935!8m2!3d49.3620309!4d0.8053628!16s%2Fg%2F1tg4kp44"
              target="_blank" rel="noopener noreferrer"
              aria-label="Ouvrir le plan d’accès à l’atelier dans Google Maps (nouvel onglet)">
@@ -362,20 +376,6 @@
           <p class="map-actions mt-1">
             <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=49.3620309,0.8053628" target="_blank" rel="noopener noreferrer">Calculer un itinéraire</a>
           </p>
-        </div>
-
-        <div>
-          <h3>Écrire à l’atelier</h3>
-          <p>Pour une demande d’achat, de réparation ou d’estimation : votre message est envoyé directement à l’atelier.</p>
-          <form id="contact-form">
-            <label>Votre nom<input name="nom" autocomplete="name" required maxlength="120"></label>
-            <label>Votre adresse e-mail<input name="email" type="email" autocomplete="email" required></label>
-            <label>Objet<select name="objet"><option>Achat d’un instrument</option><option>Réparation</option><option>Estimation</option><option>Autre demande</option></select></label>
-            <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
-            <label class="contact-hp" aria-hidden="true" tabindex="-1">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
-            <p class="form-note" data-contact-note>Amaury vous répond sous 1 à 2 jours.</p>
-            <button class="btn" type="submit">Envoyer mon message</button>
-          </form>
         </div>
 
       </div>
