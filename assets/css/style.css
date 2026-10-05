@@ -1785,8 +1785,8 @@ body:has(.breadcrumb) .section-head h1, body:has(.breadcrumb) h2, body:has(.brea
 .editeur-dialog h2 { color: #f5f1e9; padding-right: 2rem; margin-top: 0; }
 .editeur-dialog form, .editeur-dialog label { display: grid; gap: .5rem; }
 .editeur-dialog form { gap: 1rem; }
-.editeur-dialog input, .editeur-dialog textarea { width: 100%; padding: .7rem; background: #1a120c; color: #f5f1e9; border: 1px solid #685737; border-radius: 8px; font: inherit; }
-.editeur-dialog input:focus, .editeur-dialog textarea:focus { border-color: var(--brass); outline: 3px solid color-mix(in srgb, var(--brass) 35%, transparent); }
+.editeur-dialog input, .editeur-dialog select, .editeur-dialog textarea { width: 100%; padding: .7rem; background: #1a120c; color: #f5f1e9; border: 1px solid #685737; border-radius: 8px; font: inherit; }
+.editeur-dialog input:focus, .editeur-dialog select:focus, .editeur-dialog textarea:focus { border-color: var(--brass); outline: 3px solid color-mix(in srgb, var(--brass) 35%, transparent); }
 .editeur-dialog button[type="submit"] { justify-self: start; }
 .editeur-dialog button[disabled] { opacity: .6; cursor: not-allowed; }
 .editeur-dialog-close { position: absolute; top: .6rem; right: .8rem; padding: .3rem .7rem; border: 0; background: transparent; color: #e6c979; font-size: 1.8rem; line-height: 1; cursor: pointer; }
