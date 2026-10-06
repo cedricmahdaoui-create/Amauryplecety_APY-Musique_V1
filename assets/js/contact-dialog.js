@@ -46,12 +46,16 @@
     submitBtn.disabled = false;
   }
 
-  function openDialog(ctx) {
+  function openDialog(ctx, custom) {
     reset();
-    if (ctx && CTX_MESSAGES[ctx]) messageField.value = CTX_MESSAGES[ctx];
-    if (ctx && CTX_OBJET[ctx] && selectObjet) {
+    var objet = custom ? custom.objet : CTX_OBJET[ctx];
+    if (custom) messageField.value = custom.message || '';
+    else if (ctx && CTX_MESSAGES[ctx]) messageField.value = CTX_MESSAGES[ctx];
+    if (objet && selectObjet) {
+      var known = Array.prototype.some.call(selectObjet.options, function (o) { return o.textContent.replace(/’/g, "'") === objet.replace(/’/g, "'"); });
+      if (!known) selectObjet.add(new Option(objet), 1);
       for (var i = 0; i < selectObjet.options.length; i++) {
-        if (selectObjet.options[i].textContent === CTX_OBJET[ctx]) {
+        if (selectObjet.options[i].textContent.replace(/’/g, "'") === objet.replace(/’/g, "'")) {
           selectObjet.value = selectObjet.options[i].value;
           break;
         }
@@ -78,6 +82,8 @@
       openDialog(ctx);
     });
   });
+
+  window.apyOpenContact = function (custom) { openDialog(null, custom); };
 
   dialog.addEventListener('click', function (event) {
     if (event.target === dialog) dialog.close();

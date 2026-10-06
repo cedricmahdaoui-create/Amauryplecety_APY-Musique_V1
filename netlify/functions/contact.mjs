@@ -5,7 +5,7 @@ import { dataStore, json, looksLikeSpam } from "../lib/common.mjs";
 const MAX_MSG_PER_WINDOW = 5;
 const WINDOW_MS = 60 * 60 * 1000; // 1 heure
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const OBJETS = ["Achat d’un instrument", "Réparation", "Estimation", "Autre demande"];
+const OBJETS = ["Achat d’un instrument", "Réserver un essai", "Réparation", "Estimation", "Autre demande"];
 
 const sha = (value) => createHash("sha256").update(value).digest("hex").slice(0, 24);
 const clean = (value, max) => (typeof value === "string" ? value.trim().slice(0, max) : "");

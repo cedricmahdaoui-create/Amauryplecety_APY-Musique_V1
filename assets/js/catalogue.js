@@ -179,6 +179,11 @@
       ph.className = "placeholder";
       ph.setAttribute("role", "img");
       ph.setAttribute("aria-label", "Photo à venir — " + it.nom);
+      var logo = document.createElement("img");
+      logo.className = "cat-placeholder-logo";
+      logo.src = "assets/img/logo-apy.png";
+      logo.alt = "";
+      ph.appendChild(logo);
       media.appendChild(ph);
     }
     var badge = document.createElement("span");
@@ -211,6 +216,14 @@
       d.className = "cat-card-desc";
       d.textContent = it.desc;
       body.appendChild(d);
+      var more = document.createElement("button");
+      more.type = "button";
+      more.className = "cat-card-more";
+      more.textContent = "Voir plus";
+      more.hidden = true;
+      more.setAttribute("aria-label", "Voir l’annonce complète : " + it.nom);
+      more.addEventListener("click", function () { openDetail(it, photos, bits); });
+      body.appendChild(more);
     }
 
     var foot = document.createElement("div");
@@ -223,6 +236,7 @@
     a.className = "btn btn--ghost";
     a.href = "/?instrument=" + encodeURIComponent(it.nom) + "#contact";
     a.textContent = "Réserver un essai";
+    a.addEventListener("click", function (e) { reserve(e, it); });
     foot.appendChild(a);
     body.appendChild(foot);
 
@@ -241,16 +255,75 @@
     grid.innerHTML = "";
     list.forEach(function (it) { grid.appendChild(card(it)); });
 
-    var total = items.length;
-    if (list.length === total) {
-      countEl.textContent = total + (total > 1 ? " instruments" : " instrument");
-    } else {
-      countEl.textContent = list.length + " sur " + total + (total > 1 ? " instruments" : " instrument");
-    }
+    countEl.textContent = "";
     emptyEl.hidden = list.length !== 0;
     grid.hidden = list.length === 0;
 
+    syncMoreButtons();
     syncUrl();
+  }
+
+  // « Voir plus » seulement quand la description dépasse les 4 lignes affichées.
+  function syncMoreButtons() {
+    document.querySelectorAll(".cat-card-more").forEach(function (btn) {
+      var desc = btn.previousElementSibling;
+      btn.hidden = desc.scrollHeight <= desc.clientHeight + 1;
+    });
+  }
+  var resizeTimer;
+  window.addEventListener("resize", function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(syncMoreButtons, 150); });
+
+  // Ouvre le formulaire « Écrire à l'atelier » pré-rempli pour cet instrument.
+  function reserve(e, it) {
+    if (!window.apyOpenContact || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
+    e.preventDefault();
+    var details = [it.sousfamille, it.annee, it.prix > 0 ? prix(it.prix) : ""].filter(Boolean).join(", ");
+    window.apyOpenContact({
+      objet: "Réserver un essai",
+      message: "Je souhaite réserver un essai pour l'instrument : " + it.nom + (details ? " (" + details + ")" : "") + ".\n"
+    });
+    return true;
+  }
+
+  /* ----- Annonce détaillée (modale) ----- */
+  var detail = null;
+  function openDetail(it, photos, bits) {
+    if (!detail) {
+      detail = document.createElement("dialog");
+      detail.className = "editeur-dialog cat-detail";
+      detail.setAttribute("aria-labelledby", "cat-detail-title");
+      detail.innerHTML = '<button type="button" class="editeur-dialog-close" aria-label="Fermer">×</button>' +
+        '<div class="cat-detail-media"><img alt=""><div class="cat-carousel-controls"><button type="button" class="cat-detail-prev" aria-label="Photo précédente">‹</button><span aria-live="polite"></span><button type="button" class="cat-detail-next" aria-label="Photo suivante">›</button></div></div>' +
+        '<p class="cat-card-meta"></p><h2 id="cat-detail-title"></h2><p class="cat-detail-desc"></p>' +
+        '<div class="cat-card-foot"><span class="cat-card-price"></span><a class="btn"></a></div>';
+      document.body.appendChild(detail);
+      detail.querySelector(".editeur-dialog-close").addEventListener("click", function () { detail.close(); });
+      detail.addEventListener("click", function (e) { if (e.target === detail) detail.close(); });
+      detail.querySelector(".cat-detail-prev").addEventListener("click", function () { detail.step(-1); });
+      detail.querySelector(".cat-detail-next").addEventListener("click", function () { detail.step(1); });
+    }
+    var img = detail.querySelector(".cat-detail-media img");
+    var counter = detail.querySelector(".cat-detail-media span");
+    var position = 0;
+    detail.step = function (delta) {
+      position = (position + delta + photos.length) % photos.length;
+      setPhoto(img, photos[position]);
+      img.alt = it.nom + " — photo " + (position + 1) + " sur " + photos.length;
+      counter.textContent = (position + 1) + " / " + photos.length;
+    };
+    detail.querySelector(".cat-detail-media").hidden = !photos.length;
+    detail.querySelector(".cat-carousel-controls").hidden = photos.length < 2;
+    if (photos.length) detail.step(0);
+    detail.querySelector(".cat-card-meta").textContent = bits.join(" · ");
+    detail.querySelector("h2").textContent = it.nom;
+    detail.querySelector(".cat-detail-desc").textContent = it.desc || "";
+    detail.querySelector(".cat-card-price").textContent = it.prix > 0 ? prix(it.prix) : "Prix sur demande";
+    var link = detail.querySelector(".cat-card-foot .btn");
+    link.href = "/?instrument=" + encodeURIComponent(it.nom) + "#contact";
+    link.textContent = "Réserver un essai";
+    link.onclick = function (e) { if (reserve(e, it)) detail.close(); };
+    detail.showModal();
+    detail.scrollTop = 0;
   }
 
   /* ----- Synchronisation légère avec l'URL (partage / retour arrière) ----- */

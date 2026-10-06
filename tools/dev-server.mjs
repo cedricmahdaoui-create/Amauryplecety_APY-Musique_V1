@@ -70,6 +70,13 @@ const server = createServer(async (req, res) => {
       res.end(JSON.stringify({ ok: true }));
       return;
     }
+    // Photos envoyées via l'admin : stockées dans Netlify Blobs, absentes du disque.
+    if (req.method === "GET" && req.url.startsWith("/media/")) {
+      const remote = await fetch("https://apymusique.fr" + req.url.split("?")[0]);
+      res.writeHead(remote.status, { "Content-Type": remote.headers.get("content-type") || "application/octet-stream" });
+      res.end(Buffer.from(await remote.arrayBuffer()));
+      return;
+    }
     let path = decodeURIComponent(req.url.split("?")[0]);
     if (path.endsWith("/")) path += "index.html";
     const file = normalize(join(root, path));
