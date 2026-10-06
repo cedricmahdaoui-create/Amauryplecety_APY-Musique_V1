@@ -1,242 +1,79 @@
 {
   "articles": [],
   "families": [
-    {
-      "id": "vent",
-      "label": "Instrument à vent"
-    },
-    {
-      "id": "cordes",
-      "label": "Cordes — quatuor"
-    },
-    {
-      "id": "percussion",
-      "label": "Percussion"
-    },
-    {
-      "id": "accessoire",
-      "label": "Accessoire / pièce"
-    },
-    {
-      "id": "claviers",
-      "label": "Claviers"
-    },
-    {
-      "id": "saxophones-altos",
-      "label": "Saxophones altos"
-    },
-    {
-      "id": "saxophones-tenors",
-      "label": "Saxophones tenors"
-    },
-    {
-      "id": "saxophones-sopranos",
-      "label": "Saxophones sopranos"
-    },
-    {
-      "id": "saxophones-barytons",
-      "label": "Saxophones barytons"
-    },
-    {
-      "id": "clarinettes",
-      "label": "Clarinettes"
-    },
-    {
-      "id": "trompettes",
-      "label": "Trompettes"
-    },
-    {
-      "id": "saxophones",
-      "label": "Saxophones"
-    },
-    {
-      "id": "cornets",
-      "label": "Cornets"
-    },
-    {
-      "id": "saxophones-basses",
-      "label": "Saxophones basses"
-    },
-    {
-      "id": "tubas",
-      "label": "Tubas"
-    }
+    {"id": "vent", "label": "Instrument à vent"},
+    {"id": "cordes", "label": "Cordes — quatuor"},
+    {"id": "percussion", "label": "Percussion"},
+    {"id": "accessoire", "label": "Accessoire / pièce"},
+    {"id": "claviers", "label": "Claviers"},
+    {"id": "saxophones-altos", "label": "Saxophones altos"},
+    {"id": "saxophones-tenors", "label": "Saxophones tenors"},
+    {"id": "saxophones-sopranos", "label": "Saxophones sopranos"},
+    {"id": "saxophones-barytons", "label": "Saxophones barytons"},
+    {"id": "clarinettes", "label": "Clarinettes"},
+    {"id": "trompettes", "label": "Trompettes"},
+    {"id": "saxophones", "label": "Saxophones"},
+    {"id": "cornets", "label": "Cornets"},
+    {"id": "saxophones-basses", "label": "Saxophones basses"},
+    {"id": "tubas", "label": "Tubas"}
   ],
   "instruments": [
-    {
-      "annee": "1988",
-      "desc": "Saxophone alto professionnel Buffet Crampon, modèle haut de gamme Prestige, n°39429, fabriqué en 1988, dans un magnifique état, entièrement retamponné à neuf, nettoyé, révisé et réglé. Le corps est en cuivre rose, les clés vernies, pavillon gravé à la main, un très bon confort de jeu grâce à son ergonomie et sa facilité d'émission, et un son plein de personnalité qui change du Selmer, avec une bonne réserve de puissance. Vendu dans son étui d'origine",
-      "dispo": true,
-      "etat": "revise",
-      "famille": "saxophones-altos",
-      "featured": false,
-      "nom": "Buffet Crampon Prestige",
-      "photo": "media/instrument-8947.jpg",
-      "photos": [
-        "media/instrument-34226.jpg",
-        "media/instrument-33981.jpg",
-        "media/instrument-34023.jpg",
-        "media/instrument-34070.jpg",
-        "media/instrument-34119.jpg",
-        "media/instrument-62929.jpg"
-      ],
-      "prix": 2900,
-      "sousfamille": "Saxophone alto"
-    },
-    {
-      "annee": "1991",
-      "desc": "Saxophone alto Julius Keilwerth, modèle intermédiaire ST90 série IV, n°100313, fabriqué en Allemagne au début des années 90. Une valeur sûre, robuste, avec l'ergonomie moderne très efficace, avec le gros son puissant Keilwerth. Instrument en excellent état, vernis comme tampons, révisé, prêt à jouer et vendu dans son étui d'origine.",
-      "dispo": true,
-      "etat": "revise",
-      "famille": "saxophones-altos",
-      "featured": false,
-      "nom": "Julius Keilwerth ST90 Série IV",
-      "photo": "media/julius-keilwerth-st90-serie-iv-5140.jpg",
-      "photos": [
-        "media/julius-keilwerth-st90-serie-iv-30283.jpg",
-        "media/julius-keilwerth-st90-serie-iv-30319.jpg",
-        "media/julius-keilwerth-st90-serie-iv-30542.jpg",
-        "media/julius-keilwerth-st90-serie-iv-30246.jpg",
-        "media/julius-keilwerth-st90-serie-iv-30365.jpg",
-        "media/julius-keilwerth-st90-serie-iv-30426.jpg",
-        "media/julius-keilwerth-st90-serie-iv-49767.jpg"
-      ],
-      "prix": 990,
-      "sousfamille": "Saxophone alto"
-    },
-    {
-      "annee": "1942",
-      "desc": "Un des modèles vintage américains de légende, le célèbre King Zephyr, n°237428, entièrement refait à neuf, corps déverni, bocal à double emboitement parfaitement étanche. Une projection unique du son, avec la chaleur typique des saxs américains de cette age d'or. Vendu en étui moderne neuf.",
-      "dispo": true,
-      "etat": "revise",
-      "famille": "saxophones-altos",
-      "featured": false,
-      "nom": "King Zephyr",
-      "photo": "media/king-zephyr-62571.jpg",
-      "photos": [
-        "media/king-zephyr-50860.jpg",
-        "media/king-zephyr-50665.jpg",
-        "media/king-zephyr-51081.jpg",
-        "media/king-zephyr-50976.jpg",
-        "media/king-zephyr-51193.jpg",
-        "media/king-zephyr-50829.jpg",
-        "media/king-zephyr-51301.jpg"
-      ],
-      "prix": 1500,
-      "sousfamille": "Saxophone alto"
-    },
-    {
-      "nom": "Saxophone alto Selmer Série III",
-      "famille": "vent",
-      "sousfamille": "Saxophone alto",
-      "etat": "revise",
-      "prix": 2600,
-      "dispo": true,
-      "featured": false,
-      "annee": "2005",
-      "photo": "assets/img/catalogue-selmer-serie-iii.jpg",
-      "photos": [],
-      "desc": "Verni intégral, mécanique révisée, très bon état général. Idéal conservatoire et pratique avancée."
-    },
-    {
-      "nom": "Saxophone alto Selmer Mark VI",
-      "famille": "vent",
-      "sousfamille": "Saxophone alto",
-      "etat": "revise",
-      "prix": 4200,
-      "dispo": true,
-      "featured": false,
-      "annee": "1965",
-      "photo": "assets/img/catalogue-selmer-mark-vi.jpg",
-      "photos": [
-        "assets/img/catalogue-selmer-mark-vi-detail.jpg",
-        "assets/img/saxophone-alto-selmer-mark-vi-55908.jpg"
-      ],
-      "desc": "Révision complète, jeu de tampons neuf, clés argentées d'origine. Instrument professionnel, son centré et rond."
-    },
-    {
-      "nom": "Saxophone alto King Zephyr",
-      "famille": "vent",
-      "sousfamille": "Saxophone alto",
-      "etat": "a-restaurer",
-      "prix": 900,
-      "dispo": true,
-      "featured": false,
-      "annee": "années 1940",
-      "photo": "assets/img/catalogue-king-zephyr.jpg",
-      "photos": [],
-      "desc": "Finition argent, pièce de caractère à remettre en état. Devis de restauration sur demande."
-    },
-    {
-      "nom": "Saxophone ténor d'étude",
-      "famille": "vent",
-      "sousfamille": "Saxophone ténor",
-      "etat": "revise",
-      "prix": 1200,
-      "dispo": true,
-      "featured": false,
-      "annee": "",
-      "photo": "assets/img/restauration-04.jpg",
-      "photos": [],
-      "desc": "Verni, révisé et réglé pour un démarrage serein. Housse fournie."
-    }
-  ],
-  "families": [
-    {
-      "id": "vent",
-      "label": "Instrument à vent"
-    },
-    {
-      "id": "cordes",
-      "label": "Cordes — quatuor"
-    },
-    {
-      "id": "percussion",
-      "label": "Percussion"
-    },
-    {
-      "id": "accessoire",
-      "label": "Accessoire / pièce"
-    },
-    {
-      "id": "claviers",
-      "label": "Claviers"
-    }
-  ],
-  "articles": [
-    {
-      "title": "L'expo du weekend",
-      "text": "L'expo à '...........' à été riche en '......'.\nPlusieurs commandes de pièces et instruments.\nEt un agenda de réparations prévues qui se remplie a vue d'oeil. \n",
-      "date": "2026-09-23",
-      "published": true,
-      "photo": "assets/img/actualite-33271.jpg",
-      "photos": [
-        "assets/img/actualite-33404.jpg"
-      ]
-    },
-    {
-      "title": "Mark VI de Cloclo",
-      "text": "Une rareté, commande spéciale pour les musiciens de Claude François. Laque bleue d'origine et clés additionnelles.",
-      "date": "2026-09-26",
-      "published": true,
-      "photo": "assets/img/actualite-65157.jpg",
-      "photos": []
-    }
+    {"annee": "1988", "desc": "Saxophone alto professionnel Buffet Crampon, modèle haut de gamme Prestige, n°39429, fabriqué en 1988, dans un magnifique état, entièrement retamponné à neuf, nettoyé, révisé et réglé. Le corps est en cuivre rose, les clés vernies, pavillon gravé à la main, un très bon confort de jeu grâce à son ergonomie et sa facilité d'émission, et un son plein de personnalité qui change du Selmer, avec une bonne réserve de puissance. Vendu dans son étui d'origine", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Buffet Crampon Prestige", "photo": "media/instrument-8947.jpg", "photos": ["media/instrument-34226.jpg", "media/instrument-33981.jpg", "media/instrument-34023.jpg", "media/instrument-34070.jpg", "media/instrument-34119.jpg", "media/instrument-62929.jpg"], "prix": 2900, "sousfamille": "Saxophone alto"},
+    {"annee": "1991", "desc": "Saxophone alto Julius Keilwerth, modèle intermédiaire ST90 série IV, n°100313, fabriqué en Allemagne au début des années 90. Une valeur sûre, robuste, avec l'ergonomie moderne très efficace, avec le gros son puissant Keilwerth. Instrument en excellent état, vernis comme tampons, révisé, prêt à jouer et vendu dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Julius Keilwerth ST90 Série IV", "photo": "media/julius-keilwerth-st90-serie-iv-5140.jpg", "photos": ["media/julius-keilwerth-st90-serie-iv-30283.jpg", "media/julius-keilwerth-st90-serie-iv-30319.jpg", "media/julius-keilwerth-st90-serie-iv-30542.jpg", "media/julius-keilwerth-st90-serie-iv-30246.jpg", "media/julius-keilwerth-st90-serie-iv-30365.jpg", "media/julius-keilwerth-st90-serie-iv-30426.jpg", "media/julius-keilwerth-st90-serie-iv-49767.jpg"], "prix": 990, "sousfamille": "Saxophone alto"},
+    {"annee": "1942", "desc": "Un des modèles vintage américains de légende, le célèbre King Zephyr, n°237428, entièrement refait à neuf, corps déverni, bocal à double emboitement parfaitement étanche. Une projection unique du son, avec la chaleur typique des saxs américains de cette age d'or. Vendu en étui moderne neuf.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "King Zephyr", "photo": "media/king-zephyr-62571.jpg", "photos": ["media/king-zephyr-50860.jpg", "media/king-zephyr-50665.jpg", "media/king-zephyr-51081.jpg", "media/king-zephyr-50976.jpg", "media/king-zephyr-51193.jpg", "media/king-zephyr-50829.jpg", "media/king-zephyr-51301.jpg"], "prix": 1500, "sousfamille": "Saxophone alto"},
+    {"annee": "1977", "desc": "Un modèle professionnel que l'on n'a plus besoin de présenter, celui avec la meilleur projection de la marque, Selmer Mark VII n°272894 fabriqué en 1977, en excellent état général, usure partielle de vernis sur le tube, les tampons sont récents. Révisé, prêt à jouer, et vendu dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Selmer Mark VII 1977", "photo": "media/instrument-49714.jpg", "photos": ["media/instrument-73150.jpg", "media/instrument-6644.jpg", "media/instrument-6937.jpg", "media/instrument-6894.jpg", "media/instrument-6841.jpg", "media/instrument-6805.jpg", "media/instrument-7048.jpg"], "prix": 2700, "sousfamille": "Saxophone alto"},
+    {"annee": "1976", "desc": "Un Selmer Mark VII un peu particulier, n°250519, fabriqué en 1976, avec une finition assez unique, le corps est en laiton brut satiné, et les clés conservent le vernis d'origine. Le saxophone est entièrement retamponné à neuf et vendu dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Selmer Mark VII 1976", "photo": "media/selmer-mark-vii-1976-36645.jpg", "photos": ["media/selmer-mark-vii-1976-64492.jpg", "media/selmer-mark-vii-1976-64712.jpg", "media/selmer-mark-vii-1976-64647.jpg", "media/selmer-mark-vii-1976-65040.jpg", "media/selmer-mark-vii-1976-65146.jpg", "media/selmer-mark-vii-1976-64829.jpg", "media/selmer-mark-vii-1976-64935.jpg"], "prix": 2700, "sousfamille": "Saxophone alto"},
+    {"annee": "1983", "desc": "Selmer Super Action 80 n°348114, fabriqué en 1983, une référence des saxophones professionnels, celui ci est entièrement retamponné à neuf, très bon état général malgré des marques d'usure du vernis sur le tube. Vendu en étui rigide.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Selmer Super Action 80 1983", "photo": "media/selmer-super-action-80-1983-84256.jpg", "photos": ["media/selmer-super-action-80-1983-8324.jpg", "media/selmer-super-action-80-1983-8506.jpg", "media/selmer-super-action-80-1983-8388.jpg", "media/selmer-super-action-80-1983-8619.jpg", "media/selmer-super-action-80-1983-8726.jpg", "media/selmer-super-action-80-1983-8830.jpg"], "prix": 2500, "sousfamille": "Saxophone alto"},
+    {"annee": "1948", "desc": "Un des modèles les plus mythiques, précurseur du Mark VI, le \"Super Action\" de son nom officiel, dit Super Balanced Action ou SBA, qui pose encore un peu plus les bases de ce que seront les saxophones modernes, cet alto est en superbe état, entièrement retamponné à neuf, l'argenture d'origine est préservée à 99%. Niveau son, on y retrouve meme plus de chaleur que certains Mark VI avec des subtones uniques. En étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Selmer SBA 1948", "photo": "media/selmer-sba-1948-18062.jpg", "photos": ["media/selmer-sba-1948-65072.jpg", "media/selmer-sba-1948-65344.jpg", "media/selmer-sba-1948-65274.jpg", "media/selmer-sba-1948-65178.jpg", "media/selmer-sba-1948-65457.jpg", "media/selmer-sba-1948-65229.jpg", "media/selmer-sba-1948-65572.jpg"], "prix": 4200, "sousfamille": "Saxophone alto"},
+    {"annee": "1954", "desc": "Une saxophone légendaire, d'une année spéciale pour Selmer, Super Balanced Action SBA n°53202 fait en 1954. Ce saxophone est en magnifique état, et, fait assez peu commun sur ceux de cette époque, est déjà équipé du Fa# aigu. Entièrement retamponné à neuf, l'argenture d'origine est présente à 99%, bref, une perle.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Selmer SBA 1954", "photo": "media/selmer-sba-1954-97031.jpg", "photos": ["media/selmer-sba-1954-29477.jpg", "media/selmer-sba-1954-29426.jpg", "media/selmer-sba-1954-29339.jpg", "media/selmer-sba-1954-29709.jpg", "media/selmer-sba-1954-29526.jpg", "media/selmer-sba-1954-29595.jpg"], "prix": 5300, "sousfamille": "Saxophone alto"},
+    {"annee": "2003", "desc": "Selmer série III alto n°640699 fabriqué en 2003, un des saxophones professionnels de référence dans le monde du classique, ce qui n'en fait pas moins un instrument polyvalent, celui ci est en très bon état, entièrement révisé et nettoyé, vendu dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Selmer Série III 2003", "photo": "media/selmer-serie-iii-2003-29034.jpg", "photos": ["media/selmer-serie-iii-2003-49042.jpg", "media/selmer-serie-iii-2003-49086.jpg", "media/selmer-serie-iii-2003-49183.jpg", "media/selmer-serie-iii-2003-49130.jpg", "media/selmer-serie-iii-2003-49310.jpg", "media/selmer-serie-iii-2003-49251.jpg", "media/selmer-serie-iii-2003-49372.jpg"], "prix": 2600, "sousfamille": "Saxophone alto"},
+    {"annee": "", "desc": "Saxophone alto d'étude Yamaha YAS 25 n°052525, fait au Japon dans les années 90, en excellent état, entièrement retamponné à neuf, clé de Fa# aigu, vendu avec bec et étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Yamaha YAS 25", "photo": "media/yamaha-yas-25-37523.jpg", "photos": ["media/yamaha-yas-25-59193.jpg", "media/yamaha-yas-25-59282.jpg", "media/yamaha-yas-25-59371.jpg", "media/yamaha-yas-25-59437.jpg", "media/yamaha-yas-25-59243.jpg"], "prix": 650, "sousfamille": "Saxophone alto"},
+    {"annee": "", "desc": "Saxophone alto semi professionnel, Yamaha YAS 32F n°003536, fait au Japon dans les années 80, en état proche du neuf, juste quelques rayures au pavillon, il est entièrement retamponné à neuf, avec clé de Fa# aigu, vendu en étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Yamaha YAS 32F", "photo": "media/yamaha-yas-32f-38472.jpg", "photos": ["media/yamaha-yas-32f-42132.jpg", "media/yamaha-yas-32f-41981.jpg", "media/yamaha-yas-32f-42177.jpg", "media/yamaha-yas-32f-42075.jpg", "media/yamaha-yas-32f-42287.jpg", "media/yamaha-yas-32f-51148.jpg"], "prix": 1100, "sousfamille": "Saxophone alto"},
+    {"annee": "1965", "desc": "Saxophone tenor vintage, King Zephyr fabriqué à Cleveland en 1965, entièrement retamponné à neuf, le corps est majoritairement déverni, mais le chrome des clés est en très bon état, le gros son américain par excellence !", "dispo": true, "etat": "revise", "famille": "saxophones-tenors", "featured": false, "nom": "King Zephyr", "photo": "media/instrument-60953.jpg", "photos": ["media/king-zephyr-26463.jpg", "media/king-zephyr-26575.jpg", "media/king-zephyr-26693.jpg", "media/king-zephyr-26800.jpg", "media/king-zephyr-26401.jpg", "media/king-zephyr-26907.jpg", "media/king-zephyr-27012.jpg"], "prix": 1500, "sousfamille": "Saxophone ténor"},
+    {"annee": "1967", "desc": "Selmer Mark VI tenor n°146937, fait en 1967, avec Fa# aigu, entièrement refait à neuf, tampons, feutres, lièges, ressorts, le corps est quasiment totalement déverni, et le clétage a gardé le vernis d'origine. vendu en étui moderne.", "dispo": true, "etat": "revise", "famille": "saxophones-tenors", "featured": false, "nom": "Selmer Mark VI 1967", "photo": "media/selmer-mark-vi-1967-89317.jpg", "photos": ["media/selmer-mark-vi-1967-11362.jpg", "media/selmer-mark-vi-1967-11533.jpg", "media/selmer-mark-vi-1967-11644.jpg", "media/selmer-mark-vi-1967-11763.jpg", "media/selmer-mark-vi-1967-11877.jpg", "media/selmer-mark-vi-1967-11993.jpg", "media/selmer-mark-vi-1967-12108.jpg"], "prix": 6000, "sousfamille": "Saxophone ténor"},
+    {"annee": "1970", "desc": "Selmer Mark VI tenor n°179394 fabriqué en 1970, avec clé de Fa# aigu, entièrement retamponné à neuf, le vernis du corps est globalement bien conservé, il manque de l'argenture par endroit sur le clétage, mais très bon état général, vendu dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-tenors", "featured": false, "nom": "Selmer Mark VI 1970", "photo": "media/selmer-mark-vi-1970-16102.jpg", "photos": ["media/selmer-mark-vi-1970-36850.jpg", "media/selmer-mark-vi-1970-36558.jpg", "media/selmer-mark-vi-1970-36590.jpg", "media/selmer-mark-vi-1970-36653.jpg", "media/selmer-mark-vi-1970-36707.jpg", "media/selmer-mark-vi-1970-36962.jpg", "media/selmer-mark-vi-1970-36788.jpg"], "prix": 5900, "sousfamille": "Saxophone ténor"},
+    {"annee": "1976", "desc": "Selmer tenor Mark VII n°256957 de 1976, en excellent état général, retamponné à neuf pour la vente, révisé et nettoyé, vendu dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-tenors", "featured": false, "nom": "Selmer Mark VII 1976", "photo": "media/selmer-mark-vii-1977-96907.jpg", "photos": ["media/selmer-mark-vii-1977-15080.jpg", "media/selmer-mark-vii-1977-15189.jpg", "media/selmer-mark-vii-1977-14927.jpg", "media/selmer-mark-vii-1977-15297.jpg", "media/selmer-mark-vii-1977-15014.jpg", "media/selmer-mark-vii-1977-15408.jpg"], "prix": 3500, "sousfamille": "Saxophone ténor"},
+    {"annee": "1965", "desc": "Un beau tenor professionnel vintage, Pierret modèle Competition, fait autour de 1965, marqué \"Hunleth\", revendeur americain basé à St Louis qui commandait chez Pierret à Mantes la Jolie, comme Olds pour son modèle \"Parisian Ambassador\". Un saxo pas comme les autres, car ce fut mon tenor personnel pendant de nombreuses années ! Le dernier modele fabriqué par la marque, un sax surprenant, avec du coffre, et un timbre spécial. Dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-tenors", "featured": false, "nom": "Pierret Competition", "photo": "media/pierret-competition-96430.jpg", "photos": ["media/pierret-competition-25672.jpg", "media/pierret-competition-25730.jpg", "media/pierret-competition-25545.jpg", "media/pierret-competition-25792.jpg", "media/pierret-competition-25905.jpg", "media/pierret-competition-26019.jpg"], "prix": 1200, "sousfamille": "Saxophone ténor"},
+    {"annee": "1987", "desc": "Saxophone tenor professionnel de référence, Selmer Super Action 80 (SA80SII) Série II, n°398587 de 1987, entièrement retamponné à neuf, nettoyé et réglé, vendu en étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-tenors", "featured": false, "nom": "Selmer Super Action 80 1987", "photo": "media/selmer-super-action-80-1987-99948.jpg", "photos": ["media/selmer-super-action-80-1987-22661.jpg", "media/selmer-super-action-80-1987-22895.jpg", "media/selmer-super-action-80-1987-23003.jpg", "media/selmer-super-action-80-1987-23116.jpg", "media/selmer-super-action-80-1987-23225.jpg", "media/selmer-super-action-80-1987-22823.jpg", "media/selmer-super-action-80-1987-23346.jpg"], "prix": 3000, "sousfamille": "Saxophone ténor"},
+    {"annee": "1981", "desc": "Les premieres séries du SA80, tenor professionnel n°319618, fabriqué en 1981, en très bon état général, vernis comme tampons, révisé et prêt à jouer, pavillon gravé et étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-tenors", "featured": false, "nom": "Selmer Super Action 80 1981", "photo": "media/selmer-super-action-80-1981-90340.jpg", "photos": ["media/selmer-super-action-80-1981-29065.jpg", "media/selmer-super-action-80-1981-29124.jpg", "media/selmer-super-action-80-1981-29182.jpg", "media/selmer-super-action-80-1981-29324.jpg", "media/selmer-super-action-80-1981-29435.jpg", "media/selmer-super-action-80-1981-29546.jpg", "media/selmer-super-action-80-1981-29288.jpg"], "prix": 3000, "sousfamille": "Saxophone ténor"},
+    {"annee": "1939", "desc": "Une des trompettes vintage de légende, Conn Vocabell 48B n°327556, avec le pavillon \"rimless\", faite à Elkhart en 1939, en excellent état, le chrome des pistons est irréprochable, donnant un compression optimale, fabriquée pour être la trompette la plus puissante possible, avec précision.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Conn Vocabell 48B", "photo": "media/instrument-24107.jpg", "photos": ["media/conn-vocabell-48b-51775.jpg", "media/conn-vocabell-48b-52029.jpg", "media/conn-vocabell-48b-51964.jpg", "media/conn-vocabell-48b-51858.jpg", "media/conn-vocabell-48b-51899.jpg", "media/conn-vocabell-48b-52117.jpg"], "prix": 1400, "sousfamille": "Trompette SiB"},
+    {"annee": "", "desc": "Trompette professionnelle faite en Espagne, Stomvi Elite n°878685, perce ML et branche n°3. Argenture de qualité et kit piston plaqué or, très bon état général, un excellent rapport qualité prix. Vendu en étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Stomvi Elite 250 ML", "photo": "media/stomvi-elite-86850.jpg", "photos": ["media/stomvi-elite-250-ml-72923.jpg", "media/stomvi-elite-250-ml-72747.jpg", "media/stomvi-elite-250-ml-73052.jpg", "media/stomvi-elite-250-ml-73163.jpg", "media/stomvi-elite-250-ml-73270.jpg", "media/stomvi-elite-250-ml-72861.jpg"], "prix": 950, "sousfamille": "Trompette SiB"},
+    {"annee": "", "desc": "Trompette haut de gamme de la marque de fabrication taïwanaise Carol Brass, modèle CTR9990 H RSM n°115841, en magnifique état, perce ML, corps en alliage à 90% de cuivre rose, la pistonnerie est comme neuve, un excellent rapport qualité / prix, vendu en étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Carol Brass CTR9990 H", "photo": "media/caroll-brass-ctr9990-h-64185.jpg", "photos": ["media/caroll-brass-ctr9990-h-81068.jpg", "media/caroll-brass-ctr9990-h-81136.jpg", "media/caroll-brass-ctr9990-h-80907.jpg", "media/caroll-brass-ctr9990-h-81254.jpg", "media/caroll-brass-ctr9990-h-81020.jpg", "media/caroll-brass-ctr9990-h-81368.jpg"], "prix": 750, "sousfamille": "Trompette SiB"},
+    {"annee": "", "desc": "La clarinette semi professionnelle la plus connue, Buffet Crampon E13 n°K187884, en état proche du neuf, entièrement retamponnée en tampons cuir blanc, avec un bois de très grande qualité, bien entretenu à l'huile, l'argenture des clés est en parfait état, vendue dans son étui d'origine avec tous les accessoires et le bec neuf.", "dispo": true, "etat": "revise", "famille": "clarinettes", "featured": false, "nom": "Buffet Crampon E13", "photo": "media/buffet-crampon-e13-59439.jpg", "photos": ["media/buffet-crampon-e13-62064.jpg", "media/buffet-crampon-e13-62205.jpg", "media/buffet-crampon-e13-62319.jpg", "media/buffet-crampon-e13-62433.jpg", "media/buffet-crampon-e13-98420.jpg"], "prix": 1100, "sousfamille": ""},
+    {"annee": "", "desc": "Le haut de gamme de la marque Jupiter, JAS1100S n°VF01142, en excellent état, argenture comme tampons, pavillon gravé et finition soignée de qualité professionnelle, les clés de paumes sont ajustable en hauteur, rapport qualité / prix imbattable pour cet alto.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Jupiter JAS 1100S", "photo": "media/jupiter-jas-1100s-1688.jpg", "photos": ["media/jupiter-jas-1100s-52106.jpg", "media/jupiter-jas-1100s-52173.jpg", "media/jupiter-jas-1100s-52228.jpg", "media/jupiter-jas-1100s-52366.jpg", "media/jupiter-jas-1100s-52292.jpg", "media/jupiter-jas-1100s-52327.jpg"], "prix": 850, "sousfamille": "Saxophone alto"},
+    {"annee": "", "desc": "Tenor d'étude Jupiter STS 787 n°805993, fabriqué à Taiwan dans les années 80, le vernis a mal passé le temps, mais l'essentiel est là : les tampons sont neufs ! Réglé, révisé et prêt à jouer dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-tenors", "featured": false, "nom": "Jupiter STS 787", "photo": "media/jupiter-sts-787-26131.jpg", "photos": ["media/jupiter-sts-787-90070.jpg", "media/jupiter-sts-787-89841.jpg", "media/jupiter-sts-787-90187.jpg", "media/jupiter-sts-787-89906.jpg", "media/jupiter-sts-787-89976.jpg", "media/jupiter-sts-787-90306.jpg", "media/jupiter-sts-787-90425.jpg"], "prix": 690, "sousfamille": "Saxophone tenor"},
+    {"annee": "1945", "desc": "Un très bon alto vintage français, SML Super 45, de 1945, n°1398, entièrement retamponné à neuf, cheminées roulées, un gros son à l'americaine, et une bonne réserve de puissance, vendu dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "SML Super 45", "photo": "media/sml-super-45-85417.jpg", "photos": ["media/sml-super-45-80877.jpg", "media/sml-super-45-80915.jpg", "media/sml-super-45-81168.jpg", "media/sml-super-45-81286.jpg", "media/sml-super-45-81022.jpg", "media/sml-super-45-81066.jpg", "media/sml-super-45-81124.jpg"], "prix": 1100, "sousfamille": "Saxophone alto"},
+    {"annee": "1975", "desc": "Saxophone soprano Selmer Mark VI n°243441, sans Fa# aigu, fait en 1975, en très bon état général, quelques marques au vernis, et les tampons sont tous récents, révisé et parfaitement prêt à jouer. Vendu dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-sopranos", "featured": false, "nom": "Selmer Mark VI 1975", "photo": "media/selmer-mark-vi-1975-75828.jpg", "photos": ["media/selmer-mark-vi-1975-74276.jpg", "media/selmer-mark-vi-1975-74250.jpg", "media/selmer-mark-vi-1975-74475.jpg", "media/selmer-mark-vi-1975-74587.jpg", "media/selmer-mark-vi-1975-74410.jpg", "media/selmer-mark-vi-1975-74705.jpg"], "prix": 2900, "sousfamille": "saxophone soprano"},
+    {"annee": "", "desc": "Saxophone soprano allemand (Made in GDR) B&S, époque \"Blue Label\" n°1398 fabriqué au milieux des années 70, entièrement retamponné à neuf, avec un bon clétage compact efficace, et une belle projection. Vendu avec bec et étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-sopranos", "featured": false, "nom": "B&S \"Blue Label\"", "photo": "media/b-s-blue-label-46237.jpg", "photos": ["media/b-s-blue-label-9962.jpg", "media/b-s-blue-label-9996.jpg", "media/b-s-blue-label-10047.jpg", "media/b-s-blue-label-10100.jpg", "media/b-s-blue-label-10146.jpg", "media/b-s-blue-label-10195.jpg"], "prix": 600, "sousfamille": "Saxophone soprano"},
+    {"annee": "", "desc": "Saxophone soprano courbé Yanagisawa SC 900 n°00161695, fait au Japon à la fin des années 90, bocal démontable, révisé à l'atelier, et en très bon état général, la marque à toujours fait parmi les meilleurs sopranos courbés modernes . Vendu dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-sopranos", "featured": false, "nom": "Yanagisawa SC900", "photo": "media/yanagisawa-sc900-63955.jpg", "photos": ["media/yanagisawa-sc900-66767.jpg", "media/yanagisawa-sc900-66958.jpg", "media/yanagisawa-sc900-67074.jpg", "media/yanagisawa-sc900-67192.jpg", "media/yanagisawa-sc900-67309.jpg", "media/yanagisawa-sc900-67426.jpg"], "prix": 2000, "sousfamille": "Saxophone soprano"},
+    {"annee": "1952", "desc": "Un très beau saxophone français vintage, Dolnet \"Imperial\" n°41783, fabriqué à Mantes la Ville en 1952, modèle \"toutes options\" avec le Fa# aigu à la main gauche, clé de trille de Sol# et de Ré# aigu, plus la clé d'ouverture du fond de tube et enfin le bocal avec micro tuner réglable pour s'accorder. Un alto en superbe état, entièrement retamponné à neuf et vendu en étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "Dolnet Imperial", "photo": "media/dolnet-imperial-65847.jpg", "photos": ["media/dolnet-imperial-62306.jpg", "media/dolnet-imperial-62045.jpg", "media/dolnet-imperial-62111.jpg", "media/dolnet-imperial-62417.jpg", "media/dolnet-imperial-62190.jpg", "media/dolnet-imperial-62237.jpg", "media/dolnet-imperial-62534.jpg"], "prix": 750, "sousfamille": "Saxophone alto"},
+    {"annee": "1969", "desc": "Un célèbre vintage français, SML Gold Medal Mark II, fait à Mantes en 1969, souvent surnommé \"Mark VI killer\" outre Atlantique, avec une grosse projection et beaucoup de personnalité, celui là est entièrement retamponné à neuf et vendu en étui moderne.", "dispo": true, "etat": "revise", "famille": "saxophones-altos", "featured": false, "nom": "SML Gold Medal MKII", "photo": "media/sml-gold-medal-mkii-71128.jpg", "photos": ["media/sml-gold-medal-mkii-97887.jpg", "media/sml-gold-medal-mkii-97711.jpg", "media/sml-gold-medal-mkii-98000.jpg", "media/sml-gold-medal-mkii-97763.jpg", "media/sml-gold-medal-mkii-97813.jpg", "media/sml-gold-medal-mkii-98115.jpg", "media/sml-gold-medal-mkii-98230.jpg"], "prix": 1700, "sousfamille": "Saxophone alto"},
+    {"annee": "", "desc": "Clarinette SiB professionnelle haut de gamme Buffet Crampon RC Prestige n°515880, du début des années 2000, avec un bois magnifique en excellent état, entièrement retamponnée à neuf en cuir blanc, et tous les lièges changés, entretien du bois à l'huile, réglée et prête à jouer, vendue dans son étui d'origine avec barillet 65mm.", "dispo": true, "etat": "revise", "famille": "clarinettes", "featured": false, "nom": "Buffet Crampon RC Prestige", "photo": "media/buffet-crampon-rc-prestige-17272.jpg", "photos": ["media/buffet-crampon-rc-prestige-96441.jpg", "media/buffet-crampon-rc-prestige-96391.jpg", "media/buffet-crampon-rc-prestige-96329.jpg", "media/buffet-crampon-rc-prestige-96290.jpg"], "prix": 2600, "sousfamille": "Clarinette SiB"},
+    {"annee": "1957", "desc": "La clarinette vintage jazz par excellence, Selmer Centered Tone n°7482, de 1957, en très bon état, tampons cuir et tous les lièges neufs, le bois a extrêmement bien vieilli, comme le clétage maillechort.", "dispo": true, "etat": "revise", "famille": "clarinettes", "featured": false, "nom": "Selmer Centered Tone", "photo": "media/selmer-centered-tone-3096.jpg", "photos": ["media/selmer-centered-tone-5155.jpg", "media/selmer-centered-tone-5033.jpg", "media/selmer-centered-tone-5275.jpg", "media/selmer-centered-tone-5117.jpg"], "prix": 900, "sousfamille": "Clarinette SiB"},
+    {"annee": "", "desc": "Clarinette d'étude en résine, Yamaha YCL 255 n°L47378, en état proche du neuf, tampons cuir neufs, clétage chromé à l'épreuve du temps, en étui d'origine avec le bec Yamaha 4C.", "dispo": true, "etat": "revise", "famille": "clarinettes", "featured": false, "nom": "Yamaha YCL 255", "photo": "media/yamaha-ycl-255-70494.jpg", "photos": ["media/yamaha-ycl-255-68026.jpg", "media/yamaha-ycl-255-68071.jpg"], "prix": 300, "sousfamille": "Clarinette SiB"},
+    {"annee": "", "desc": "Très bonne clarinette intermédiaire, Yamaha YCL 450 , un modèle semi pro fiable et efficace, le marquage du corps du haut a été partiellement effacé, mais elle est entièrement retamponnée à neuf en cuir blanc, vendue dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "clarinettes", "featured": false, "nom": "Yamaha YCL 450", "photo": "media/yamaha-ycl-450-39778.jpg", "photos": ["media/yamaha-ycl-450-58080.jpg", "media/yamaha-ycl-450-58134.jpg", "media/yamaha-ycl-450-58207.jpg", "media/yamaha-ycl-450-58274.jpg"], "prix": 580, "sousfamille": "Clarinette SiB"},
+    {"annee": "1925", "desc": "Probablement ce qu'il se faisait de mieux à l'époque, cette Conn 22B \"New York Symphony\" est entièrement plaquée or et dans un état exceptionnel. Fabriquée à Elkhart en 1925, c'est une belle piece de collection, comme de jeu, avec ses pistons en excellent état et sa belle projection typique des Conn. Le pavillon entier est magnifiquement gravé à la main, avec même le détail poussé jusqu'au nacres serties sous les dessous de pistons. Vendue dans l'étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Conn 22B New York Symphony", "photo": "media/conn-22b-new-york-symphony-33929.jpg", "photos": ["media/conn-22b-new-york-symphony-25426.jpg", "media/conn-22b-new-york-symphony-25158.jpg", "media/conn-22b-new-york-symphony-25538.jpg", "media/conn-22b-new-york-symphony-25655.jpg", "media/conn-22b-new-york-symphony-25333.jpg", "media/conn-22b-new-york-symphony-25278.jpg", "media/conn-22b-new-york-symphony-25715.jpg", "media/conn-22b-new-york-symphony-25399.jpg"], "prix": 1600, "sousfamille": "Trompette Sib"},
+    {"annee": "1952", "desc": "une autre trompette pro vintage legendaire, King Liberty n°324260 faite à Cleveland en 1952, un des modeles jazz de reference de l'age d'or americain. Le vernis a bien tenu dans l'ensemble sur cette trompette dont les pistons sont comme neufs. Vendue en étui moderne.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "King Liberty", "photo": "media/king-liberty-18822.jpg", "photos": ["media/king-liberty-71639.jpg", "media/king-liberty-71680.jpg", "media/king-liberty-71720.jpg", "media/king-liberty-71785.jpg", "media/king-liberty-71987.jpg", "media/king-liberty-71860.jpg", "media/king-liberty-72060.jpg"], "prix": 950, "sousfamille": "Trompette Sib"},
+    {"annee": "1924", "desc": "Belle trompette pro vintage Holton, modèle Révélation n°80548, entièrement plaquée or, et fabriquée à Elkhorn en 1925. Un modèle qui a participé à poser les bases des trompettes futures, perce ML, elle est excellent état général. Tout le pavillon est magnifiquement gravé à la main, jusqu'à l'interieur. Les pistons sont en très bon état ainsi que son étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Holton Révélation", "photo": "media/holton-revelation-25082.jpg", "photos": ["media/holton-revelation-88221.jpg", "media/holton-revelation-88252.jpg", "media/holton-revelation-88489.jpg", "media/holton-revelation-88424.jpg", "media/holton-revelation-88315.jpg", "media/holton-revelation-88367.jpg", "media/holton-revelation-88150.jpg"], "prix": 1100, "sousfamille": "Trompette Sib"},
+    {"annee": "1968", "desc": "Une belle trompette peu commune, entre vintage et moderne, Holton T-500 modèle \"Al Hirt Spécial\" n°457806 (1968), développée dans les années 60 en collaboration avec le célèbre jazzmen, avec de superbes finitions comme le visage du trompettiste sur la coulisse d'accord, ou la branche et les coulisses en maillechort pour sa robustesse, un instrument à essayer ! Vendue dans son étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Holton \"Al Hirt spécial\"", "photo": "media/holton-al-hirt-special-62895.jpg", "photos": ["media/holton-al-hirt-special-53794.jpg", "media/holton-al-hirt-special-53662.jpg", "media/holton-al-hirt-special-53696.jpg", "media/holton-al-hirt-special-53906.jpg", "media/holton-al-hirt-special-53738.jpg", "media/holton-al-hirt-special-54014.jpg", "media/holton-al-hirt-special-53477.jpg"], "prix": 900, "sousfamille": "Trompette Sib"},
+    {"annee": "2009", "desc": "Probablement une des dernieres 84A fabriquées, cette Selmer Chorus porte le numéro 106651, pavillon 703 comme la 80J, entièrement en laiton brut d'origine avec les tubes en maillechort, très peu usée, les pistons sont comme neufs, un renfort a quand même été rajouté sur le coude du pavillon. Vendue en étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Selmer Chorus 84A", "photo": "media/selmer-chorus-84a-91684.jpg", "photos": ["media/selmer-chorus-84a-76487.jpg", "media/selmer-chorus-84a-76530.jpg", "media/selmer-chorus-84a-76587.jpg", "media/selmer-chorus-84a-76733.jpg", "media/selmer-chorus-84a-76672.jpg", "media/selmer-chorus-84a-76840.jpg"], "prix": 900, "sousfamille": "Trompette en Sib"},
+    {"annee": "1950", "desc": "Petite trompette en Ut, Couesnon Monopole Conservatoire n°1469, modèle haut de gamme de l'époque, autour de 1950, excellent rapport qualité / prix. Vendue en étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Couesnon Monopole Conservatoire", "photo": "media/couesnon-monopole-conservatoire-94588.jpg", "photos": ["media/couesnon-monopole-conservatoire-21375.jpg", "media/couesnon-monopole-conservatoire-21420.jpg", "media/couesnon-monopole-conservatoire-21460.jpg", "media/couesnon-monopole-conservatoire-21529.jpg", "media/couesnon-monopole-conservatoire-21649.jpg", "media/couesnon-monopole-conservatoire-21592.jpg"], "prix": 250, "sousfamille": "Trompette en Ut"},
+    {"annee": "1990", "desc": "Magnifique trompette Selmer en Ut, n°81302, en superbe état, pavillon \"703\", des pistons très bien conservés, faite autour de 1990, vendue en étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Selmer en Ut", "photo": "media/selmer-en-ut-39783.jpg", "photos": ["media/selmer-en-ut-71073.jpg", "media/selmer-en-ut-71116.jpg", "media/selmer-en-ut-71273.jpg", "media/selmer-en-ut-71180.jpg", "media/selmer-en-ut-71380.jpg", "media/selmer-en-ut-71491.jpg", "media/selmer-en-ut-71603.jpg"], "prix": 580, "sousfamille": "Trompette en Ut"},
+    {"annee": "1956", "desc": "Une excellente trompette pro vintage, Conn modèle 6B Victor \"Early model\" n°639104, faite à Elkhart en 1956, avec les matériaux les plus robustes, comme le revêtement indestructible des pistons, ou le nickel du bloc entier, elle offre des possibilités impressionnantes dans presque tous les registres. Vendu en étui moderne.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Conn 6B \"Victor\"", "photo": "media/conn-6b-victor-28202.jpg", "photos": ["media/conn-6b-victor-9113.jpg", "media/conn-6b-victor-9160.jpg", "media/conn-6b-victor-9054.jpg", "media/conn-6b-victor-8984.jpg", "media/conn-6b-victor-9273.jpg", "media/conn-6b-victor-9380.jpg", "media/conn-6b-victor-64287.jpg"], "prix": 920, "sousfamille": "Trompette en Sib"},
+    {"annee": "1972", "desc": "Petite trompette piccolo professionnelle Antoine Courtois n°26122, de 1972, 4 pistons, en très bon état général et vendu en étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Antoine Courtois piccolo", "photo": "media/antoine-courtois-piccolo-36099.jpg", "photos": ["media/antoine-courtois-piccolo-29935.jpg", "media/antoine-courtois-piccolo-29980.jpg", "media/antoine-courtois-piccolo-30045.jpg", "media/antoine-courtois-piccolo-30106.jpg", "media/antoine-courtois-piccolo-30164.jpg", "media/antoine-courtois-piccolo-30205.jpg", "media/antoine-courtois-piccolo-30257.jpg"], "prix": 750, "sousfamille": "Trompette piccolo Sib"},
+    {"annee": "1998", "desc": "Surprenante trompette americaine semi professionnelle (++) Getzen 590S Capri n°R32863, faite à Elkhorn USA en 1998, très bien finie et robuste avec les fameux pistons garantis à vie par Getzen, inépuisables, qui donne une étanchéité du bloc comme aux premiers jours. Comme les trompettes pro, elle est équipée du trigger de premier piston. Vendue dans l'étui d'origine.", "dispo": true, "etat": "revise", "famille": "trompettes", "featured": false, "nom": "Getzen Capri 590S", "photo": "media/getzen-capri-590s-40302.jpg", "photos": ["media/getzen-capri-590s-53147.jpg", "media/getzen-capri-590s-53259.jpg", "media/getzen-capri-590s-53365.jpg", "media/getzen-capri-590s-53475.jpg", "media/getzen-capri-590s-53589.jpg", "media/getzen-capri-590s-53112.jpg", "media/getzen-capri-590s-53703.jpg"], "prix": 1000, "sousfamille": "Trompette Sib"},
+    {"annee": "1996", "desc": "Un cornet à pistons semi professionnel, de grande qualité, Getzen 580 Capri n°R20715 de 1996, en état proche de neuf, toujours aussi robuste grâce aux pistons garantis à vie de Getzen, l'accent à vraiment été mis sur la recherche de chaleur et de rondeur pour cet instrument. En étui rigide d'origine.", "dispo": true, "etat": "revise", "famille": "cornets", "featured": false, "nom": "Getzen Capri 580", "photo": "media/getzen-capri-580-63868.jpg", "photos": ["media/getzen-capri-580-36654.jpg", "media/getzen-capri-580-36427.jpg", "media/getzen-capri-580-36498.jpg", "media/getzen-capri-580-36534.jpg", "media/getzen-capri-580-36779.jpg", "media/getzen-capri-580-36602.jpg"], "prix": 700, "sousfamille": "Cornet Sib"},
+    {"annee": "1965", "desc": "Peut être le modèle de cornet le plus légendaire, Conn Connstellation 38A n°E87580, en excellent état, fabriqué à Elkhart USA en 1965, perce large, corps nickelé à l'épreuve du temps, comme le revêtement des pistons, la meilleure façon d'allier la puissance au velouté. Vendu dans l'étui rigide d'origine.", "dispo": true, "etat": "revise", "famille": "cornets", "featured": false, "nom": "Conn Connstellation 38A", "photo": "media/conn-connstellation-38a-95310.jpg", "photos": ["media/conn-connstellation-38a-40604.jpg", "media/conn-connstellation-38a-40673.jpg", "media/conn-connstellation-38a-40915.jpg", "media/conn-connstellation-38a-40755.jpg", "media/conn-connstellation-38a-41037.jpg", "media/conn-connstellation-38a-40827.jpg", "media/conn-connstellation-38a-40882.jpg"], "prix": 1100, "sousfamille": "Cornet Sib"},
+    {"annee": "1968", "desc": "Un autre vintage bien connu, The Martin Committe III n°311936 fait à Elkhart USA autour de 1968, entièrement refait à neuf, tampons lièges feutres ressorts.. Le son gras et puissant, typique des barytons americains, vendu avec bec et étui d'origine.", "dispo": true, "etat": "revise", "famille": "saxophones-barytons", "featured": false, "nom": "The Martin Committe III", "photo": "media/martin-committe-iii-79635.jpg", "photos": ["media/the-martin-committe-iii-40017.jpg", "media/the-martin-committe-iii-39736.jpg", "media/the-martin-committe-iii-39767.jpg", "media/the-martin-committe-iii-39823.jpg", "media/the-martin-committe-iii-40132.jpg", "media/the-martin-committe-iii-40238.jpg", "media/the-martin-committe-iii-39960.jpg", "media/the-martin-committe-iii-39926.jpg"], "prix": 2700, "sousfamille": "Saxophone baryton"},
+    {"annee": "1925", "desc": "Saxophone basse en Sib, Couesnon Monopole n°37336 fait en 1925, entièrement refait à neuf, conçu à la base avec une double clé d'octave, il à été modifié en usine pour lui installer un systeme Selmer moderne de clé automatique . Vendu en étui compacte, neuf, à roulette.", "dispo": true, "etat": "revise", "famille": "saxophones-basses", "featured": false, "nom": "Couesnon Monopole", "photo": "media/couesnon-monopole-77812.jpg", "photos": ["media/couesnon-monopole-60635.jpg", "media/couesnon-monopole-60742.jpg", "media/couesnon-monopole-60524.jpg", "media/couesnon-monopole-60851.jpg", "media/couesnon-monopole-60555.jpg", "media/couesnon-monopole-60960.jpg", "media/couesnon-monopole-61067.jpg"], "prix": 5000, "sousfamille": "Saxophone basse"},
+    {"annee": "", "desc": "Cornet d'étude Yamaha YCR 2300 série II n°668970 fait au japon au milieux des années 90, fiable et réputé, c'est l'ideal pour les débutants, le vernis montre du vecu mais les pistons sont en parfait état. Vendu en étui d'origine avec embouchure.", "dispo": true, "etat": "revise", "famille": "cornets", "featured": false, "nom": "Yamaha YCR 2330 II", "photo": "media/yamaha-ycr-2330-ii-51978.jpg", "photos": ["media/yamaha-ycr-2330-ii-47045.jpg", "media/yamaha-ycr-2330-ii-46857.jpg", "media/yamaha-ycr-2330-ii-47487.jpg", "media/yamaha-ycr-2330-ii-47158.jpg", "media/yamaha-ycr-2330-ii-47375.jpg", "media/yamaha-ycr-2330-ii-47264.jpg", "media/yamaha-ycr-2330-ii-47010.jpg"], "prix": 380, "sousfamille": "Cornet en Sib"},
+    {"annee": "1980", "desc": "Le haut de gamme de l'époque, et un des cornets français les plus réputés, Antoine Courtois \"Bandmaster\" model n°311936, fait autour de 1980, avec les é trigger 1er et 3eme pistons, le vernis est usé mais toute la mécanique et les pistons sont en excellente santé. En étui d'origine.", "dispo": true, "etat": "revise", "famille": "cornets", "featured": false, "nom": "Antoine Courtois Bandmaster", "photo": "media/antoine-courtois-bandmaster-94952.jpg", "photos": ["media/antoine-courtois-bandmaster-24946.jpg", "media/antoine-courtois-bandmaster-24988.jpg", "media/antoine-courtois-bandmaster-25350.jpg", "media/antoine-courtois-bandmaster-25066.jpg", "media/antoine-courtois-bandmaster-25463.jpg", "media/antoine-courtois-bandmaster-25244.jpg", "media/antoine-courtois-bandmaster-25144.jpg"], "prix": 500, "sousfamille": "Cornet pro en Sib"},
+    {"annee": "1978", "desc": "Euphonium haut de gamme Conn 4I n°GH880078 fait en 1978, à 4 pistons en ligne et pavillon frontal, parfait pour la musique de rue par exemple, il offre une grande nuance de sons, piano ou forte, en très bon état général, le vernis a réussi à survivre en partie au temps. Vendu dans l'étui d'origine.", "dispo": true, "etat": "revise", "famille": "vent", "featured": false, "nom": "Conn 4I", "photo": "media/conn-4i-58464.jpg", "photos": ["media/conn-4i-55482.jpg", "media/conn-4i-55136.jpg", "media/conn-4i-55594.jpg", "media/conn-4i-55275.jpg", "media/conn-4i-55334.jpg", "media/conn-4i-55365.jpg", "media/conn-4i-55709.jpg", "media/conn-4i-55826.jpg", "media/conn-4i-55932.jpg"], "prix": 1200, "sousfamille": "Euphonium Sib"},
+    {"annee": "1925", "desc": "Euphonium Boosey & Co. 4 pistons compensés \"Class A\" n°124243", "dispo": true, "etat": "revise", "famille": "tubas", "featured": false, "nom": "Boosey & Co. 4 pistons compensés", "photo": "", "photos": [], "prix": 1400, "sousfamille": "Euphonium Sib"}
   ],
   "realisations": [
-    {
-      "id": "",
-      "titre": "Saxo restauré",
-      "avant": "assets/img/realisation-avant-89669.jpg",
-      "apres": "assets/img/realisation-apres-98097.jpg",
-      "texte": "Texte example de ce qui a été fait"
-    },
-    {
-      "id": "",
-      "titre": "Trompette",
-      "avant": "assets/img/realisation-avant-79090.jpg",
-      "apres": "assets/img/realisation-apres-93894.jpg",
-      "texte": "trompette restaurée"
-    }
+    {"apres": "media/realisation-apres-76760.jpg", "avant": "media/realisation-avant-66966.jpg", "id": "rmuqznmrk0", "texte": "Nettoyage, soudure, défaussage, ré-argenture.", "titre": "Restauration d'un tenor SML Gold Medal"},
+    {"apres": "media/realisation-apres-4597.jpg", "avant": "media/realisation-avant-98455.jpg", "id": "rmuqznmrk1", "texte": "Soudure à l'argent et création d'une nouvelle touche", "titre": "Réfection d'une clé de saxo baryton très moche"},
+    {"apres": "media/realisation-apres-96507.jpg", "avant": "media/realisation-avant-72289.jpg", "id": "rmuqznmrk2", "texte": "Nettoyage complet, débosselage, ré-argenture de l'instrument, sans polissage préalable, pour la remettre comme au premier jour.", "titre": "Restauration complete d'une trompette Selmer \"Radial\""}
   ]
 }
