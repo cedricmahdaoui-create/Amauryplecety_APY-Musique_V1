@@ -1,5 +1,130 @@
 {
+  "articles": [],
+  "families": [
+    {
+      "id": "vent",
+      "label": "Instrument à vent"
+    },
+    {
+      "id": "cordes",
+      "label": "Cordes — quatuor"
+    },
+    {
+      "id": "percussion",
+      "label": "Percussion"
+    },
+    {
+      "id": "accessoire",
+      "label": "Accessoire / pièce"
+    },
+    {
+      "id": "claviers",
+      "label": "Claviers"
+    },
+    {
+      "id": "saxophones-altos",
+      "label": "Saxophones altos"
+    },
+    {
+      "id": "saxophones-tenors",
+      "label": "Saxophones tenors"
+    },
+    {
+      "id": "saxophones-sopranos",
+      "label": "Saxophones sopranos"
+    },
+    {
+      "id": "saxophones-barytons",
+      "label": "Saxophones barytons"
+    },
+    {
+      "id": "clarinettes",
+      "label": "Clarinettes"
+    },
+    {
+      "id": "trompettes",
+      "label": "Trompettes"
+    },
+    {
+      "id": "saxophones",
+      "label": "Saxophones"
+    },
+    {
+      "id": "cornets",
+      "label": "Cornets"
+    },
+    {
+      "id": "saxophones-basses",
+      "label": "Saxophones basses"
+    },
+    {
+      "id": "tubas",
+      "label": "Tubas"
+    }
+  ],
   "instruments": [
+    {
+      "annee": "1988",
+      "desc": "Saxophone alto professionnel Buffet Crampon, modèle haut de gamme Prestige, n°39429, fabriqué en 1988, dans un magnifique état, entièrement retamponné à neuf, nettoyé, révisé et réglé. Le corps est en cuivre rose, les clés vernies, pavillon gravé à la main, un très bon confort de jeu grâce à son ergonomie et sa facilité d'émission, et un son plein de personnalité qui change du Selmer, avec une bonne réserve de puissance. Vendu dans son étui d'origine",
+      "dispo": true,
+      "etat": "revise",
+      "famille": "saxophones-altos",
+      "featured": false,
+      "nom": "Buffet Crampon Prestige",
+      "photo": "media/instrument-8947.jpg",
+      "photos": [
+        "media/instrument-34226.jpg",
+        "media/instrument-33981.jpg",
+        "media/instrument-34023.jpg",
+        "media/instrument-34070.jpg",
+        "media/instrument-34119.jpg",
+        "media/instrument-62929.jpg"
+      ],
+      "prix": 2900,
+      "sousfamille": "Saxophone alto"
+    },
+    {
+      "annee": "1991",
+      "desc": "Saxophone alto Julius Keilwerth, modèle intermédiaire ST90 série IV, n°100313, fabriqué en Allemagne au début des années 90. Une valeur sûre, robuste, avec l'ergonomie moderne très efficace, avec le gros son puissant Keilwerth. Instrument en excellent état, vernis comme tampons, révisé, prêt à jouer et vendu dans son étui d'origine.",
+      "dispo": true,
+      "etat": "revise",
+      "famille": "saxophones-altos",
+      "featured": false,
+      "nom": "Julius Keilwerth ST90 Série IV",
+      "photo": "media/julius-keilwerth-st90-serie-iv-5140.jpg",
+      "photos": [
+        "media/julius-keilwerth-st90-serie-iv-30283.jpg",
+        "media/julius-keilwerth-st90-serie-iv-30319.jpg",
+        "media/julius-keilwerth-st90-serie-iv-30542.jpg",
+        "media/julius-keilwerth-st90-serie-iv-30246.jpg",
+        "media/julius-keilwerth-st90-serie-iv-30365.jpg",
+        "media/julius-keilwerth-st90-serie-iv-30426.jpg",
+        "media/julius-keilwerth-st90-serie-iv-49767.jpg"
+      ],
+      "prix": 990,
+      "sousfamille": "Saxophone alto"
+    },
+    {
+      "annee": "1942",
+      "desc": "Un des modèles vintage américains de légende, le célèbre King Zephyr, n°237428, entièrement refait à neuf, corps déverni, bocal à double emboitement parfaitement étanche. Une projection unique du son, avec la chaleur typique des saxs américains de cette age d'or. Vendu en étui moderne neuf.",
+      "dispo": true,
+      "etat": "revise",
+      "famille": "saxophones-altos",
+      "featured": false,
+      "nom": "King Zephyr",
+      "photo": "media/king-zephyr-62571.jpg",
+      "photos": [
+        "media/king-zephyr-50860.jpg",
+        "media/king-zephyr-50665.jpg",
+        "media/king-zephyr-51081.jpg",
+        "media/king-zephyr-50976.jpg",
+        "media/king-zephyr-51193.jpg",
+        "media/king-zephyr-50829.jpg",
+        "media/king-zephyr-51301.jpg"
+      ],
+      "prix": 1500,
+      "sousfamille": "Saxophone alto"
+    },
     {
       "nom": "Saxophone alto Selmer Série III",
       "famille": "vent",
