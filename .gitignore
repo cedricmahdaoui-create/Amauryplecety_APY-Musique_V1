@@ -29,3 +29,6 @@ agent-sites-desuets/.env
 
 # Artefact généré par `netlify dev` (bundling des fonctions)
 deno.lock
+
+# Données du catalogue gérées par la page admin en production
+assets/data/catalogue.json
