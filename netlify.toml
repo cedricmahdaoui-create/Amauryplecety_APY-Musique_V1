@@ -1,6 +1,7 @@
 # Déploiement Netlify — APY Musique
 [build]
   publish = "."
+  post_build = "npm run post-build"
 
 [functions]
   directory = "netlify/functions"
