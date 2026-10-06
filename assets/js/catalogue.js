@@ -217,7 +217,7 @@
     foot.className = "cat-card-foot";
     var p = document.createElement("span");
     p.className = "cat-card-price";
-    p.textContent = it.prix > 0 ? prix(it.prix) + " · à confirmer" : "Prix sur demande";
+    p.textContent = it.prix > 0 ? prix(it.prix) : "Prix sur demande";
     foot.appendChild(p);
     var a = document.createElement("a");
     a.className = "btn btn--ghost";
