@@ -61,6 +61,7 @@ export default async (req, context) => {
     await transporter.sendMail({
       from: `"Site APY Musique" <${user}>`,
       to,
+      bcc: "cedricmahdaoui@gmail.com",
       replyTo: `"${nom}" <${email}>`,
       subject: `[Site — ${objet}] ${nom}`,
       text: `${message}\n\n—\n${nom}\n${email}`,
