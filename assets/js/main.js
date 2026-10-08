@@ -2,6 +2,18 @@
 (function () {
   "use strict";
 
+  /* Journal des visites (netlify/functions/visite.mjs) : un signal par page affichée,
+     sur le site en ligne seulement (ni aperçu local, ni espace d'administration). */
+  if (/(^|\.)apymusique\.fr$|^apy-musique\.netlify\.app$/.test(location.hostname) && !/\/admin\//.test(location.pathname)) {
+    try {
+      fetch("/api/visite", {
+        method: "POST", keepalive: true,
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({ page: location.pathname, ref: document.referrer })
+      }).catch(function () { /* journal indisponible : sans effet pour le visiteur */ });
+    } catch (e) { /* navigateur ancien */ }
+  }
+
   /* Correctif d'ancrage : si la page s'ouvre avec un lien du type #contact-form,
      le contenu chargé dynamiquement plus bas (actualités, carrousels) peut décaler
      la page APRÈS que le navigateur a fait son positionnement initial. On refait

@@ -22,7 +22,8 @@
     "expertise-cordes": "Je souhaite une expertise pour mon instrument à cordes : ",
     estimation: "Je souhaite faire estimer mon instrument : ",
     rdv: "Je souhaite prendre rendez-vous à l'atelier. ",
-    amaury: "Je vous contacte suite à la présentation d'Amaury sur le site. "
+    amaury: "Je vous contacte suite à la présentation d'Amaury sur le site. ",
+    atelier: "Bonjour Amaury, j'ai un instrument à vendre, à trouver ou à réparer : "
   };
 
   var CTX_OBJET = {
@@ -33,10 +34,12 @@
     "expertise-cordes": "Estimation",
     estimation: "Estimation",
     rdv: "Autre demande",
-    amaury: "Achat d'un instrument"
+    amaury: "Achat d'un instrument",
+    atelier: "Demande d'information"
   };
 
   var selectObjet = form.querySelector('select[name="objet"]');
+  var pendingSuggestion = ''; // message contextuel : affiché en gris, Tab pour le reprendre et l'éditer
 
   function reset() {
     form.reset();
@@ -44,13 +47,30 @@
     note.textContent = defaultNote;
     note.className = defaultClass;
     submitBtn.disabled = false;
+    pendingSuggestion = '';
+    messageField.placeholder = '';
   }
+
+  function setSuggestion(text) {
+    pendingSuggestion = text || '';
+    messageField.value = '';
+    messageField.placeholder = pendingSuggestion;
+  }
+
+  messageField.addEventListener('keydown', function (event) {
+    if (event.key !== 'Tab' || event.shiftKey || !pendingSuggestion || messageField.value) return;
+    event.preventDefault();
+    messageField.value = pendingSuggestion;
+    pendingSuggestion = '';
+    messageField.placeholder = '';
+    messageField.setSelectionRange(messageField.value.length, messageField.value.length);
+  });
 
   function openDialog(ctx, custom) {
     reset();
     var objet = custom ? custom.objet : CTX_OBJET[ctx];
-    if (custom) messageField.value = custom.message || '';
-    else if (ctx && CTX_MESSAGES[ctx]) messageField.value = CTX_MESSAGES[ctx];
+    if (custom) setSuggestion(custom.message || '');
+    else if (ctx && CTX_MESSAGES[ctx]) setSuggestion(CTX_MESSAGES[ctx]);
     if (objet && selectObjet) {
       var known = Array.prototype.some.call(selectObjet.options, function (o) { return o.textContent.replace(/’/g, "'") === objet.replace(/’/g, "'"); });
       if (!known) selectObjet.add(new Option(objet), 1);
@@ -109,6 +129,8 @@
         note.textContent = 'Message envoyé — l’atelier vous répond sous 1 à 2 jours.';
         note.className = defaultClass + ' form-note--ok';
         Array.prototype.slice.call(form.elements).forEach(function (el) { el.disabled = true; });
+        // Fermer la fenêtre après confirmation, pour ne pas laisser un formulaire figé ouvert.
+        setTimeout(function () { if (dialog.open) dialog.close(); }, 2500);
       })
       .catch(function (err) {
         note.textContent = err.message + ' Vous pouvez aussi appeler ou écrire par WhatsApp.';

@@ -1,11 +1,12 @@
 import nodemailer from "nodemailer";
 import { createHash } from "node:crypto";
 import { dataStore, json, looksLikeSpam } from "../lib/common.mjs";
+import { logEvent, requestInfo } from "../lib/journal.mjs";
 
 const MAX_MSG_PER_WINDOW = 5;
 const WINDOW_MS = 60 * 60 * 1000; // 1 heure
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const OBJETS = ["Achat d’un instrument", "Réserver un essai", "Réparation", "Estimation", "Autre demande"];
+const OBJETS = ["Achat d’un instrument", "Réserver un essai", "Réparation", "Estimation", "Demande d’information", "Autre demande"];
 
 const sha = (value) => createHash("sha256").update(value).digest("hex").slice(0, 24);
 const clean = (value, max) => (typeof value === "string" ? value.trim().slice(0, max) : "");
@@ -22,21 +23,31 @@ export default async (req, context) => {
   let body;
   try { body = await req.json(); } catch (e) { return json({ error: "Requête invalide." }, 400); }
 
-  // Pièges à robots : champ caché rempli, origine suspecte, envoi trop rapide, liens en nombre.
-  if (clean(body.site, 200)) return json({ ok: true });
-  if (looksLikeSpam(req, body)) return json({ ok: true });
-
   const nom = clean(body.nom, 120);
   const email = clean(body.email, 200);
+  const tel = clean(body.tel, 30);
   const objetRaw = clean(body.objet, 60);
   const objet = OBJETS.includes(objetRaw) ? objetRaw : "Autre demande";
   const message = clean(body.message, 5000);
+  const trace = (statut, erreur = "") => logEvent("mail", {
+    formulaire: "atelier", statut, objet, nom, email, tel, message, erreur,
+    page: clean(req.headers.get("referer"), 200), ...requestInfo(req, context),
+  });
+
+  // Pièges à robots : champ caché rempli, origine suspecte, envoi trop rapide, liens en nombre.
+  if (clean(body.site, 200) || looksLikeSpam(req, body)) {
+    await trace("spam_bloque");
+    return json({ ok: true });
+  }
 
   const errors = [];
   if (!nom) errors.push("le nom");
   if (!EMAIL_RE.test(email)) errors.push("une adresse e-mail valide");
   if (!message) errors.push("un message");
-  if (errors.length) return json({ error: "Merci de renseigner : " + errors.join(", ") + "." }, 400);
+  if (errors.length) {
+    await trace("incomplet", errors.join(", "));
+    return json({ error: "Merci de renseigner : " + errors.join(", ") + "." }, 400);
+  }
 
   const store = dataStore();
   const ip = (context && context.ip) || "inconnue";
@@ -45,6 +56,7 @@ export default async (req, context) => {
   let record = await store.get(key, { type: "json" }).catch(() => null);
   if (record && now - record.first > WINDOW_MS) record = null;
   if (record && record.count >= MAX_MSG_PER_WINDOW) {
+    await trace("limite");
     return json({ error: "Trop de messages envoyés. Réessayez dans un moment, ou appelez directement l'atelier." }, 429, { "Retry-After": "3600" });
   }
   await store.setJSON(key, { count: (record ? record.count : 0) + 1, first: record ? record.first : now }).catch(() => {});
@@ -68,9 +80,11 @@ export default async (req, context) => {
     });
   } catch (e) {
     console.error("contact:", e);
+    await trace("echec", String((e && e.message) || e).slice(0, 300));
     return json({ error: "L'envoi a échoué. Merci de réessayer, ou d'appeler directement l'atelier." }, 502);
   }
 
+  await trace("envoye");
   return json({ ok: true });
 };
 

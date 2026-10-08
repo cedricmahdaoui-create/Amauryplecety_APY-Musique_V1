@@ -32,7 +32,7 @@ export const safeHeaders = SAFE_HEADERS;
 
 const sha = (value) => createHash("sha256").update(value).digest();
 
-const ALLOWED_ORIGINS = ["https://apymusique.fr", "https://www.apymusique.fr", "https://apy-musique.netlify.app"];
+export const ALLOWED_ORIGINS =["https://apymusique.fr", "https://www.apymusique.fr", "https://apy-musique.netlify.app"];
 const MIN_FORM_MS = 2500; // en dessous, quasi certainement un robot (rempli+envoyé trop vite).
 
 /**
@@ -67,10 +67,10 @@ const WINDOW_MS = 15 * 60 * 1000;
  * Renvoie une Response d'erreur si l'accès est refusé, ou null si tout est bon.
  * Échoue "fermé" : sans ADMIN_PASSWORD défini côté serveur, aucun accès n'est possible.
  */
-export async function requireAdmin(req, context) {
-  const expected = process.env.ADMIN_PASSWORD;
+export async function requireAdmin(req, context, envName = "ADMIN_PASSWORD") {
+  const expected = process.env[envName];
   if (!expected) {
-    return json({ error: "L'administration en ligne n'est pas encore activée (mot de passe non défini sur le serveur)." }, 503);
+    return json({ error: "Cet espace n'est pas encore activé (mot de passe " + envName + " non défini sur le serveur)." }, 503);
   }
 
   const store = dataStore();

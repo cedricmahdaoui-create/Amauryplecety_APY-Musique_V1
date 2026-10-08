@@ -936,8 +936,6 @@ address { font-style: normal; }
 }
 .contact-map .map-cta svg { width: 16px; height: 16px; }
 .contact-map:hover .map-cta { background: #241812; color: #fff; }
-.contact-form-card { margin-bottom: 1rem; }
-.contact-form-card h3 { margin-top: 0; margin-bottom: 0.5rem; }
 .contact-map-container { margin-top: 2rem; }
 .contact-map--small { aspect-ratio: 16 / 9; max-width: 400px; width: 100%; }
 .map-actions { display: flex; }
@@ -1633,7 +1631,7 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
   .home #a-la-une { padding-top: calc(clamp(1.5rem, 3vw, 2.5rem) + 14px); }
 }
 .home .service, .home .spotlight, .home .review-summary, .home .hours,
-.home .contact-form-card, .home .cta-band {
+.home .cta-band {
   background: linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
   border: 1px solid rgba(220,198,150,.20);
   border-radius: 18px;
@@ -1642,7 +1640,6 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
   box-shadow: inset 0 1px 0 rgba(255,255,255,.045), 0 18px 50px rgba(0,0,0,.2);
 }
 .home .spotlight { border-left: 3px solid #dfb748; }
-.home .contact-form-card { padding: clamp(1.4rem, 3vw, 2.2rem); }
 .home .story-portrait { border-color: #3d2f1f; box-shadow: 0 20px 55px rgba(0,0,0,.35); }
 .home .gallery figure { background: rgba(255,255,255,.035); border: 1px solid #2e2214; border-radius: 12px; }
 .home .gallery .frame { background: #111114; }
@@ -1657,8 +1654,11 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
 .home .btn--ghost { background: rgba(255,255,255,.025); color: #ead39c; border-color: #655638; }
 .home .btn--ghost:hover { background: #252119; color: #fff1ca; }
 .home a:not(.btn):hover { color: #f5d98a; }
-.home .cta-band h2 { color: #f5f1e9; }
-.home .cta-band p { color: #c4bfb6; }
+/* Vignette « Écrire à l’atelier » de la section Contact (accueil). */
+.home .cta-band { margin-bottom: 1rem; padding: clamp(1.4rem, 3vw, 2.2rem); text-align: left; }
+.home .cta-band h3 { font-size: 1.3rem; font-weight: 700; line-height: 1.15; margin: 0 0 .5rem; color: #f5f1e9; }
+.home .cta-band p { color: #c4bfb6; max-width: none; margin: 0 0 1rem; }
+.home .cta-band .btn { margin-top: 0; }
 .home .site-footer { background: #120b07; color: #b7b2aa; border-top: 1px solid #2e2214; }
 .home .site-footer h2 { color: #dfb748; }
 .home .footer-legal { color: #aaa49b; }
@@ -1941,6 +1941,14 @@ body:has(.breadcrumb) .section::before { background: radial-gradient(ellipse at 
 .admin-login-back { justify-self: center; font-size: .9rem; }
 .admin-history { display: grid; gap: .7rem; padding-top: .8rem; max-width: 34rem; }
 .admin-history select { padding: .6rem .7rem; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--ivory); color: var(--text); font: inherit; }
+.admin-journal-filters { display: flex; flex-wrap: wrap; align-items: end; gap: .7rem; padding-top: .8rem; }
+.admin-journal-filters label { display: grid; gap: .3rem; font-size: .9rem; }
+.admin-journal-filters select, .admin-journal-filters input { padding: .5rem .6rem; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--ivory); color: var(--text); font: inherit; }
+.admin-journal-wrap { overflow-x: auto; margin-top: .6rem; }
+.admin-journal { width: 100%; min-width: 60rem; border-collapse: collapse; font-size: .85rem; }
+.admin-journal th, .admin-journal td { padding: .4rem .6rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.admin-journal td { max-width: 18rem; overflow-wrap: break-word; }
+.admin-journal td:first-child, .admin-journal td:last-child { white-space: nowrap; }
 
 /* <picture> (variantes WebP) : aucune boîte propre, la mise en page reste celle de l'<img>. */
 picture { display: contents; }

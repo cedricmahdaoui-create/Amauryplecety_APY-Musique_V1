@@ -1,8 +1,8 @@
-/* Fenêtre « Écrire à l'éditeur du site » : ouverte depuis le crédit SpectrumIA du
+/* Fenêtre « Écrire à l'éditeur du site » : ouverte depuis le crédit « Cédric » du
    pied de page (toutes les pages) et depuis le lien « droit au retrait d'information »
    de la politique de confidentialité. L'objet est imposé par le lien cliqué et n'est
-   pas modifiable par le visiteur. Le message peut être pré-rempli (ex. depuis le
-   crédit SpectrumIA) mais reste librement modifiable par le visiteur. */
+   pas modifiable par le visiteur. Le message contextuel (ex. depuis le crédit du pied
+   de page) s'affiche en gris ; Tab le reprend pour l'éditer. */
 (function () {
   "use strict";
   var dialog = document.getElementById("editeur-dialog");
@@ -16,6 +16,8 @@
   var defaultClass = note.className;
   var openers = document.querySelectorAll("[data-editeur-objet]");
   var openedAt = 0; // anti-spam : mesuré depuis l'ouverture de la fenêtre, pas le chargement de la page.
+  var messageField = form.querySelector('textarea[name="message"]');
+  var pendingSuggestion = ""; // message contextuel : affiché en gris, Tab pour le reprendre et l'éditer
 
   function reset() {
     form.reset();
@@ -23,7 +25,18 @@
     note.textContent = defaultNote;
     note.className = defaultClass;
     submitBtn.disabled = false;
+    pendingSuggestion = "";
+    if (messageField) messageField.placeholder = "";
   }
+
+  if (messageField) messageField.addEventListener("keydown", function (event) {
+    if (event.key !== "Tab" || event.shiftKey || !pendingSuggestion || messageField.value) return;
+    event.preventDefault();
+    messageField.value = pendingSuggestion;
+    pendingSuggestion = "";
+    messageField.placeholder = "";
+    messageField.setSelectionRange(messageField.value.length, messageField.value.length);
+  });
 
   Array.prototype.forEach.call(openers, function (opener) {
     opener.addEventListener("click", function (event) {
@@ -32,9 +45,8 @@
       var objet = opener.getAttribute("data-editeur-objet");
       objetDisplay.textContent = objet;
       objetInput.value = objet;
-      var messageField = form.querySelector('textarea[name="message"]');
       var prefill = opener.getAttribute("data-editeur-message");
-      if (messageField && prefill) messageField.value = prefill;
+      if (messageField && prefill) { pendingSuggestion = prefill; messageField.placeholder = prefill; }
       if (typeof dialog.showModal === "function") dialog.showModal();
       else dialog.setAttribute("open", "");
       openedAt = Date.now();
@@ -58,7 +70,7 @@
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        nom: data.get("nom"), email: data.get("email"), objet: data.get("objet"),
+        nom: data.get("nom"), email: data.get("email"), tel: data.get("tel"), objet: data.get("objet"),
         message: data.get("message"), site: data.get("site"), elapsed: Date.now() - openedAt
       })
     }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, body: b }; }); })
@@ -67,6 +79,8 @@
         note.textContent = "Message envoyé.";
         note.className = defaultClass + " form-note--ok";
         Array.prototype.slice.call(form.elements).forEach(function (el) { el.disabled = true; });
+        // Fermer la fenêtre après confirmation, pour ne pas laisser un formulaire figé ouvert.
+        setTimeout(function () { if (dialog.open) dialog.close(); }, 2500);
       })
       .catch(function (err) {
         note.textContent = err.message;

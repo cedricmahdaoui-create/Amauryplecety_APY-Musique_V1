@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none';">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<base href="../">
+<title>Journal du site — APY Musique</title>
+<link rel="icon" href="assets/img/logo-apy.png" type="image/png">
+<link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo-apy.png" alt="" width="42" height="42">
+      <span>APY Musique<small>Journal du site</small></span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Navigation">
+      <ul>
+        <li><a class="btn" href="index.html">Retour au site</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<nav class="breadcrumb" aria-label="Fil d&#39;Ariane"><div class="container"><ol><li><a href="index.html">Accueil</a></li><li aria-current="page">Journal du site</li></ol></div></nav>
+
+<main id="contenu">
+  <section class="section">
+    <div class="container">
+      <h1>Journal des visites et des messages</h1>
+
+      <div class="admin-journal-filters">
+        <label>Afficher
+          <select id="j-type">
+            <option value="tout">Visites et messages</option>
+            <option value="visite">Visites</option>
+            <option value="mail">Messages envoyés</option>
+          </select>
+        </label>
+        <label>Du <input type="date" id="j-from"></label>
+        <label>Au <input type="date" id="j-to"></label>
+        <button type="button" class="btn" id="j-show">Afficher</button>
+        <button type="button" class="btn btn--ghost" id="j-csv">Télécharger CSV (Excel)</button>
+        <button type="button" class="btn btn--ghost" id="j-jsonl">Télécharger JSONL</button>
+      </div>
+      <p class="admin-status" id="j-status" role="status"></p>
+      <div class="admin-journal-wrap"><table class="admin-journal" id="j-table" hidden>
+        <thead><tr><th>Date</th><th>Type</th><th>Page / objet</th><th>Contact</th><th>Statut</th><th>Lieu</th><th>Appareil</th><th>IP</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <p class="form-note">Le tableau affiche au plus 500 lignes ; les téléchargements contiennent tout. Survolez une cellule pour voir le message complet ou le navigateur exact.</p>
+
+      <hr class="admin-sep">
+
+      <h2>Purge</h2>
+      <p class="lead">Efface les visites de plus de 13 mois et les messages de plus de 12 mois (durées annoncées dans la politique de confidentialité). À lancer au moins une fois par mois.</p>
+      <p><button type="button" class="btn" id="j-purge">Purger les entrées expirées</button></p>
+      <p class="admin-status" id="j-purge-status" role="status"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-legal">
+      <span>&copy; <span data-year>2026</span> APY Musique — Journal du site</span>
+      <span><a href="index.html">Site public</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<script src="admin/journal.js?v=3" defer></script>
+</body>
+</html>
