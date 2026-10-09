@@ -30,7 +30,7 @@
     var a = articles[i];
     if (!a) { notFound(); return; }
 
-    document.title = a.title + ' — ' + "APY Musique";
+    document.title = a.title + ' — ' + {{json entreprise.nom}};
     var descMeta = document.querySelector('meta[name="description"]');
     if (!descMeta) { descMeta = document.createElement('meta'); descMeta.name = 'description'; document.head.appendChild(descMeta); }
     descMeta.content = (a.text || '').slice(0, 160);

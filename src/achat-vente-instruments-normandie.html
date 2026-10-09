@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="{{seo.langue}}">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none';">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{page.titre}}</title>
+<meta name="description" content="{{page.description}}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="{{page.url}}">
+<meta property="og:type" content="{{page.og_type}}">
+<meta property="og:site_name" content="{{entreprise.nom}}">
+<meta property="og:title" content="{{page.og_titre}}">
+<meta property="og:description" content="{{page.og_description}}">
+<meta property="og:locale" content="{{seo.locale}}">
+<meta property="og:url" content="{{page.url}}">
+{{#if seo.image_partage}}
+<meta property="og:image" content="{{seo.domaine}}/{{seo.image_partage}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{{/if}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="{{theme.couleur_navigateur}}">
+{{#if entreprise.logo}}
+<link rel="icon" href="{{entreprise.logo}}" type="image/png">
+{{/if}}
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": {{json entreprise.type_schema_org}},
+  "name": {{json entreprise.nom}},
+  "description": "Achat, vente et reprise d'instruments de musique d'occasion à vent, cuivres et cordes.",
+  "url": "{{jsonstr seo.domaine}}/achat-vente-instruments-normandie.html",
+  "telephone": {{json contact.telephone.international}},
+  {{#if legal.siret}}
+  "identifier": { "@type": "PropertyValue", "propertyID": "SIRET", "value": {{json legal.siret}} },
+  {{/if}}
+  "image": "{{jsonstr seo.domaine}}/{{jsonstr seo.image_partage}}",
+  "address": {{json calc.adresse_ld 2}},
+  {{#if calc.geo_ld}}
+  "geo": {{json calc.geo_ld 2}},
+  {{/if}}
+  "areaServed": ["Normandie", "Eure", "Seine-Maritime"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "{{jsonstr seo.domaine}}/" },
+    { "@type": "ListItem", "position": 2, "name": "Achat-vente d'instruments en Normandie", "item": "{{jsonstr seo.domaine}}/achat-vente-instruments-normandie.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      {{#if entreprise.logo}}<img src="{{entreprise.logo}}" alt="" width="42" height="42">{{/if}}
+      <span>{{entreprise.nom}}<small>{{entreprise.accroche}}</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html#histoire">Notre histoire</a></li>
+        <li class="has-submenu">
+          <a href="index.html#services">Nos services</a>
+          <ul class="submenu">
+            <li><a href="catalogue.html" aria-current="page">Catalogue</a></li>
+            {{#if blocs.reparations}}
+            <li class="has-submenu">
+              <a href="reparations.html">Réparations</a>
+              <ul class="submenu">
+                <li><a href="reparations.html#cuivres">Cuivres</a></li>
+                <li><a href="reparations.html#bois">Bois</a></li>
+              </ul>
+            </li>
+            {{/if}}
+          </ul>
+        </li>
+        {{#if blocs.actualites}}<li><a href="index.html#a-la-une">À la une</a></li>{{/if}}
+        <li><a class="btn" href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Accueil</a></li>
+      {{#if blocs.catalogue}}<li><a href="catalogue.html">Catalogue</a></li>{{/if}}
+        <li><a href="index.html#a-la-une">À la une</a></li>
+      <li aria-current="page">Achat-vente en Normandie</li>
+    </ol>
+  </div>
+</nav>
+
+<main id="contenu">
+  <section class="section">
+    <div class="container prose">
+      <span class="eyebrow">Normandie · Eure (27)</span>
+      <h1>Achat et vente d'instruments de musique d'occasion en Normandie</h1>
+      <p class="lead">{{entreprise.nom}}, à Bourg-Achard entre Rouen et Pont-Audemer, achète, vend et reprend des instruments de musique d'occasion. Chaque instrument proposé est contrôlé et réglé à l'atelier avant la vente.</p>
+
+      <h2>Ce que vous trouvez à l'atelier</h2>
+      <ul>
+        <li><strong>Instruments à vent</strong> : saxophones, trompettes, trombones, cors, clarinettes, flûtes, tubas — d'étude comme professionnels</li>
+        <li><strong>Quatuor à cordes</strong> : violons, altos, violoncelles, contrebasses et archets, dans toutes les tailles</li>
+        <li><strong>Pièces de caractère</strong> : instruments anciens et modèles recherchés chinés en France, en Europe et aux États-Unis</li>
+      </ul>
+      <p>Le stock évolue chaque semaine. <a href="catalogue.html">Consultez le catalogue</a> ou dites-nous ce que vous cherchez.</p>
+
+      <h2>Vous voulez vendre ou faire estimer un instrument&nbsp;?</h2>
+      <p>Nous rachetons les instruments à vent et à cordes, et proposons la <strong>reprise</strong> de votre ancien instrument lors d'un achat. L'atelier réalise aussi des <strong>estimations</strong> pour une vente, une succession ou une assurance.</p>
+      <p>Envoyez-nous des photos, la marque et le numéro de série si vous l'avez : vous recevez une première évaluation rapidement.</p>
+
+      <h2>Acheter en confiance</h2>
+      <ul>
+        <li>Instrument révisé et réglé, prêt à jouer</li>
+        <li>Conseil selon le niveau, le style musical et le budget</li>
+        <li>Possibilité d'essayer sur place, sur rendez-vous</li>
+        <li>Service après-vente assuré par l'atelier</li>
+      </ul>
+
+      <h2>Où nous trouver</h2>
+      <p>{{calc.adresse_ligne}} — à proximité de l'A13, entre Rouen, Elbeuf, Le Neubourg et Pont-Audemer. Musiciens de toute la Normandie bienvenus.</p>
+
+      <p>
+        <a href="catalogue.html" class="btn">Voir les instruments à vendre</a>
+        <a href="index.html?ctx=estimation#contact-form" class="btn btn--ghost">Faire estimer mon instrument</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-centered">
+    <a class="footer-brand" href="index.html">
+      {{#if entreprise.logo}}<img src="{{entreprise.logo}}" alt="" width="36" height="36">{{/if}}
+      <strong>{{entreprise.nom}}</strong>
+    </a>
+    <h2 class="footer-about-title">À propos {{calc.de_nom}}</h2>
+    <nav class="footer-links-row" aria-label="Liens du pied de page">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <span aria-hidden="true">–</span>
+      <a href="politique-confidentialite.html">Confidentialité</a>
+      <span aria-hidden="true">–</span>
+      <a href="plan-du-site.html">Plan du site</a>
+    </nav>
+    <div class="footer-legal">
+      <span>&copy; <span data-year>2026</span> {{legal.mention_copyright}}{{#if legal.siret}} · SIRET {{calc.siret_affiche}}{{/if}}</span>
+      {{#if editeur.credit_actif}}<span class="footer-credit">Fait avec <span class="footer-heart">❤︎</span> par <button type="button" class="footer-credit-link" data-editeur-objet="Contacter l’éditeur du site" data-editeur-message="Je souhaite faire un site web, auditer mon site, l’améliorer ou le refondre — ou j’ai une automatisation à mettre en place dans mon entreprise. Pourrions-nous échanger sur mon projet ?">{{editeur.nom}}</button></span>{{/if}}
+    </div>
+  </div>
+</footer>
+
+{{#if calc.whatsapp_actif}}
+<!-- Bouton flottant WhatsApp (toutes tailles d'écran). -->
+<a class="wa-float" href="{{calc.whatsapp_url}}" target="_blank" rel="noopener noreferrer" aria-label="Écrire sur WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2m0 2a8 8 0 0 1 6.9 12l.3.5-.8 2.8-2.9-.8-.5.3A8 8 0 1 1 12 4m-2.5 3.6c-.2 0-.5 0-.7.3s-1 1-1 2.4 1 2.8 1.2 3 2 3.2 5 4.4c2.5 1 3 .8 3.6.8s1.7-.7 2-1.4.3-1.3.2-1.4l-1-.5-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1s-1-.4-2-1.2c-.7-.7-1.2-1.5-1.4-1.7s0-.4.1-.5l.5-.5c.1-.2.1-.3.2-.5s0-.4 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4z"/></svg>
+</a>
+{{/if}}
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/contact-dialog.js" defer></script>
+<script src="assets/js/editeur-dialog.js" defer></script>
+<dialog id="contact-dialog" class="editeur-dialog">
+  <form id="contact-form">
+    <button type="button" class="editeur-dialog-close" aria-label="Fermer">×</button>
+    <h2>Écrire à l'atelier</h2>
+    <p>Pour une demande d'achat, de réparation ou d'estimation : votre message est envoyé directement à l'atelier.</p>
+    <label>Votre nom<input name="nom" autocomplete="name" required maxlength="120"></label>
+    <label>Votre adresse e-mail<input name="email" type="email" autocomplete="email" required></label>
+    <label>Objet<select name="objet"><option>Achat d’un instrument</option><option>Réparation</option><option>Estimation</option><option>Demande d’information</option><option>Autre demande</option></select></label>
+    <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
+    <label class="contact-hp" aria-hidden="true" tabindex="-1">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
+    <p class="form-note" data-contact-note>{{calc.qui_repond}} sous {{contact.delai_reponse}}.</p>
+    <button class="btn" type="submit">Envoyer mon message</button>
+  </form>
+</dialog>
+<dialog id="editeur-dialog" class="editeur-dialog">
+  <form id="editeur-form">
+    <button type="button" class="editeur-dialog-close" aria-label="Fermer">×</button>
+    <h2>Écrire à l’éditeur du site</h2>
+    <p class="form-note"><strong>Objet :</strong> <span data-objet-display></span></p>
+    <input type="hidden" name="objet" data-objet-input>
+    <label>Votre nom<input name="nom" autocomplete="name" required maxlength="120"></label>
+    <label>Votre adresse e-mail<input name="email" type="email" autocomplete="email" required></label>
+    <label>Votre téléphone (facultatif)<input name="tel" type="tel" autocomplete="tel" maxlength="30"></label>
+    <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
+    <label class="contact-hp" aria-hidden="true" tabindex="-1">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
+    <p class="form-note" data-editeur-note>Votre message sera transmis directement.</p>
+    <button class="btn" type="submit">Envoyer</button>
+  </form>
+</dialog>
+
+</body>
+</html>

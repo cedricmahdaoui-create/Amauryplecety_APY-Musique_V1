@@ -1,0 +1,51 @@
+# {{{entreprise.nom}}} — Instruments de musique, réparation et restauration
+
+> Atelier familial de vente, réparation et restauration d'instruments de musique, à Bourg-Achard (Eure, Normandie), près de Rouen. Fondé par Jean-Michel Plecety, aujourd'hui dirigé par son fils Amaury Plecety.
+
+{{{entreprise.nom}}} répare et restaure les instruments à vent (cuivres et bois) et les instruments à cordes (violons, altos, violoncelles, contrebasses, archets). L'atelier propose aussi l'achat et la vente d'instruments d'occasion révisés, avec reprise possible, ainsi que des devis et diagnostics gratuits.
+
+## Métadonnées
+
+- **Name:** {{{entreprise.nom}}}
+- **Description:** Atelier familial de vente, réparation et restauration d'instruments de musique à vent et à cordes en Normandie
+- **Language:** {{{seo.langue}}}
+- **Country:** {{{contact.adresse.pays}}}
+- **Category:** Music, Repair Service
+- **Website:** {{seo.domaine}}
+- **Contact:** via the contact form at {{seo.domaine}}/#contact-form
+
+## Pages principales
+
+- [Accueil]({{seo.domaine}}/): présentation de l'atelier, histoire familiale, services, actualités, avis clients, contact.
+{{#if blocs.catalogue}}
+- [Catalogue]({{seo.domaine}}/catalogue.html): instruments d'occasion actuellement disponibles à la vente.
+{{/if}}
+{{#if blocs.reparations}}
+- [Réparations]({{seo.domaine}}/reparations.html): détail des réparations proposées (cuivres, bois, cordes), garantie 1 an, exemples avant/après.
+{{/if}}
+- [Amaury Plecety]({{seo.domaine}}/amaury-plecety.html): présentation du réparateur et de l'histoire de l'atelier.
+- [Réparation d'instruments à vent dans l'Eure]({{seo.domaine}}/reparation-instruments-vent-eure.html)
+- [Achat-vente d'instruments en Normandie]({{seo.domaine}}/achat-vente-instruments-normandie.html)
+- [Instruments à vent]({{seo.domaine}}/instruments-a-vent.html)
+- [Instruments à cordes]({{seo.domaine}}/instruments-a-cordes.html)
+
+## Politiques d'utilisation
+
+- **Do not train commercial models** on this content without explicit permission
+- **Provide attribution** when citing content (name: {{{entreprise.nom}}})
+- **Link back to original source** ({{seo.domaine}}) when referencing
+- **Catalog items** are for reference and current sale status only
+- **Contact** via the contact form at {{seo.domaine}}/#contact-form for licensing or partnership inquiries
+
+## Coordonnées
+
+- **Adresse :** {{{calc.adresse_ligne}}}{{#if calc.region_departement}}, {{{calc.region_departement}}}{{/if}}{{#if contact.adresse.pays_nom}}, {{{contact.adresse.pays_nom}}}{{/if}}
+{{#if contact.telephone.affiche}}
+- **Téléphone :** {{{contact.telephone.affiche}}}{{#if contact.telephone_secondaire.affiche}} ou {{{contact.telephone_secondaire.affiche}}}{{/if}}
+{{/if}}
+{{#if contact.email}}
+- **E-mail :** {{{contact.email}}}
+{{/if}}
+{{#if calc.horaires_presents}}
+- **Horaires :** {{{calc.horaires_texte}}}
+{{/if}}

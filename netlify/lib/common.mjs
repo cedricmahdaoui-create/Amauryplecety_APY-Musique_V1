@@ -1,5 +1,6 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { getStore } from "@netlify/blobs";
+import { SITE } from "./site.mjs";
 
 export const dataStore = () => getStore({ name: "apy-data", consistency: "strong" });
 export const mediaStore = () => getStore({ name: "apy-media", consistency: "strong" });
@@ -32,7 +33,7 @@ export const safeHeaders = SAFE_HEADERS;
 
 const sha = (value) => createHash("sha256").update(value).digest();
 
-export const ALLOWED_ORIGINS =["https://apymusique.fr", "https://www.apymusique.fr", "https://apy-musique.netlify.app"];
+export const ALLOWED_ORIGINS = SITE.origines_autorisees;
 const MIN_FORM_MS = 2500; // en dessous, quasi certainement un robot (rempli+envoyé trop vite).
 
 /**

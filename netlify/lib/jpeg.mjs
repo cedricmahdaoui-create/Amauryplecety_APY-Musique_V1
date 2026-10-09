@@ -1,4 +1,5 @@
 import piexif from "piexifjs";
+import { SITE } from "./site.mjs";
 
 /** Dimensions réelles lues dans l'en-tête SOF du JPEG (et non dans une métadonnée). */
 export function jpegSize(buf) {
@@ -32,9 +33,9 @@ export function tagJpeg(buf) {
   try {
     const exif = {
       "0th": {
-        [piexif.ImageIFD.Copyright]: "APY Musique - Amaury Plecety",
-        [piexif.ImageIFD.Artist]: "APY Musique",
-        [piexif.ImageIFD.ImageDescription]: "APY Musique - atelier de vente et reparation d'instruments, Bourg-Achard",
+        [piexif.ImageIFD.Copyright]: SITE.exif.copyright,
+        [piexif.ImageIFD.Artist]: SITE.exif.artiste,
+        [piexif.ImageIFD.ImageDescription]: SITE.exif.description,
       },
       Exif: {}, GPS: {}, "1st": {}, thumbnail: null,
     };

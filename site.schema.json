@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/site.config.schema.json",
+  "title": "Configuration de site vitrine TPE/artisan",
+  "description": "Fichier unique qui contient tout le contenu propre à un client. Une chaîne vide signifie « valeur non renseignée » : le bloc correspondant n'est alors pas affiché.",
+  "type": "object",
+  "required": ["version", "entreprise", "contact", "horaires", "legal", "seo", "pages", "blocs_actifs"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": {
+      "description": "Version du format de configuration.",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$"
+    },
+
+    "entreprise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nom", "accroche", "description", "type_schema_org", "logo"],
+      "properties": {
+        "nom": { "description": "Nom commercial affiché partout.", "$ref": "#/$defs/texteRequis" },
+        "accroche": { "description": "Petite ligne sous le nom, dans l'en-tête.", "type": "string" },
+        "description": { "description": "Une phrase sur l'activité (données structurées).", "type": "string" },
+        "presentation": { "description": "Présentation courte (manifeste PWA, llms.txt).", "type": "string" },
+        "type_schema_org": {
+          "description": "Type Schema.org de l'établissement.",
+          "type": "string",
+          "enum": ["LocalBusiness", "Store", "MusicStore", "HomeAndConstructionBusiness", "ProfessionalService", "AutomotiveBusiness", "FoodEstablishment", "HealthAndBeautyBusiness", "Electrician", "Plumber", "HousePainter", "RoofingContractor", "GeneralContractor", "Locksmith"]
+        },
+        "logo": { "description": "Chemin du logo (relatif à la racine du site).", "$ref": "#/$defs/chemin" },
+        "date_creation": { "$ref": "#/$defs/dateOuVide" },
+        "fourchette_prix": { "type": "string", "enum": ["", "€", "€€", "€€€", "€€€€"] },
+        "zones_desservies": { "type": "array", "items": { "$ref": "#/$defs/texteRequis" } },
+        "offres": { "description": "Prestations proposées (données structurées).", "type": "array", "items": { "$ref": "#/$defs/texteRequis" } }
+      }
+    },
+
+    "equipe": {
+      "description": "Personnes présentées (données structurées).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["nom", "fonction"],
+        "properties": {
+          "nom": { "$ref": "#/$defs/texteRequis" },
+          "fonction": { "type": "string" },
+          "fondateur": { "type": "boolean" }
+        }
+      }
+    },
+
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["telephone", "email", "adresse"],
+      "properties": {
+        "interlocuteur": { "description": "Prénom de la personne qui répond (« Amaury vous répond… »). Vide : « Nous vous répondons… ».", "type": "string" },
+        "delai_reponse": { "description": "Ex. « 1 à 2 jours ».", "type": "string" },
+        "telephone": { "$ref": "#/$defs/telephone" },
+        "telephone_secondaire": { "$ref": "#/$defs/telephone" },
+        "email": { "$ref": "#/$defs/emailOuVide" },
+        "whatsapp": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["numero"],
+          "properties": {
+            "numero": { "description": "Numéro international sans + ni espaces (ex. 33612345678).", "type": "string", "pattern": "^(\\d{8,15})?$" },
+            "affiche": { "description": "Numéro tel qu'affiché.", "type": "string" },
+            "message": { "description": "Début de message pré-rempli.", "type": "string" }
+          }
+        },
+        "adresse": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rue", "code_postal", "ville", "pays"],
+          "properties": {
+            "rue": { "type": "string" },
+            "code_postal": { "type": "string", "pattern": "^(\\d{5})?$" },
+            "ville": { "type": "string" },
+            "departement": { "type": "string" },
+            "region": { "type": "string" },
+            "pays": { "description": "Code pays ISO (FR).", "type": "string", "pattern": "^[A-Z]{2}$" },
+            "pays_nom": { "type": "string" }
+          }
+        },
+        "acces": { "description": "Comment venir (une ou deux phrases).", "type": "string" },
+        "geo": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "latitude": { "type": ["number", "null"], "minimum": -90, "maximum": 90 },
+            "longitude": { "type": ["number", "null"], "minimum": -180, "maximum": 180 }
+          }
+        },
+        "google_maps_url": { "$ref": "#/$defs/urlOuVide" },
+        "reseaux": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "facebook": { "$ref": "#/$defs/urlOuVide" },
+            "instagram": { "$ref": "#/$defs/urlOuVide" },
+            "linkedin": { "$ref": "#/$defs/urlOuVide" },
+            "youtube": { "$ref": "#/$defs/urlOuVide" }
+          }
+        }
+      }
+    },
+
+    "horaires": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jours"],
+      "properties": {
+        "jours": {
+          "description": "Créneaux d'ouverture par jour. Liste vide = fermé.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"],
+          "properties": {
+            "lundi": { "$ref": "#/$defs/creneaux" },
+            "mardi": { "$ref": "#/$defs/creneaux" },
+            "mercredi": { "$ref": "#/$defs/creneaux" },
+            "jeudi": { "$ref": "#/$defs/creneaux" },
+            "vendredi": { "$ref": "#/$defs/creneaux" },
+            "samedi": { "$ref": "#/$defs/creneaux" },
+            "dimanche": { "$ref": "#/$defs/creneaux" }
+          }
+        },
+        "note": { "description": "Mention sous les horaires (source, date du relevé…).", "type": "string" }
+      }
+    },
+
+    "legal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["titulaire", "forme_juridique", "siret", "responsable_publication", "hebergeur"],
+      "properties": {
+        "titulaire": { "description": "Personne physique ou raison sociale.", "type": "string" },
+        "forme_juridique": { "description": "Ex. « entrepreneur individuel », « SARL au capital de … € ».", "type": "string" },
+        "noms_commerciaux": { "type": "array", "items": { "$ref": "#/$defs/texteRequis" } },
+        "mention_copyright": { "description": "Texte après © dans le pied de page.", "type": "string" },
+        "siret": { "description": "14 chiffres, sans espaces.", "type": "string", "pattern": "^(\\d{14})?$" },
+        "registre": { "description": "Ex. « Registre National des Entreprises », « RCS Évreux ».", "type": "string" },
+        "code_ape": { "type": "string", "pattern": "^(\\d{2}\\.\\d{2}[A-Z])?$" },
+        "libelle_ape": { "type": "string" },
+        "tva": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["regime"],
+          "properties": {
+            "regime": { "type": "string", "enum": ["", "franchise", "assujetti"] },
+            "numero": { "type": "string", "pattern": "^(FR[0-9A-Z]{2}\\d{9})?$" },
+            "a_confirmer": { "type": "boolean" }
+          }
+        },
+        "responsable_publication": { "type": "string" },
+        "hebergeur": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["nom", "adresse"],
+          "properties": {
+            "nom": { "type": "string" },
+            "adresse": { "type": "string" },
+            "url": { "$ref": "#/$defs/urlOuVide" }
+          }
+        },
+        "messagerie": { "description": "Prestataire qui reçoit les messages du formulaire (confidentialité).", "type": "string" },
+        "date_maj_confidentialite": { "$ref": "#/$defs/dateOuVide" }
+      }
+    },
+
+    "editeur": {
+      "description": "Prestataire qui a réalisé le site (crédit, copie des messages).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nom", "email"],
+      "properties": {
+        "nom": { "type": "string" },
+        "telephone": { "type": "string" },
+        "email": { "$ref": "#/$defs/emailOuVide" },
+        "credit_actif": { "description": "Affiche « Fait avec ❤ par … » dans le pied de page.", "type": "boolean" },
+        "copie_cachee": { "description": "Envoie une copie cachée des messages du site à l'éditeur.", "type": "boolean" }
+      }
+    },
+
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domaine", "langue", "locale", "image_partage"],
+      "properties": {
+        "domaine": { "description": "URL du site, sans / final (ex. https://www.exemple.fr).", "type": "string", "pattern": "^(https://[a-z0-9.-]+\\.[a-z]{2,})?$" },
+        "langue": { "type": "string", "pattern": "^[a-z]{2}$" },
+        "locale": { "type": "string", "pattern": "^[a-z]{2}_[A-Z]{2}$" },
+        "mots_cles": { "type": "array", "items": { "$ref": "#/$defs/texteRequis" } },
+        "auteur": { "type": "string" },
+        "image_partage": { "description": "Image Open Graph 1200×630.", "$ref": "#/$defs/chemin" }
+      }
+    },
+
+    "technique": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "origines_autorisees": { "description": "Origines acceptées par les fonctions serveur (CORS).", "type": "array", "items": { "type": "string", "pattern": "^https?://[a-z0-9.:-]+$" } },
+        "smtp_hote": { "description": "Serveur SMTP d'envoi des formulaires.", "type": "string" },
+        "exif_description": { "description": "Description inscrite dans les photos envoyées par l'admin (défaut : « Nom - Ville »).", "type": "string" }
+      }
+    },
+
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "couleur_navigateur": { "$ref": "#/$defs/couleur" },
+        "couleur_fond_application": { "$ref": "#/$defs/couleur" },
+        "couleurs": {
+          "description": "Variables CSS du thème clair (nom sans les deux tirets).",
+          "type": "object",
+          "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+          "additionalProperties": { "$ref": "#/$defs/couleur" }
+        }
+      }
+    },
+
+    "pages": {
+      "description": "Titres et descriptions de chaque page (clé = nom du fichier sans .html).",
+      "type": "object",
+      "required": ["index"],
+      "propertyNames": { "pattern": "^[a-z0-9-]+$" },
+      "additionalProperties": { "$ref": "#/$defs/page" }
+    },
+
+    "accueil": {
+      "description": "Textes du haut de la page d'accueil.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sur_titre": { "type": "string" },
+        "titre": { "type": "string" },
+        "sous_titre": { "description": "Peut contenir <br>.", "type": "string" },
+        "citation": { "type": "string" },
+        "signature": { "type": "string" }
+      }
+    },
+
+    "catalogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accroche": { "description": "Phrase optionnelle en tête du catalogue. N'y mettre qu'une affirmation vérifiable.", "type": "string" }
+      }
+    },
+
+    "temoignages": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "note": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["valeur", "nombre", "source", "date_releve"],
+          "properties": {
+            "valeur": { "type": ["number", "null"], "minimum": 0, "maximum": 5 },
+            "nombre": { "type": ["integer", "null"], "minimum": 0 },
+            "source": { "type": "string" },
+            "date_releve": { "$ref": "#/$defs/dateOuVide" },
+            "url": { "$ref": "#/$defs/urlOuVide" }
+          }
+        },
+        "avis": {
+          "description": "Seuls les avis avec verifie: true sont affichés.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["texte", "auteur", "verifie"],
+            "properties": {
+              "texte": { "$ref": "#/$defs/texteRequis" },
+              "auteur": { "$ref": "#/$defs/texteRequis" },
+              "contexte": { "type": "string" },
+              "verifie": { "description": "true uniquement pour un avis réel, publié avec l'accord du client.", "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+
+    "bandeau": {
+      "description": "Bande d'annonce défilante en haut de l'accueil (bloc « bandeau »).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "texte": { "type": "string" }
+      }
+    },
+
+    "blocs_actifs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalogue", "reparations", "actualites", "temoignages", "carte", "whatsapp", "bandeau"],
+      "properties": {
+        "catalogue": { "type": "boolean" },
+        "reparations": { "type": "boolean" },
+        "actualites": { "type": "boolean" },
+        "temoignages": { "type": "boolean" },
+        "carte": { "type": "boolean" },
+        "whatsapp": { "type": "boolean" },
+        "bandeau": { "description": "Désactivé par défaut.", "type": "boolean", "default": false }
+      }
+    }
+  },
+
+  "allOf": [
+    {
+      "$comment": "Obligatoire car blocs_actifs.whatsapp vaut true.",
+      "if": { "properties": { "blocs_actifs": { "properties": { "whatsapp": { "const": true } } } } },
+      "then": { "properties": { "contact": { "required": ["whatsapp"], "properties": { "whatsapp": { "properties": { "numero": { "minLength": 8 } } } } } } }
+    },
+    {
+      "$comment": "Obligatoire car blocs_actifs.carte vaut true.",
+      "if": { "properties": { "blocs_actifs": { "properties": { "carte": { "const": true } } } } },
+      "then": { "properties": { "contact": { "required": ["geo", "google_maps_url"], "properties": { "google_maps_url": { "minLength": 1 }, "geo": { "required": ["latitude", "longitude"], "properties": { "latitude": { "type": "number" }, "longitude": { "type": "number" } } } } } } }
+    },
+    {
+      "$comment": "Obligatoire car blocs_actifs.bandeau vaut true.",
+      "if": { "properties": { "blocs_actifs": { "properties": { "bandeau": { "const": true } } } } },
+      "then": { "required": ["bandeau"], "properties": { "bandeau": { "required": ["texte"], "properties": { "texte": { "minLength": 1 } } } } }
+    },
+    {
+      "$comment": "Obligatoire car blocs_actifs.temoignages vaut true.",
+      "if": { "properties": { "blocs_actifs": { "properties": { "temoignages": { "const": true } } } } },
+      "then": { "required": ["temoignages"] }
+    }
+  ],
+
+  "$defs": {
+    "texteRequis": { "type": "string", "minLength": 1 },
+    "chemin": { "type": "string", "pattern": "^([a-zA-Z0-9_./-]+)?$" },
+    "couleur": { "type": "string", "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$" },
+    "dateOuVide": { "description": "AAAA-MM-JJ ou vide.", "type": "string", "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$" },
+    "urlOuVide": { "type": "string", "pattern": "^(https://\\S+)?$" },
+    "emailOuVide": { "type": "string", "pattern": "^([^\\s@]+@[^\\s@]+\\.[^\\s@]+)?$" },
+    "telephone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["affiche", "international"],
+      "properties": {
+        "affiche": { "description": "Ex. « 06 12 34 56 78 ».", "type": "string" },
+        "international": { "description": "Ex. « +33612345678 ».", "type": "string", "pattern": "^(\\+\\d{8,15})?$" }
+      }
+    },
+    "creneaux": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ouverture", "fermeture"],
+        "properties": {
+          "ouverture": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
+          "fermeture": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" }
+        }
+      }
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["titre", "description"],
+      "properties": {
+        "titre": { "description": "Balise <title> (idéalement 50 à 60 caractères).", "$ref": "#/$defs/texteRequis" },
+        "description": { "description": "Meta description (idéalement 150 à 160 caractères).", "type": "string", "maxLength": 300 },
+        "og_titre": { "type": "string" },
+        "og_description": { "type": "string" },
+        "og_type": { "type": "string", "enum": ["website", "profile", "article", "business.business"] }
+      }
+    }
+  }
+}

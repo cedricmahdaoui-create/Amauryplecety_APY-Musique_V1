@@ -2,17 +2,18 @@ import nodemailer from "nodemailer";
 import { createHash } from "node:crypto";
 import { dataStore, json, looksLikeSpam } from "../lib/common.mjs";
 import { logEvent, requestInfo } from "../lib/journal.mjs";
+import { SITE } from "../lib/site.mjs";
 
 /* Formulaire « Écrire à l'éditeur du site » : réservé aux demandes concernant le
    site lui-même (droit au retrait d'information, contact de l'éditeur technique),
    distinct du formulaire de contact de l'atelier. Envoyé via le même compte SMTP
-   OVH, mais à Cédric (éditeur) plutôt qu'à l'atelier. */
+   OVH, mais à l'éditeur (editeur.email dans la configuration) plutôt qu'à l'atelier. */
 
 const MAX_MSG_PER_WINDOW = 5;
 const WINDOW_MS = 60 * 60 * 1000; // 1 heure
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const OBJETS = ["Droit au retrait d’information", "Contacter l’éditeur du site"];
-const EDITEUR_TO = "cedricmahdaoui@gmail.com";
+const EDITEUR_TO = SITE.editeur_email;
 
 const sha = (value) => createHash("sha256").update(value).digest("hex").slice(0, 24);
 const clean = (value, max) => (typeof value === "string" ? value.trim().slice(0, max) : "");
@@ -68,7 +69,7 @@ export default async (req, context) => {
   await store.setJSON(key, { count: (record ? record.count : 0) + 1, first: record ? record.first : now }).catch(() => {});
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.mail.ovh.net",
+    host: SITE.smtp_hote,
     port: 465,
     secure: true,
     auth: { user, pass },
@@ -76,10 +77,10 @@ export default async (req, context) => {
 
   try {
     await transporter.sendMail({
-      from: `"Site APY Musique" <${user}>`,
+      from: `"Site ${SITE.nom}" <${user}>`,
       to: EDITEUR_TO,
       replyTo: `"${nom}" <${email}>`,
-      subject: `[Site APY Musique — ${objetRaw}] ${nom}`,
+      subject: `[Site ${SITE.nom} — ${objetRaw}] ${nom}`,
       text: `${message}\n\n—\n${nom}\n${email}${tel ? "\n" + tel : ""}`,
     });
   } catch (e) {

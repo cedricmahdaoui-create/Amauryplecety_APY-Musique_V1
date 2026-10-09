@@ -1,0 +1,19 @@
+{
+  "name": {{json entreprise.nom}},
+  "short_name": {{json entreprise.nom}},
+  "description": {{json entreprise.presentation}},
+  "lang": {{json seo.langue}},
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": {{json theme.couleur_fond_application}},
+  "theme_color": {{json theme.couleur_navigateur}},
+  "icons": [
+{{#if entreprise.logo}}
+    { "src": "/{{jsonstr entreprise.logo}}", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+{{/if}}
+    { "src": "/assets/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/img/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -32,3 +32,6 @@ deno.lock
 
 # Données du catalogue gérées par la page admin en production
 assets/data/catalogue.json
+
+# Configuration propre au client : ne doit jamais partir dans le template
+/site.config.json

@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import { createHash } from "node:crypto";
 import { dataStore, json, looksLikeSpam } from "../lib/common.mjs";
 import { logEvent, requestInfo } from "../lib/journal.mjs";
+import { SITE } from "../lib/site.mjs";
 
 const MAX_MSG_PER_WINDOW = 5;
 const WINDOW_MS = 60 * 60 * 1000; // 1 heure
@@ -62,7 +63,7 @@ export default async (req, context) => {
   await store.setJSON(key, { count: (record ? record.count : 0) + 1, first: record ? record.first : now }).catch(() => {});
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.mail.ovh.net",
+    host: SITE.smtp_hote,
     port: 465,
     secure: true,
     auth: { user, pass },
@@ -71,9 +72,9 @@ export default async (req, context) => {
   const to = process.env.CONTACT_TO || user;
   try {
     await transporter.sendMail({
-      from: `"Site APY Musique" <${user}>`,
+      from: `"Site ${SITE.nom}" <${user}>`,
       to,
-      bcc: "cedricmahdaoui@gmail.com",
+      ...(SITE.copie_cachee_editeur ? { bcc: SITE.editeur_email } : {}),
       replyTo: `"${nom}" <${email}>`,
       subject: `[Site — ${objet}] ${nom}`,
       text: `${message}\n\n—\n${nom}\n${email}`,

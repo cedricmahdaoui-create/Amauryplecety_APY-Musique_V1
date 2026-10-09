@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{seo.langue}}">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none';">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Amaury Plecety — le luthier qui reprend l'atelier | APY Musique</title>
-<meta name="description" content="Amaury Plecety a appris le métier auprès de son père Jean-Michel et reprend progressivement l'atelier APY Musique à Bourg-Achard : réparation, restauration et remise à neuf d'instruments à vent et à cordes.">
+<title>{{page.titre}}</title>
+<meta name="description" content="{{page.description}}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="https://apymusique.fr/amaury-plecety.html">
-<meta property="og:type" content="profile">
-<meta property="og:site_name" content="APY Musique">
-<meta property="og:title" content="Amaury Plecety — le luthier qui reprend l'atelier">
-<meta property="og:description" content="Formé à l'ancienne par son père, tourné vers l'avenir de l'atelier familial de Bourg-Achard.">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:url" content="https://apymusique.fr/amaury-plecety.html">
-<meta property="og:image" content="https://apymusique.fr/assets/img/og-image.jpg">
+<link rel="canonical" href="{{page.url}}">
+<meta property="og:type" content="{{page.og_type}}">
+<meta property="og:site_name" content="{{entreprise.nom}}">
+<meta property="og:title" content="{{page.og_titre}}">
+<meta property="og:description" content="{{page.og_description}}">
+<meta property="og:locale" content="{{seo.locale}}">
+<meta property="og:url" content="{{page.url}}">
+{{#if seo.image_partage}}
+<meta property="og:image" content="{{seo.domaine}}/{{seo.image_partage}}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+{{/if}}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#241812">
-<link rel="icon" href="assets/img/logo-apy.png" type="image/png">
+<meta name="theme-color" content="{{theme.couleur_navigateur}}">
+{{#if entreprise.logo}}
+<link rel="icon" href="{{entreprise.logo}}" type="image/png">
+{{/if}}
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
@@ -29,22 +33,19 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Amaury Plecety",
+  "name": {{json calc.personne.nom}},
   "jobTitle": "Luthier réparateur",
   "worksFor": {
-    "@type": "MusicStore",
-    "name": "APY Musique",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "993 rue du Château d'Eau",
-      "postalCode": "27310",
-      "addressLocality": "Bourg-Achard",
-      "addressRegion": "Normandie",
-      "addressCountry": "FR"
-    }
+    "@type": {{json entreprise.type_schema_org}},
+    "name": {{json entreprise.nom}},
+    "address": {{json calc.adresse_ld 4}}
   },
-  "parent": { "@type": "Person", "name": "Jean-Michel Plecety" },
-  "sameAs": ["https://www.facebook.com/people/Amaury-PlecetY-APY-Musique/100054372527027/"],
+{{#if calc.parent_nom}}
+  "parent": { "@type": "Person", "name": {{json calc.parent_nom}} },
+{{/if}}
+{{#if calc.reseaux_liste}}
+  "sameAs": {{json calc.reseaux_liste 2}},
+{{/if}}
   "knowsAbout": ["Réparation d'instruments à vent", "Restauration de cuivres", "Remise à neuf de saxophones", "Instruments du quatuor à cordes"]
 }
 </script>
@@ -54,8 +55,8 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://apymusique.fr/" },
-    { "@type": "ListItem", "position": 2, "name": "À propos", "item": "https://apymusique.fr/amaury-plecety.html" }
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "{{jsonstr seo.domaine}}/" },
+    { "@type": "ListItem", "position": 2, "name": "À propos", "item": "{{jsonstr seo.domaine}}/amaury-plecety.html" }
   ]
 }
 </script>
@@ -64,8 +65,8 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://apymusique.fr/" },
-    { "@type": "ListItem", "position": 2, "name": "Amaury Plecety", "item": "https://apymusique.fr/amaury-plecety.html" }
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "{{jsonstr seo.domaine}}/" },
+    { "@type": "ListItem", "position": 2, "name": "Amaury Plecety", "item": "{{jsonstr seo.domaine}}/amaury-plecety.html" }
   ]
 }
 </script>
@@ -76,8 +77,8 @@
 <header class="site-header">
   <div class="container">
     <a class="brand" href="index.html">
-      <img src="assets/img/logo-apy.png" alt="" width="42" height="42">
-      <span>APY Musique<small>Atelier familial · Bourg-Achard</small></span>
+      {{#if entreprise.logo}}<img src="{{entreprise.logo}}" alt="" width="42" height="42">{{/if}}
+      <span>{{entreprise.nom}}<small>{{entreprise.accroche}}</small></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
     <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
@@ -87,7 +88,8 @@
         <li class="has-submenu">
           <a href="index.html#services">Nos services</a>
           <ul class="submenu">
-            <li><a href="catalogue.html">Catalogue</a></li>
+            {{#if blocs.catalogue}}<li><a href="catalogue.html">Catalogue</a></li>{{/if}}
+            {{#if blocs.reparations}}
             <li class="has-submenu">
               <a href="reparations.html">Réparations</a>
               <ul class="submenu">
@@ -95,9 +97,10 @@
                 <li><a href="reparations.html#bois">Bois</a></li>
               </ul>
             </li>
+            {{/if}}
           </ul>
         </li>
-        <li><a href="index.html#a-la-une">À la une</a></li>
+        {{#if blocs.actualites}}<li><a href="index.html#a-la-une">À la une</a></li>{{/if}}
         <li><a class="btn" href="index.html#contact">Contact</a></li>
       </ul>
     </nav>
@@ -166,9 +169,9 @@
         <li>Sélection et vente d'instruments d'occasion contrôlés (voir le <a href="catalogue.html">catalogue</a>)</li>
       </ul>
 
-      <h2>APY Musique</h2>
-      <p>Amaury développe son activité sous le nom <strong>APY Musique</strong>, prolongement naturel de « La Cave aux Instrum' », où tout a commencé. Les nouveautés, les instruments qui arrivent et les avant/après de restauration sont régulièrement publiés sur la
-        <a href="https://www.facebook.com/people/Amaury-PlecetY-APY-Musique/100054372527027/" target="_blank" rel="noopener noreferrer">page Facebook APY Musique</a>.</p>
+      <h2>{{entreprise.nom}}</h2>
+      <p>Amaury développe son activité sous le nom <strong>{{entreprise.nom}}</strong>, prolongement naturel de « La Cave aux Instrum' », où tout a commencé.{{#if contact.reseaux.facebook}} Les nouveautés, les instruments qui arrivent et les avant/après de restauration sont régulièrement publiés sur la
+        <a href="{{contact.reseaux.facebook}}" target="_blank" rel="noopener noreferrer">page Facebook {{entreprise.nom}}</a>.{{/if}}</p>
 
       <p>
         <a href="reparations.html" class="btn btn--ghost">Voir le détail des réparations</a>
@@ -181,10 +184,10 @@
 <footer class="site-footer">
   <div class="container footer-centered">
     <a class="footer-brand" href="index.html">
-      <img src="assets/img/logo-apy.png" alt="" width="36" height="36">
-      <strong>APY Musique</strong>
+      {{#if entreprise.logo}}<img src="{{entreprise.logo}}" alt="" width="36" height="36">{{/if}}
+      <strong>{{entreprise.nom}}</strong>
     </a>
-    <h2 class="footer-about-title">À propos d’APY Musique</h2>
+    <h2 class="footer-about-title">À propos {{calc.de_nom}}</h2>
     <nav class="footer-links-row" aria-label="Liens du pied de page">
       <a href="mentions-legales.html">Mentions légales</a>
       <span aria-hidden="true">–</span>
@@ -193,16 +196,18 @@
       <a href="plan-du-site.html">Plan du site</a>
     </nav>
     <div class="footer-legal">
-      <span>&copy; <span data-year>2026</span> APY Musique — Plecety · SIRET 841 052 764 00013</span>
-      <span class="footer-credit">Fait avec <span class="footer-heart">❤︎</span> par <button type="button" class="footer-credit-link" data-editeur-objet="Contacter l’éditeur du site" data-editeur-message="Je souhaite faire un site web, auditer mon site, l’améliorer ou le refondre — ou j’ai une automatisation à mettre en place dans mon entreprise. Pourrions-nous échanger sur mon projet ?">Cédric</button></span>
+      <span>&copy; <span data-year>2026</span> {{legal.mention_copyright}}{{#if legal.siret}} · SIRET {{calc.siret_affiche}}{{/if}}</span>
+      {{#if editeur.credit_actif}}<span class="footer-credit">Fait avec <span class="footer-heart">❤︎</span> par <button type="button" class="footer-credit-link" data-editeur-objet="Contacter l’éditeur du site" data-editeur-message="Je souhaite faire un site web, auditer mon site, l’améliorer ou le refondre — ou j’ai une automatisation à mettre en place dans mon entreprise. Pourrions-nous échanger sur mon projet ?">{{editeur.nom}}</button></span>{{/if}}
     </div>
   </div>
 </footer>
 
+{{#if calc.whatsapp_actif}}
 <!-- Bouton flottant WhatsApp (toutes tailles d'écran). -->
-<a class="wa-float" href="https://wa.me/33634509197?text=Bonjour%2C%20je%20vous%20contacte%20via%20le%20site%20APY%20Musique%20au%20sujet%20de%20" target="_blank" rel="noopener noreferrer" aria-label="Écrire sur WhatsApp">
+<a class="wa-float" href="{{calc.whatsapp_url}}" target="_blank" rel="noopener noreferrer" aria-label="Écrire sur WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2m0 2a8 8 0 0 1 6.9 12l.3.5-.8 2.8-2.9-.8-.5.3A8 8 0 1 1 12 4m-2.5 3.6c-.2 0-.5 0-.7.3s-1 1-1 2.4 1 2.8 1.2 3 2 3.2 5 4.4c2.5 1 3 .8 3.6.8s1.7-.7 2-1.4.3-1.3.2-1.4l-1-.5-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1s-1-.4-2-1.2c-.7-.7-1.2-1.5-1.4-1.7s0-.4.1-.5l.5-.5c.1-.2.1-.3.2-.5s0-.4 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4z"/></svg>
 </a>
+{{/if}}
 
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/photo-slides.js" defer></script>
@@ -218,7 +223,7 @@
     <label>Objet<select name="objet"><option>Achat d’un instrument</option><option>Réparation</option><option>Estimation</option><option>Demande d’information</option><option>Autre demande</option></select></label>
     <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
     <label class="contact-hp" aria-hidden="true" tabindex="-1">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
-    <p class="form-note" data-contact-note>Amaury vous répond sous 1 à 2 jours.</p>
+    <p class="form-note" data-contact-note>{{calc.qui_repond}} sous {{contact.delai_reponse}}.</p>
     <button class="btn" type="submit">Envoyer mon message</button>
   </form>
 </dialog>

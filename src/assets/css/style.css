@@ -33,28 +33,28 @@
 :root {
   /* Bois & ivoire */
   /* Couleurs générées depuis site.config.json (theme.couleurs) */
-  --walnut-900:  #241812;
-  --walnut-800:  #2f2015;
-  --walnut-700:  #3d2a1c;
-  --walnut-600:  #5a3d28;
-  --wood-500:    #7a563a;
-  --ivory:       #f7f0e1;
-  --ivory-2:     #efe4cf;
-  --paper:       #fffdf7;
+  --walnut-900:  {{theme.couleurs.walnut-900}};
+  --walnut-800:  {{theme.couleurs.walnut-800}};
+  --walnut-700:  {{theme.couleurs.walnut-700}};
+  --walnut-600:  {{theme.couleurs.walnut-600}};
+  --wood-500:    {{theme.couleurs.wood-500}};
+  --ivory:       {{theme.couleurs.ivory}};
+  --ivory-2:     {{theme.couleurs.ivory-2}};
+  --paper:       {{theme.couleurs.paper}};
 
   /* Cuivre / laiton */
-  --brass:       #b07a35;
-  --brass-light: #cd9a5b;
-  --brass-dark:  #8a5c25;
-  --copper:      #a5623a;
-  --verdigris:   #4f6d5e;
+  --brass:       {{theme.couleurs.brass}};
+  --brass-light: {{theme.couleurs.brass-light}};
+  --brass-dark:  {{theme.couleurs.brass-dark}};
+  --copper:      {{theme.couleurs.copper}};
+  --verdigris:   {{theme.couleurs.verdigris}};
 
-  --ink:         #2b2016;
-  --text:        #3a2e22;
-  --text-soft:   #6c5c49;
-  --line:        #e0d2b8;
+  --ink:         {{theme.couleurs.ink}};
+  --text:        {{theme.couleurs.text}};
+  --text-soft:   {{theme.couleurs.text-soft}};
+  --line:        {{theme.couleurs.line}};
 
-  --focus:       #1a5fb4;
+  --focus:       {{theme.couleurs.focus}};
 
   --radius:      12px;
   --radius-sm:   7px;

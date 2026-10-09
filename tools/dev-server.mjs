@@ -12,6 +12,8 @@ import { spawn } from "node:child_process";
 
 const root = join(fileURLToPath(new URL(".", import.meta.url)), "..");
 const startPort = Number(process.env.PORT) || 4321;
+// Domaine du site en ligne (photos de l'admin), lu dans le module généré depuis la configuration.
+const { SITE } = await import("../netlify/lib/site.mjs").catch(() => ({ SITE: { domaine: "" } }));
 const maxTries = 15;
 
 const types = {
@@ -71,8 +73,8 @@ const server = createServer(async (req, res) => {
       return;
     }
     // Photos envoyées via l'admin : stockées dans Netlify Blobs, absentes du disque.
-    if (req.method === "GET" && req.url.startsWith("/media/")) {
-      const remote = await fetch("https://apymusique.fr" + req.url.split("?")[0]);
+    if (req.method === "GET" && req.url.startsWith("/media/") && SITE.domaine) {
+      const remote = await fetch(SITE.domaine + req.url.split("?")[0]);
       res.writeHead(remote.status, { "Content-Type": remote.headers.get("content-type") || "application/octet-stream" });
       res.end(Buffer.from(await remote.arrayBuffer()));
       return;

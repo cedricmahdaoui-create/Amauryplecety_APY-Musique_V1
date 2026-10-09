@@ -1,4 +1,4 @@
-# APY Musique
+# {{entreprise.nom}}
 User-agent: *
 Allow: /
 Disallow: /merci.html
@@ -17,4 +17,4 @@ User-agent: Gemini
 User-agent: facebookexternalhit
 Allow: /
 
-Sitemap: https://apymusique.fr/sitemap.xml
+Sitemap: {{seo.domaine}}/sitemap.xml

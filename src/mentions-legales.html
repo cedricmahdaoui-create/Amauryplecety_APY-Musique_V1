@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{seo.langue}}">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none';">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mentions légales — APY Musique</title>
-<meta name="description" content="Mentions légales du site APY Musique : éditeur, hébergeur, propriété intellectuelle.">
+<title>{{page.titre}}</title>
+<meta name="description" content="{{page.description}}">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://apymusique.fr/mentions-legales.html">
-<meta name="theme-color" content="#241812">
-<link rel="icon" href="assets/img/logo-apy.png" type="image/png">
+<link rel="canonical" href="{{page.url}}">
+<meta name="theme-color" content="{{theme.couleur_navigateur}}">
+{{#if entreprise.logo}}
+<link rel="icon" href="{{entreprise.logo}}" type="image/png">
+{{/if}}
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -21,8 +23,8 @@
 <header class="site-header">
   <div class="container">
     <a class="brand" href="index.html">
-      <img src="assets/img/logo-apy.png" alt="" width="42" height="42">
-      <span>APY Musique<small>Atelier familial · Bourg-Achard</small></span>
+      {{#if entreprise.logo}}<img src="{{entreprise.logo}}" alt="" width="42" height="42">{{/if}}
+      <span>{{entreprise.nom}}<small>{{entreprise.accroche}}</small></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
     <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
@@ -32,7 +34,8 @@
         <li class="has-submenu">
           <a href="index.html#services">Nos services</a>
           <ul class="submenu">
-            <li><a href="catalogue.html">Catalogue</a></li>
+            {{#if blocs.catalogue}}<li><a href="catalogue.html">Catalogue</a></li>{{/if}}
+            {{#if blocs.reparations}}
             <li class="has-submenu">
               <a href="reparations.html">Réparations</a>
               <ul class="submenu">
@@ -40,9 +43,10 @@
                 <li><a href="reparations.html#bois">Bois</a></li>
               </ul>
             </li>
+            {{/if}}
           </ul>
         </li>
-        <li><a href="index.html#a-la-une">À la une</a></li>
+        {{#if blocs.actualites}}<li><a href="index.html#a-la-une">À la une</a></li>{{/if}}
         <li><a class="btn" href="index.html#contact">Contact</a></li>
       </ul>
     </nav>
@@ -62,37 +66,53 @@
   <section class="section">
     <div class="container prose">
       <h1>Mentions légales</h1>
+      {{#if legal.tva.a_confirmer}}
       <p class="form-note">Un point reste à confirmer par l'éditeur : le régime de TVA (voir ci‑dessous).</p>
+      {{/if}}
 
       <h2>Éditeur du site</h2>
       <p>
-        Amaury Plecety, entrepreneur individuel exerçant sous les noms commerciaux
-        « APY Musique » et « La Cave aux Instrum' ».<br>
-        Responsable de la publication : Amaury Plecety<br>
-        Adresse : 993 rue du Château d'Eau, 27310 Bourg-Achard, France<br>
-        Téléphone : 06 34 50 91 97<br>
-        SIRET : 841 052 764 00013 — SIREN : 841 052 764<br>
-        Immatriculé au Registre National des Entreprises. Activité (code APE) :
-        95.29Z — réparation d'autres biens personnels et domestiques. Entreprise
-        créée le 3 septembre 2018.<br>
+        {{legal.titulaire}}, {{legal.forme_juridique}}{{#if calc.plusieurs_noms}} exerçant sous les noms commerciaux
+        {{calc.noms_commerciaux}}{{else}}{{#if calc.noms_commerciaux}} exerçant sous le nom commercial {{calc.noms_commerciaux}}{{/if}}{{/if}}.<br>
+        Responsable de la publication : {{legal.responsable_publication}}<br>
+        Adresse : {{calc.adresse_ligne}}{{#if contact.adresse.pays_nom}}, {{contact.adresse.pays_nom}}{{/if}}<br>
+        {{#if contact.telephone.affiche}}
+        Téléphone : {{contact.telephone.affiche}}<br>
+        {{/if}}
+        {{#if contact.email}}
+        E-mail : {{contact.email}}<br>
+        {{/if}}
+        {{#if legal.siret}}
+        SIRET : {{calc.siret_affiche}} — SIREN : {{calc.siren_affiche}}<br>
+        {{/if}}
+        {{#if legal.registre}}Immatriculé au {{legal.registre}}.{{/if}}{{#if legal.code_ape}} Activité (code APE) :
+        {{legal.code_ape}} — {{legal.libelle_ape}}.{{/if}}{{#if calc.date_creation_texte}} Entreprise
+        créée le {{calc.date_creation_texte}}.{{/if}}<br>
+        {{#if calc.tva_franchise}}
         TVA : sauf option contraire, l'entreprise relève de la franchise en base de
         TVA — « TVA non applicable, article 293 B du CGI ».
         <!-- Si l'entreprise est assujettie à la TVA : passer legal.tva.regime à « assujetti »
              et renseigner legal.tva.numero dans la configuration. -->
+        {{/if}}
+        {{#if calc.tva_assujetti}}
+        Numéro de TVA intracommunautaire : {{legal.tva.numero}}
+        {{/if}}
       </p>
 
-      <h2>Hébergeur</h2><p>Le site est hébergé par Netlify, Inc., 101 2nd Street, San Francisco, CA 94105, États-Unis — <a href="https://www.netlify.com/" target="_blank" rel="noopener noreferrer">www.netlify.com</a>.</p>
+      <h2>Hébergeur</h2><p>Le site est hébergé par {{legal.hebergeur.nom}}, {{legal.hebergeur.adresse}}{{#if legal.hebergeur.url}} — <a href="{{legal.hebergeur.url}}" target="_blank" rel="noopener noreferrer">{{calc.hebergeur_url_courte}}</a>{{/if}}.</p>
 
-      <h2>Conception et réalisation du site</h2><p>Cédric — 07 49 99 28 51.</p>
+      {{#if editeur.nom}}
+      <h2>Conception et réalisation du site</h2><p>{{editeur.nom}}{{#if editeur.telephone}} — {{editeur.telephone}}{{/if}}.</p>
+      {{/if}}
 
       <h2>Propriété intellectuelle</h2>
-      <p>L'ensemble des contenus de ce site (textes, logo, éléments graphiques) est la propriété d'APY Musique, sauf mention contraire. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
+      <p>L'ensemble des contenus de ce site (textes, logo, éléments graphiques) est la propriété {{calc.de_nom_droit}}, sauf mention contraire. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
 
       <h2>Responsabilité</h2>
       <p>Les informations diffusées sur ce site sont fournies à titre indicatif et peuvent être modifiées sans préavis (disponibilité des instruments, tarifs, délais). L'éditeur ne saurait être tenu responsable des erreurs, d'une absence de disponibilité des informations ou de la présence de virus sur son site.</p>
 
       <h2>Liens hypertextes</h2>
-      <p>Les liens vers d'autres sites n'engagent pas la responsabilité d'APY Musique quant à leur contenu.</p>
+      <p>Les liens vers d'autres sites n'engagent pas la responsabilité {{calc.de_nom_droit}} quant à leur contenu.</p>
 
       <h2>Données personnelles</h2>
       <p>Le traitement des données transmises via le formulaire de contact est décrit dans la <a href="politique-confidentialite.html">politique de confidentialité</a>.</p>
@@ -106,10 +126,10 @@
 <footer class="site-footer">
   <div class="container footer-centered">
     <a class="footer-brand" href="index.html">
-      <img src="assets/img/logo-apy.png" alt="" width="36" height="36">
-      <strong>APY Musique</strong>
+      {{#if entreprise.logo}}<img src="{{entreprise.logo}}" alt="" width="36" height="36">{{/if}}
+      <strong>{{entreprise.nom}}</strong>
     </a>
-    <h2 class="footer-about-title">À propos d’APY Musique</h2>
+    <h2 class="footer-about-title">À propos {{calc.de_nom}}</h2>
     <nav class="footer-links-row" aria-label="Liens du pied de page">
       <a href="mentions-legales.html">Mentions légales</a>
       <span aria-hidden="true">–</span>
@@ -118,16 +138,18 @@
       <a href="plan-du-site.html">Plan du site</a>
     </nav>
     <div class="footer-legal">
-      <span>&copy; <span data-year>2026</span> APY Musique — Plecety · SIRET 841 052 764 00013</span>
-      <span class="footer-credit">Fait avec <span class="footer-heart">❤︎</span> par <button type="button" class="footer-credit-link" data-editeur-objet="Contacter l’éditeur du site" data-editeur-message="Je souhaite faire un site web, auditer mon site, l’améliorer ou le refondre — ou j’ai une automatisation à mettre en place dans mon entreprise. Pourrions-nous échanger sur mon projet ?">Cédric</button></span>
+      <span>&copy; <span data-year>2026</span> {{legal.mention_copyright}}{{#if legal.siret}} · SIRET {{calc.siret_affiche}}{{/if}}</span>
+      {{#if editeur.credit_actif}}<span class="footer-credit">Fait avec <span class="footer-heart">❤︎</span> par <button type="button" class="footer-credit-link" data-editeur-objet="Contacter l’éditeur du site" data-editeur-message="Je souhaite faire un site web, auditer mon site, l’améliorer ou le refondre — ou j’ai une automatisation à mettre en place dans mon entreprise. Pourrions-nous échanger sur mon projet ?">{{editeur.nom}}</button></span>{{/if}}
     </div>
   </div>
 </footer>
 
+{{#if calc.whatsapp_actif}}
 <!-- Bouton flottant WhatsApp (toutes tailles d'écran). -->
-<a class="wa-float" href="https://wa.me/33634509197?text=Bonjour%2C%20je%20vous%20contacte%20via%20le%20site%20APY%20Musique%20au%20sujet%20de%20" target="_blank" rel="noopener noreferrer" aria-label="Écrire sur WhatsApp">
+<a class="wa-float" href="{{calc.whatsapp_url}}" target="_blank" rel="noopener noreferrer" aria-label="Écrire sur WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2m0 2a8 8 0 0 1 6.9 12l.3.5-.8 2.8-2.9-.8-.5.3A8 8 0 1 1 12 4m-2.5 3.6c-.2 0-.5 0-.7.3s-1 1-1 2.4 1 2.8 1.2 3 2 3.2 5 4.4c2.5 1 3 .8 3.6.8s1.7-.7 2-1.4.3-1.3.2-1.4l-1-.5-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1s-1-.4-2-1.2c-.7-.7-1.2-1.5-1.4-1.7s0-.4.1-.5l.5-.5c.1-.2.1-.3.2-.5s0-.4 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4z"/></svg>
 </a>
+{{/if}}
 
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/contact-dialog.js" defer></script>
@@ -142,7 +164,7 @@
     <label>Objet<select name="objet"><option>Achat d’un instrument</option><option>Réparation</option><option>Estimation</option><option>Demande d’information</option><option>Autre demande</option></select></label>
     <label>Votre message<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
     <label class="contact-hp" aria-hidden="true" tabindex="-1">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
-    <p class="form-note" data-contact-note>Amaury vous répond sous 1 à 2 jours.</p>
+    <p class="form-note" data-contact-note>{{calc.qui_repond}} sous {{contact.delai_reponse}}.</p>
     <button class="btn" type="submit">Envoyer mon message</button>
   </form>
 </dialog>

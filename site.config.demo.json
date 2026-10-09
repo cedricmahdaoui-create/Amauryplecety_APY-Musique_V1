@@ -1,0 +1,177 @@
+{
+  "$schema": "./site.schema.json",
+  "version": "1.0.0",
+
+  "entreprise": {
+    "nom": "Atelier Démo",
+    "accroche": "Atelier fictif · Villedémo",
+    "description": "Entreprise fictive de démonstration : vente et réparation d'instruments de musique.",
+    "presentation": "Entreprise fictive de démonstration — vente et réparation d'instruments de musique à Villedémo.",
+    "type_schema_org": "MusicStore",
+    "logo": "",
+    "date_creation": "2020-01-01",
+    "fourchette_prix": "€€",
+    "zones_desservies": ["Région Exemple"],
+    "offres": ["Vente d'instruments (démonstration)", "Réparation d'instruments (démonstration)"]
+  },
+
+  "equipe": [
+    { "nom": "Camille Exemple", "fonction": "Artisan réparateur (personnage fictif)", "fondateur": true }
+  ],
+
+  "contact": {
+    "interlocuteur": "Camille",
+    "delai_reponse": "2 jours ouvrés",
+    "telephone": { "affiche": "01 99 00 12 34", "international": "+33199001234" },
+    "telephone_secondaire": { "affiche": "", "international": "" },
+    "email": "contact@example.com",
+    "whatsapp": {
+      "numero": "33639980000",
+      "affiche": "06 39 98 00 00",
+      "message": "Bonjour, je vous contacte via le site de démonstration au sujet de "
+    },
+    "adresse": {
+      "rue": "1 rue de l'Exemple",
+      "code_postal": "00000",
+      "ville": "Villedémo",
+      "departement": "Département Exemple",
+      "region": "Région Exemple",
+      "pays": "FR",
+      "pays_nom": "France"
+    },
+    "acces": "Adresse fictive, utilisée pour la démonstration du modèle.",
+    "geo": { "latitude": null, "longitude": null },
+    "google_maps_url": "",
+    "reseaux": { "facebook": "", "instagram": "", "linkedin": "", "youtube": "" }
+  },
+
+  "horaires": {
+    "jours": {
+      "lundi":    [],
+      "mardi":    [{ "ouverture": "09:00", "fermeture": "12:30" }, { "ouverture": "14:00", "fermeture": "18:00" }],
+      "mercredi": [{ "ouverture": "09:00", "fermeture": "12:30" }, { "ouverture": "14:00", "fermeture": "18:00" }],
+      "jeudi":    [{ "ouverture": "09:00", "fermeture": "12:30" }, { "ouverture": "14:00", "fermeture": "18:00" }],
+      "vendredi": [{ "ouverture": "09:00", "fermeture": "12:30" }, { "ouverture": "14:00", "fermeture": "18:00" }],
+      "samedi":   [{ "ouverture": "10:00", "fermeture": "17:00" }],
+      "dimanche": []
+    },
+    "note": "Horaires fictifs de démonstration."
+  },
+
+  "legal": {
+    "titulaire": "Camille Exemple",
+    "forme_juridique": "entrepreneur individuel (fictif)",
+    "noms_commerciaux": ["Atelier Démo"],
+    "mention_copyright": "Atelier Démo",
+    "siret": "00000000000000",
+    "registre": "Registre fictif",
+    "code_ape": "",
+    "libelle_ape": "",
+    "tva": { "regime": "franchise", "numero": "", "a_confirmer": false },
+    "responsable_publication": "Camille Exemple",
+    "hebergeur": {
+      "nom": "Hébergeur Fictif",
+      "adresse": "2 avenue de l'Exemple, 00000 Villedémo",
+      "url": ""
+    },
+    "messagerie": "un prestataire de messagerie fictif",
+    "date_maj_confidentialite": "2026-01-01"
+  },
+
+  "editeur": {
+    "nom": "Studio Exemple",
+    "telephone": "01 99 00 56 78",
+    "email": "editeur@example.com",
+    "credit_actif": true,
+    "copie_cachee": false
+  },
+
+  "seo": {
+    "domaine": "https://www.example.com",
+    "langue": "fr",
+    "locale": "fr_FR",
+    "mots_cles": ["atelier de démonstration", "réparation d'instruments", "site vitrine artisan"],
+    "auteur": "Atelier Démo",
+    "image_partage": ""
+  },
+
+  "technique": {
+    "origines_autorisees": ["https://www.example.com"],
+    "smtp_hote": "smtp.example.com"
+  },
+
+  "theme": {
+    "couleur_navigateur": "#1b2533",
+    "couleur_fond_application": "#f2f5f9",
+    "couleurs": {
+      "walnut-900": "#1b2533",
+      "walnut-800": "#233044",
+      "walnut-700": "#2e3d55",
+      "walnut-600": "#415577",
+      "wood-500": "#5a7090",
+      "ivory": "#f2f5f9",
+      "ivory-2": "#e4eaf2",
+      "paper": "#ffffff",
+      "brass": "#2f6f9f",
+      "brass-light": "#5a95c2",
+      "brass-dark": "#1f4f75",
+      "copper": "#3d7a8a",
+      "verdigris": "#4f6d5e",
+      "ink": "#17202b",
+      "text": "#26313f",
+      "text-soft": "#5b6878",
+      "line": "#d3dbe6",
+      "focus": "#1a5fb4"
+    }
+  },
+
+  "pages": {
+    "index": {
+      "titre": "Atelier Démo — vente et réparation d'instruments (site fictif)",
+      "description": "Site de démonstration d'une entreprise fictive : vente et réparation d'instruments de musique à Villedémo.",
+      "og_titre": "Atelier Démo — site de démonstration",
+      "og_description": "Entreprise fictive utilisée pour présenter le modèle de site vitrine.",
+      "og_type": "business.business"
+    },
+    "catalogue": { "titre": "Catalogue | Atelier Démo", "description": "Catalogue de démonstration.", "og_titre": "Catalogue — Atelier Démo", "og_description": "Catalogue de démonstration.", "og_type": "website" },
+    "reparations": { "titre": "Réparations | Atelier Démo", "description": "Page réparations de démonstration.", "og_titre": "Réparations — Atelier Démo", "og_description": "Page réparations de démonstration.", "og_type": "website" },
+    "reparation-instruments-vent-eure": { "titre": "Réparation d'instruments à vent | Atelier Démo", "description": "Page locale de démonstration.", "og_titre": "Réparation d'instruments à vent — Atelier Démo", "og_description": "Page locale de démonstration.", "og_type": "website" },
+    "achat-vente-instruments-normandie": { "titre": "Achat et vente d'instruments | Atelier Démo", "description": "Page locale de démonstration.", "og_titre": "Achat et vente d'instruments — Atelier Démo", "og_description": "Page locale de démonstration.", "og_type": "website" },
+    "instruments-a-vent": { "titre": "Instruments à vent | Atelier Démo", "description": "Page de démonstration.", "og_titre": "Instruments à vent — Atelier Démo", "og_description": "Page de démonstration.", "og_type": "website" },
+    "instruments-a-cordes": { "titre": "Instruments à cordes | Atelier Démo", "description": "Page de démonstration.", "og_titre": "Instruments à cordes — Atelier Démo", "og_description": "Page de démonstration.", "og_type": "website" },
+    "amaury-plecety": { "titre": "L'équipe | Atelier Démo", "description": "Page équipe de démonstration.", "og_titre": "L'équipe — Atelier Démo", "og_description": "Page équipe de démonstration.", "og_type": "profile" },
+    "actualite": { "titre": "Actualité | Atelier Démo", "description": "" },
+    "merci": { "titre": "Message envoyé — Atelier Démo", "description": "Votre message a bien été envoyé (démonstration)." },
+    "mentions-legales": { "titre": "Mentions légales — Atelier Démo", "description": "Mentions légales du site de démonstration." },
+    "politique-confidentialite": { "titre": "Politique de confidentialité — Atelier Démo", "description": "Politique de confidentialité du site de démonstration." },
+    "plan-du-site": { "titre": "Plan du site — Atelier Démo", "description": "Toutes les pages du site de démonstration." },
+    "404": { "titre": "Page introuvable (404) — Atelier Démo", "description": "La page demandée n'existe pas ou a été déplacée." }
+  },
+
+  "accueil": {
+    "sur_titre": "Villedémo · Région Exemple",
+    "titre": "Un site de démonstration",
+    "sous_titre": "Entreprise fictive.<br>Toutes les données de cette page sont inventées pour la démonstration.",
+    "citation": "",
+    "signature": ""
+  },
+
+  "catalogue": { "accroche": "" },
+
+  "temoignages": {
+    "note": { "valeur": null, "nombre": null, "source": "", "date_releve": "", "url": "" },
+    "avis": []
+  },
+
+  "bandeau": { "texte": "" },
+
+  "blocs_actifs": {
+    "catalogue": true,
+    "reparations": true,
+    "actualites": true,
+    "temoignages": true,
+    "carte": false,
+    "whatsapp": true,
+    "bandeau": false
+  }
+}
