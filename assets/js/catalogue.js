@@ -361,10 +361,11 @@
   /* ----- Chargement des données ----- */
   countEl.textContent = "Chargement du catalogue…";
 
-  /* Données : fichier statique du catalogue. */
-  fetch("assets/data/catalogue.json", { cache: "no-cache" })
+  /* Données : API du site en ligne (catalogue modifié depuis l'administration), sinon fichier statique. */
+  fetch("api/catalogue")
     .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r; })
-    .then(function (r) { return r.json(); })
+    .catch(function () { return fetch("assets/data/catalogue.json", { cache: "no-cache" }); })
+    .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
     .then(function (data) {
       items = Array.isArray(data) ? data : (data && data.instruments) || [];
       (Array.isArray(data.families) ? data.families : []).forEach(function (family) {

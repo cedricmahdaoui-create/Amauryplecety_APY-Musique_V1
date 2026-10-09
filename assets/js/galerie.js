@@ -57,9 +57,10 @@
     });
   }
 
-  fetch("assets/data/catalogue.json", { cache: "no-cache" })
+  fetch("api/catalogue", { cache: "no-store" })
     .then(function (r) { if (!r.ok) throw new Error(); return r; })
-    .then(function (r) { return r.json(); })
+    .catch(function () { return fetch("assets/data/catalogue.json", { cache: "no-cache" }); })
+    .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
     .then(function (data) { render(data && data.realisations); })
     .catch(function () { /* pas de réalisations à afficher : la galerie statique suffit */ });
 })();

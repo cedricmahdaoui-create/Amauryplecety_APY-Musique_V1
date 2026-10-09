@@ -22,7 +22,7 @@
     return cut + '…';
   }
 
-  fetch('assets/data/catalogue.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(); return r; }).then(function (r) { return r.json(); }).then(function (data) {
+  fetch('api/catalogue').then(function (r) { if (!r.ok) throw new Error(); return r; }).catch(function () { return fetch('assets/data/catalogue.json', { cache: 'no-cache' }); }).then(function (r) { if (!r.ok) throw new Error(); return r.json(); }).then(function (data) {
     var articles = (data.articles || []).filter(function (a) { return a.published === true; });
     root.replaceChildren();
     if (!articles.length) { root.textContent = 'Les prochaines nouvelles de l’atelier seront publiées ici.'; return; }
