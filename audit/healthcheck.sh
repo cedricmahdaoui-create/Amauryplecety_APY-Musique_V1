@@ -15,8 +15,8 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-DOMAIN="https://lacaveauxinstrum.fr"
-API_URL="https://apy-musique.netlify.app/api"
+DOMAIN="https://apymusique.fr"
+API_URL="https://apymusique.fr/api"
 ADMIN_PASSWORD="${ADMIN_PASSWORD:-}"
 TIMEOUT=5
 TOTAL_CHECKS=0
