@@ -110,7 +110,7 @@
       {{#if accueil.sur_titre}}
       <span class="eyebrow">{{accueil.sur_titre}}</span>
       {{/if}}
-      <h1>{{accueil.titre}}</h1>
+      <h1>“{{accueil.titre}}”</h1>
       {{#if accueil.sous_titre}}
       <p>{{{accueil.sous_titre}}}</p>
       {{/if}}
@@ -136,7 +136,9 @@
 <section class="section" id="histoire">
     <div class="container">
       <div class="story">
-        <div>
+        <div class="story-media">
+          <span class="eyebrow">Notre histoire</span>
+          <h2>“Un garage devenu atelier, une passion devenue métier”</h2>
           <div class="story-portrait story-slides" tabindex="0" role="group" aria-label="Photos d’Amaury et Jean-Michel Plecety à l’atelier : passez la souris dessus ou touchez pour les faire défiler">
             <picture><source type="image/webp" srcset="assets/img/atelier-pere-fils.webp"><img src="assets/img/atelier-pere-fils.jpg"
                  alt="Amaury et Jean-Michel Plecety ensemble à l'atelier, penchés sur un étui de trompette entouré de cuivres"
@@ -148,8 +150,6 @@
           </div>
         </div>
         <div>
-          <span class="eyebrow">Notre histoire</span>
-          <h2>Un garage devenu atelier, une passion devenue métier</h2>
           <p>Tout a commencé par la passion de Jean-Michel pour les instruments à vent — du piccolo au soubassophone. Saxophoniste, il chinait, réparait, revendait. Son fils Amaury a grandi au milieu des cuivres et des établis ; il en a fait sa vie.</p>
           <p><strong>Tout a commencé en 1999.</strong> Ensemble, ils ont transformé leur garage de Bourg-Achard en véritable atelier, « La Cave aux Instrum' » : le point de départ. {{entreprise.nom}}, l'activité qu'Amaury développe aujourd'hui, en est le prolongement naturel. Loin des grandes villes et des conservatoires, ils ont choisi la campagne pour avoir la place de travailler la matière : le laiton, le bois, les cordes.</p>
 
@@ -185,7 +185,7 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Nos services</span>
-        <h2>Choisir. Réparer. Jouer.</h2>
+        <h2>“Choisir. Réparer. Jouer.”</h2>
         <p>Un instrument à trouver, un son à retrouver.</p>
       </div>
 
@@ -239,8 +239,8 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Nouveautés de l’atelier</span>
-        <h2>À la une</h2>
-        <p class="lead">Découvrez les instruments et articles récemment ajoutés au catalogue.</p>
+        <h2>“À la une”</h2>
+        <p class="lead">“Découvrez les instruments et articles récemment ajoutés au catalogue.”</p>
       </div>
       <div class="news-feed" id="news-list"></div>
     </div>
@@ -255,7 +255,7 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Ils nous font confiance</span>
-        <h2>Ce que disent les musiciens</h2>
+        <h2>“Ce que disent les musiciens”</h2>
       </div>
 
       <div class="testimonials">
@@ -288,7 +288,7 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Contact</span>
-        <h2>Venez à l'atelier</h2>
+        <h2>“Venez à l'atelier”</h2>
         <p>Le plus simple est d'appeler ou de passer. Pour une demande détaillée, écrivez-nous : {{calc.qui_repond}} sous {{contact.delai_reponse}}.</p>
       </div>
 

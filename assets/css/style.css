@@ -1488,8 +1488,10 @@ a.news-article {
 .home .section-head { margin-bottom: 2.8rem; }
 .home h2 { text-wrap: balance; margin-bottom: .7em; }
 .home .story { align-items: start; }
-.home .story > div:first-child { position: sticky; top: calc(var(--navigation-height, 135px) + 1.5rem); }
-.home .story-portrait { aspect-ratio: 3 / 4; border-radius: 4px 4px 70px 4px; }
+/* Colonne gauche : titre en haut, puis la photo qui suit le défilement du texte de droite. */
+.home .story > .story-media { align-self: stretch; }
+.home .story-media h2 { margin-bottom: 1.2rem; }
+.home .story-portrait { position: sticky; top: calc(var(--navigation-height, 135px) + 1.5rem); aspect-ratio: 3 / 4; border-radius: 4px 4px 70px 4px; }
 .home .story-portrait img { object-position: center 9%; }
 .home .spotlight { box-shadow: none; border-radius: 3px; }
 .home .service { position: relative; overflow: hidden; padding: 0 2rem 2rem; border-radius: 8px; color: var(--text); }
@@ -1532,7 +1534,7 @@ html:has(.photo-viewer[open]) { overflow: hidden; }
 @media (max-width: 860px) {
   .home .story-portrait { aspect-ratio: 3 / 4; border-radius: 4px 4px 40px 4px; }
   .home .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-  .home .story > div:first-child { position: static; }
+  .home .story-portrait { position: relative; top: auto; }
 }
 @media (max-width: 640px) {
   .home .hero h1 { max-width: 15ch; }
@@ -1963,7 +1965,8 @@ picture > source { display: none; }
    séparé, superposé à l'image, garantit le fondu quelle que soit la largeur. */
 .home main > section.hero {
   background-color: #140d08;
-  background-image: linear-gradient(90deg, #140d08 0%, #140d08 42%, rgba(20,13,8,.6) 56%, rgba(20,13,8,0) 72%), url("../img/hero-saxophone-eclate.jpg");
+  /* Voile foncé en pixels : il couvre toujours la zone du texte, quelle que soit la largeur d'écran. */
+  background-image: linear-gradient(90deg, rgba(20,13,8,.94) 0, rgba(20,13,8,.92) 540px, rgba(20,13,8,.62) 740px, rgba(20,13,8,0) 980px), url("../img/hero-saxophone-eclate.jpg");
   background-repeat: no-repeat;
   background-position: 0 0, right center;
   background-size: 100% 100%, auto 100%;
@@ -1973,11 +1976,13 @@ picture > source { display: none; }
   /* Sur mobile, la photo couvre toute la largeur : fondu vertical en haut plutôt qu'horizontal
      (image sans marge cuite, plus adaptée à ce cadrage). */
   .home main > section.hero {
-    background-image: linear-gradient(180deg, #140d08 0%, rgba(20,13,8,.5) 16%, rgba(20,13,8,0) 32%), url("../img/hero-saxophone-eclate-mobile.jpg");
+    /* Voile foncé sur toute la hauteur : le texte passe sur la photo, il doit rester lisible. */
+    background-image: linear-gradient(180deg, #140d08 0%, rgba(20,13,8,.88) 16%, rgba(20,13,8,.8) 55%, rgba(20,13,8,.7) 100%), url("../img/hero-saxophone-eclate-mobile.jpg");
     background-position: 0 0, center top;
     background-size: 100% 100%, cover;
   }
 }
+.home .hero h1, .home .hero p, .home .hero .eyebrow { text-shadow: 0 1px 14px rgba(0,0,0,.7); }
 
 .footer-credit { display: inline-flex; align-items: center; gap: .45rem; }
 .footer-credit img { display: block; width: 22px; height: auto; }
