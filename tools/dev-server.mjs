@@ -85,7 +85,7 @@ const server = createServer(async (req, res) => {
     if (!file.startsWith(root)) { res.writeHead(403).end("Forbidden"); return; }
     let target = file;
     try { if ((await stat(target)).isDirectory()) target = join(target, "index.html"); }
-    catch { /* ignore */ }
+    catch { if (!extname(target)) target += ".html"; /* /catalogue -> catalogue.html, comme Netlify */ }
     let body;
     try {
       body = await readFile(target);

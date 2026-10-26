@@ -248,7 +248,7 @@ for (const fichier of lister(dossierSrc)) {
     if (!p) { console.error(`✖ ${rel} : aucune entrée « pages.${id} » dans la configuration.`); erreurs++; continue; }
     page = {
       id,
-      url: url(id === "index" ? "" : rel),
+      url: url(id === "index" ? "" : id), // adresses sans .html, servies telles quelles par Netlify
       titre: p.titre,
       description: p.description || "",
       og_titre: p.og_titre || p.titre,

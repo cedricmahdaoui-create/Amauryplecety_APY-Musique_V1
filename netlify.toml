@@ -32,9 +32,10 @@
   status = 404
   force = true
 
+# Adresse technique Netlify : renvoie vers le domaine officiel (évite le contenu en double).
 [[redirects]]
-  from = "https://lacaveauxinstrum.fr/*"
-  to = "https://www.lacaveauxinstrum.fr/:splat"
+  from = "https://apy-musique.netlify.app/*"
+  to = "https://apymusique.fr/:splat"
   status = 301
   force = true
 

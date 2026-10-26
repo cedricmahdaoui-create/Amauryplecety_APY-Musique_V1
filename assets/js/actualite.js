@@ -17,7 +17,7 @@
     var p = document.createElement('p');
     p.textContent = 'Cette actualité est introuvable — elle a peut-être été retirée.';
     var a = document.createElement('p');
-    a.innerHTML = '<a class="btn" href="index.html#a-la-une">Retour à « À la une »</a>';
+    a.innerHTML = '<a class="btn" href="/#a-la-une">Retour à « À la une »</a>';
     root.append(p, a);
   }
 
@@ -67,7 +67,7 @@
     }
 
     var back = document.createElement('p'); back.className = 'mt-2';
-    back.innerHTML = '<a class="btn btn--ghost" href="index.html#a-la-une">← Toutes les actualités</a>';
+    back.innerHTML = '<a class="btn btn--ghost" href="/#a-la-une">← Toutes les actualités</a>';
     root.appendChild(back);
   }).catch(notFound);
 })();
