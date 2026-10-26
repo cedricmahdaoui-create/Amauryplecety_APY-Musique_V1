@@ -17,13 +17,13 @@ APY Musique répare et restaure les instruments à vent (cuivres et bois) et les
 ## Pages principales
 
 - [Accueil](https://apymusique.fr/): présentation de l'atelier, histoire familiale, services, actualités, avis clients, contact.
-- [Catalogue](https://apymusique.fr/catalogue.html): instruments d'occasion actuellement disponibles à la vente.
-- [Réparations](https://apymusique.fr/reparations.html): détail des réparations proposées (cuivres, bois, cordes), garantie 1 an, exemples avant/après.
-- [Amaury Plecety](https://apymusique.fr/amaury-plecety.html): présentation du réparateur et de l'histoire de l'atelier.
-- [Réparation d'instruments à vent dans l'Eure](https://apymusique.fr/reparation-instruments-vent-eure.html)
-- [Achat-vente d'instruments en Normandie](https://apymusique.fr/achat-vente-instruments-normandie.html)
-- [Instruments à vent](https://apymusique.fr/instruments-a-vent.html)
-- [Instruments à cordes](https://apymusique.fr/instruments-a-cordes.html)
+- [Catalogue](https://apymusique.fr/catalogue): instruments d'occasion actuellement disponibles à la vente.
+- [Réparations](https://apymusique.fr/reparations): détail des réparations proposées (cuivres, bois, cordes), garantie 1 an, exemples avant/après.
+- [Amaury Plecety](https://apymusique.fr/amaury-plecety): présentation du réparateur et de l'histoire de l'atelier.
+- [Réparation d'instruments à vent dans l'Eure](https://apymusique.fr/reparation-instruments-vent-eure)
+- [Achat-vente d'instruments en Normandie](https://apymusique.fr/achat-vente-instruments-normandie)
+- [Instruments à vent](https://apymusique.fr/instruments-a-vent)
+- [Instruments à cordes](https://apymusique.fr/instruments-a-cordes)
 
 ## Politiques d'utilisation
 
