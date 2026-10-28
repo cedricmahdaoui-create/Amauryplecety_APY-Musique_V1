@@ -56,7 +56,7 @@ ils redonnent une nouvelle vie aux instruments de musique »*.
 | Élément | Où | Remarque |
 |---|---|---|
 | Domaine `www.lacaveauxinstrum.fr` | tous les fichiers | Rechercher / remplacer par le vrai domaine |
-| Coordonnées (tél 06 34 50 91 97, e‑mail `amaury.plecety@laposte.net`, adresse) | pieds de page + `index.html` + JSON‑LD | Relevées des fiches publiques — à confirmer |
+| Coordonnées (tél 06 34 50 91 97, e‑mail `celas27@gmail.com`, adresse) | pieds de page + `index.html` + JSON‑LD | Relevées des fiches publiques — à confirmer |
 | **WhatsApp** | barre mobile (toutes les pages) + `index.html` `#contact` | Le lien `wa.me/33634509197` suppose que ce numéro est sur WhatsApp — **le retirer sinon** (commentaire dans le HTML + `.mb-wa` / `.mobile-bar` dans le CSS) |
 | **Horaires** | `index.html` `#contact` + JSON‑LD | Relevés sur Google Maps le 8 sept. 2026 |
 | **Témoignages** | `index.html` `#avis` | Exemples masqués — voir §6 |
@@ -131,7 +131,7 @@ Hébergement statique = pas de PHP : il faut un service qui reçoit l'envoi.
 1. Déployer le dossier sur Netlify : le formulaire `contact` est détecté
    automatiquement au premier déploiement.
 2. Dans Netlify → *Forms → Notifications*, ajouter une notification e‑mail vers
-   `amaury.plecety@laposte.net`.
+   `celas27@gmail.com`.
 3. Le honeypot `site_web` (Netlify + JS), le délai minimal (JS) et la case de
    consentement limitent déjà le spam — pas de CAPTCHA nécessaire.
 

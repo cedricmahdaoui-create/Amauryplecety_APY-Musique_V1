@@ -1985,6 +1985,18 @@ picture > source { display: none; }
 .home .hero h1, .home .hero p, .home .hero .eyebrow { text-shadow: 0 1px 14px rgba(0,0,0,.7); }
 
 .footer-credit { display: inline-flex; align-items: center; gap: .45rem; }
-.footer-credit img { display: block; width: 22px; height: auto; }
+.footer-credit img { display: block; width: auto; height: 14px; }
 .footer-heart { color: #e0245e; }
 .footer-credit img { position: relative; top: -3px; }
+/* Bulle au survol du crédit éditeur */
+.footer-credit-link[data-bulle] { position: relative; }
+.footer-credit-link[data-bulle]::before,
+.footer-credit-link[data-bulle]::after { position: absolute; left: 50%; opacity: 0; pointer-events: none; transition: opacity .15s ease; }
+.footer-credit-link[data-bulle]::after { content: attr(data-bulle); bottom: calc(100% + 10px); transform: translateX(-50%); padding: .35rem .65rem; border-radius: 6px; background: #f7f0e1; color: #241812; font-size: .8rem; font-weight: 600; line-height: 1.2; white-space: nowrap; box-shadow: 0 4px 14px rgba(0, 0, 0, .35); }
+.footer-credit-link[data-bulle]::before { content: ""; bottom: calc(100% + 4px); transform: translateX(-50%); border: 6px solid transparent; border-bottom: 0; border-top-color: #f7f0e1; }
+.footer-credit-link[data-bulle]:hover::before, .footer-credit-link[data-bulle]:hover::after,
+.footer-credit-link[data-bulle]:focus-visible::before, .footer-credit-link[data-bulle]:focus-visible::after { opacity: 1; }
+/* Survol du logo OwaXium : léger agrandissement, coupé si l’utilisateur limite les animations */
+.footer-credit-link img { transition: opacity .15s ease, transform .15s ease; }
+.footer-credit-link:hover img, .footer-credit-link:focus-visible img { opacity: .85; transform: scale(1.03); }
+@media (prefers-reduced-motion: reduce) { .footer-credit-link img { transition: none; } .footer-credit-link:hover img, .footer-credit-link:focus-visible img { transform: none; } }
