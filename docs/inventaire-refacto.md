@@ -15,7 +15,7 @@ Pages publiques concernées (14) : `index`, `catalogue`, `reparations`, `reparat
 | Point | Inventaire fourni | Constat dans le dépôt |
 |---|---|---|
 | Domaine canonique | `apy-musique.netlify.app` | **`apymusique.fr`** partout (canonical, og:url, JSON-LD, sitemap, robots, llms). `netlify.app` n'apparaît que dans `netlify/lib/common.mjs:35` et `audit/`. Un 3ᵉ domaine, `lacaveauxinstrum.fr`, reste dans `netlify.toml:36-37` et `.htaccess:14-15`. |
-| E-mail `celas27@gmail.com` | « contact, footer, JSON-LD » | **Absent du site.** Il n'est que dans `README.md:59,134`. Le formulaire envoie vers la variable d'environnement `CONTACT_TO` (`netlify/functions/contact.mjs:71`). |
+| E-mail `celas276@gmail.com` | « contact, footer, JSON-LD » | **Absent du site.** Il n'est que dans `README.md:59,134`. Le formulaire envoie vers la variable d'environnement `CONTACT_TO` (`netlify/functions/contact.mjs:71`). |
 | Bandeau « Le plus gros stock… » | bandeau d'annonce | **Absent du HTML actuel** (présent seulement dans `_sources-apy/_t-index-avant.html`). Restent : le CSS `.announce-bar` (`assets/css/style.css:266-290 env.`) et une formule voisine « L'un des plus grands stocks d'instruments » (`catalogue.html:88`). |
 | Note Google | 5,0 / 17 avis | Visible : 5,0 / 17 (`index.html:272`). **JSON-LD contradictoire : 4,8 / 12** (`index.html:72-76`). |
 | README lié en dur | illisible | Lu sans difficulté, pas besoin de copie. |
@@ -265,7 +265,7 @@ Note : `tools/csp-hashes.mjs` doit être relancé si un bloc JSON-LD change (`to
 4. **Domaine** : `apymusique.fr` (actuel) ; `lacaveauxinstrum.fr` est un reste dans
    `netlify.toml` et `.htaccess` (je n'y touche pas).
 5. **E-mail public** : aucun sur le site. Je laisse `contact.email` vide ou je reprends
-   `celas27@gmail.com` du README (« à confirmer » selon le README) ?
+   `celas276@gmail.com` du README (« à confirmer » selon le README) ?
 6. **Note JSON-LD 4,8/12 contre 5,0/17 affiché** : je génère le JSON-LD depuis la valeur
    affichée (5,0/17, relevée le 8/09/2026), ou je supprime `aggregateRating`
    (Google déconseille les avis auto-déclarés sur sa propre fiche) ?
